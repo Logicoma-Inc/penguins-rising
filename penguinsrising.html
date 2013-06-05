@@ -37,6 +37,7 @@ var choc = null;
 var frameRate = 1000/60;
 var framecount = 0;
 var frame = 0;
+var frame2 =0;
 var assets = [ 60, 90, 150, 180, 210, 180, 150 ,90];
 var frames = [];
 
@@ -51,6 +52,8 @@ var onImageLoad = function(){
 var animate = function() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(img, 0,0, canvas.width, canvas.height);
+	ctx.font = "bold 16px Arial";
+	ctx.fillText(String(framecount%60), 20, 20);
 	//ctx.drawImage(choc, assets[frame], 123, 30, 30, 60, 60,100 ,100);
 	//This will reset frame to zero if it ever goes over frames length.
 	//frame = (frame + 1) % assets.length;
@@ -59,13 +62,15 @@ var animate = function() {
 	//ctx.clearRect(0, 0, canvas.width, canvas.height);
 	//ctx.drawImage(img, 0,0, canvas.width, canvas.height);
 	ctx.drawImage(choc, assets[frame], 123, 30, 30, 160, 160,100 ,100);
+	ctx.drawImage(choc, assets[frame2], 123, 30, 30, 260, 260,100 ,100);
 	console.log("frame count for choc");
 	//This will reset frame to zero if it ever goes over frames length.
-	framecount = (framecount + 1) % frameRate;
-	if(framecount == 0)
-	{
-	frame = (frame + 1) % assets.length;
-	}
+	//framecount = (framecount + 1) % frameRate;
+	if((framecount % 3) == 0){
+	frame = (frame + 1) % assets.length;}
+	if((framecount % 10) == 0){
+	frame2 = (frame2 + 1) % assets.length;}
+	framecount += 1;//(framecount + 1) % 30;
 	//setInterval(animatechoco, 1000/20);
 };
 var setup = function() {
@@ -81,11 +86,6 @@ var setup = function() {
 		ctx.drawImage(choc, 60, 123, 30, 30, 60, 60,100 ,100);
 	}
 	choc.src = 'chocobo.gif';
-	/*for (var i =0; i< assets.lengh; i++){
-	frames.push(new Image());
-	frames[i].onImageLoad;
-	//frames[i].src = assets[i];
-	}*/
 	setInterval(animate, frameRate);
 };
 </script>
