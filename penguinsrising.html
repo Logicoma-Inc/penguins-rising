@@ -11,10 +11,6 @@
 			height: 100%;
             margin: 0;
         }
-        #container{
-            position: relative;
-            width: 100%;
-        }
         canvas {
        
             width: 100%;
@@ -25,67 +21,208 @@
         }
 		</style>
 </head>
-<body id="body" onload="setup()">
-</body>
+<body id="body" onload="setup()"></body>
 <canvas id="window"></canvas>
 </html>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script>
+Array.prototype.erase = function (item) {
+	for (var i = this.length; i--; i) {
+		if (this[i] === item) this.splice(i, 1);
+	}
+
+	return this;
+};
+
+Function.prototype.bind = function (bind) {
+	var self = this;
+	return function () {
+		var args = Array.prototype.slice.call(arguments);
+		return self.apply(bind || null, args);
+	};
+};
+
+merge = function (original, extended) {
+	for (var key in extended) {
+		var ext = extended[key];
+		if (typeof (ext) != 'object' || ext instanceof Class) {
+			original[key] = ext;
+		} else {
+			if (!original[key] || typeof (original[key]) != 'object') {
+				original[key] = {};
+			}
+			merge(original[key], ext);
+		}
+	}
+	return original;
+};
+
+function copy(object) {
+	if (!object || typeof (object) != 'object' || object instanceof Class) {
+		return object;
+	} else if (object instanceof Array) {
+		var c = [];
+		for (var i = 0, l = object.length; i < l; i++) {
+			c[i] = copy(object[i]);
+		}
+		return c;
+	} else {
+		var c = {};
+		for (var i in object) {
+			c[i] = copy(object[i]);
+		}
+		return c;
+	}
+}
+
+function ksort(obj) {
+	if (!obj || typeof (obj) != 'object') {
+		return [];
+	}
+
+	var keys = [],
+		values = [];
+	for (var i in obj) {
+		keys.push(i);
+	}
+
+	keys.sort();
+	for (var i = 0; i < keys.length; i++) {
+		values.push(obj[keys[i]]);
+	}
+
+	return values;
+}
+
+/* Simple JavaScript Inheritance
+ * By John Resig http://ejohn.org/
+ * MIT Licensed.
+ */
+// Inspired by base2 and Prototype
+(function(){
+  var initializing = false, fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;
+ 
+  // The base Class implementation (does nothing)
+  this.Class = function(){};
+ 
+  // Create a new Class that inherits from this class
+  Class.extend = function(prop) {
+    var _super = this.prototype;
+   
+    // Instantiate a base class (but only create the instance,
+    // don't run the init constructor)
+    initializing = true;
+    var prototype = new this();
+    initializing = false;
+   
+    // Copy the properties over onto the new prototype
+    for (var name in prop) {
+      // Check if we're overwriting an existing function
+      prototype[name] = typeof prop[name] == "function" &&
+        typeof _super[name] == "function" && fnTest.test(prop[name]) ?
+        (function(name, fn){
+          return function() {
+            var tmp = this._super;
+           
+            // Add a new ._super() method that is the same method
+            // but on the super-class
+            this._super = _super[name];
+           
+            // The method only need to be bound temporarily, so we
+            // remove it when we're done executing
+            var ret = fn.apply(this, arguments);        
+            this._super = tmp;
+           
+            return ret;
+          };
+        })(name, prop[name]) :
+        prop[name];
+    }
+   
+    // The dummy class constructor
+    function Class() {
+      // All construction is actually done in the init method
+      if ( !initializing && this.init )
+        this.init.apply(this, arguments);
+    }
+   
+    // Populate our constructed prototype object
+    Class.prototype = prototype;
+   
+    // Enforce the constructor to be what we expect
+    Class.prototype.constructor = Class;
+ 
+    // And make this class extendable
+    Class.extend = arguments.callee;
+   
+    return Class;
+  };
+})();
 var canvas = null;
+$(window).resize(function () { 
+	canvas.width = window.innerWidth+10;
+	canvas.height = window.innerHeight; 
+});
 var ctx = null;
 var img = null;
-var choc = null;
 var frameRate = 1000/60;
 var framecount = 0;
 var frame = 0;
-var frame2 =0;
 var assets = [ 60, 90, 150, 180, 210, 180, 150 ,90];
 var frames = [];
+var Fort = Class.extend({
+	init: function(level){
+		this.Status = level;//flag
+		this.Health;
+		this.Animations;
+		this.Upgrades;
+  }
+});
+var Landscape = Fort.extend({
+	//this.Objects;
+});
+var Weapon = Class.extend({
 
-var onImageLoad = function(){
-	console.log("Landscaped:loaded");
-    ctx.drawImage(img, 0,0, canvas.width, canvas.height);
-	// Draw an image to the canvas at position 192,192.
-	// Remember that the drawImage method is attached
-	// to the 2D Context, not the canvas element!
-	// YOUR CODE HERE
-};
-var animate = function() {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.drawImage(img, 0,0, canvas.width, canvas.height);
-	ctx.font = "bold 16px Arial";
-	ctx.fillText(String(framecount%60), 20, 20);
-	//ctx.drawImage(choc, assets[frame], 123, 30, 30, 60, 60,100 ,100);
-	//This will reset frame to zero if it ever goes over frames length.
-	//frame = (frame + 1) % assets.length;
-	//};
-//var animatechoco = function(){
-	//ctx.clearRect(0, 0, canvas.width, canvas.height);
-	//ctx.drawImage(img, 0,0, canvas.width, canvas.height);
-	ctx.drawImage(choc, assets[frame], 123, 30, 30, 160, 160,100 ,100);
-	ctx.drawImage(choc, assets[frame2], 123, 30, 30, 260, 260,100 ,100);
-	console.log("frame count for choc");
-	//This will reset frame to zero if it ever goes over frames length.
-	//framecount = (framecount + 1) % frameRate;
-	if((framecount % 3) == 0){
-	frame = (frame + 1) % assets.length;}
-	if((framecount % 10) == 0){
-	frame2 = (frame2 + 1) % assets.length;}
-	framecount += 1;//(framecount + 1) % 30;
-	//setInterval(animatechoco, 1000/20);
-};
+});
+var Player = Weapon.extend({
+
+});
+var Penguins = Class.extend({
+
+});
+var World = Landscape.extend({
+	init: function(level){
+		this.Score;
+		this.Level = level;
+	}
+});
+var world = new World(1);
+console.log("User at Level:"+world.Level);
 var setup = function() {
 	canvas = document.getElementById("window");
 	ctx = canvas.getContext('2d');
-	canvas.width = window.innerWidth;
+	canvas.width = window.innerWidth+10;
 	canvas.height = window.innerHeight;
 	img = new Image();
-	img.onload = onImageLoad;
-	img.src = "landscape.webp";
-	choc = new Image();
-	choc.onload = function(){
-		ctx.drawImage(choc, 60, 123, 30, 30, 60, 60,100 ,100);
-	}
-	choc.src = 'chocobo.gif';
+	img.onload = function(){
+		ctx.drawImage(img, 0,0, canvas.width, canvas.height);
+	}	
+	img.src = "landscape.jpg";
+	var f = new Fort("test");
+	console.log(f.Status);
+	;
+	
 	setInterval(animate, frameRate);
+	
+	
 };
+var animate = function() {
+	
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.drawImage(img, 0,0, canvas.width, canvas.height);
+	ctx.font = "bold 22px Arial";
+	ctx.fillText("Score:0", 10, 25);
+	ctx.fillText("Level:"+world.Level, canvas.width - 90, 25);
+};
+
 </script>
