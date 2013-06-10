@@ -179,16 +179,38 @@ var Fort = Class.extend({
   }
 });
 var Landscape = Fort.extend({
-	//this.Objects;
+	init: function(){
+	this.Objects;
+	}
 });
 var Weapon = Class.extend({
-
+	init: function(){
+	this.Rate;//speed of the weapon
+	this.Type;
+	this.Animation;
+	this.Box;
+	this.Bullets;//bullet count before reload
+	this.Sound;
+	}
 });
 var Player = Weapon.extend({
-
+	init: function(){
+		this.Position;
+		this.Animation;
+		this.Box;
+		this.Rotation;
+	}
 });
 var Penguins = Class.extend({
-
+	init: function(){
+	this.Level;
+	this.Position;
+	this.Speed;
+	this.Animation;
+	this.Box;
+	this.Sound;
+	this.Hit;
+	}
 });
 var World = Landscape.extend({
 	init: function(level){
@@ -196,7 +218,7 @@ var World = Landscape.extend({
 		this.Level = level;
 	}
 });
-var world = new World(1);
+var world = new World(1);//Needs to be Global;
 console.log("User at Level:"+world.Level);
 var setup = function() {
 	canvas = document.getElementById("window");
@@ -210,7 +232,6 @@ var setup = function() {
 	img.src = "landscape.jpg";
 	var f = new Fort("test");
 	console.log(f.Status);
-	;
 	
 	setInterval(animate, frameRate);
 	
