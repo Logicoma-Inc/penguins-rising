@@ -18,6 +18,7 @@
             image-rendering: -moz-crisp-edges;
             image-rendering: -webkit-optimize-contrast;
             image-rendering: optimize-contrast;
+			cursor: crosshair;
         }
 		</style>
 </head>
@@ -218,10 +219,17 @@ var World = Landscape.extend({
 		this.Level = level;
 	}
 });
+var message = "Start you engines!";
 var world = new World(1);//Needs to be Global;
 console.log("User at Level:"+world.Level);
-var setup = function() {
+var setup = function(){
+	
 	canvas = document.getElementById("window");
+	canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+      }, false);
+	canvas.addEventListener('mousedown', onKeyDown);
 	ctx = canvas.getContext('2d');
 	canvas.width = window.innerWidth+10;
 	canvas.height = window.innerHeight;
@@ -230,20 +238,35 @@ var setup = function() {
 		ctx.drawImage(img, 0,0, canvas.width, canvas.height);
 	}	
 	img.src = "landscape.jpg";
-	var f = new Fort("test");
-	console.log(f.Status);
-	
-	setInterval(animate, frameRate);
-	
-	
+	//var f = new Fort("test");
+	//console.log(f.Status);
+	setInterval(animate, frameRate)
 };
+
 var animate = function() {
-	
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(img, 0,0, canvas.width, canvas.height);
 	ctx.font = "bold 22px Arial";
 	ctx.fillText("Score:0", 10, 25);
 	ctx.fillText("Level:"+world.Level, canvas.width - 90, 25);
+	ctx.fillText(message, 10, 45);
 };
-
+function writeMessage(canvas, message) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = '18pt Calibri';
+        context.fillStyle = 'black';
+        context.fillText(message, 10, 25);
+      };
+      function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      };
+	  function onKeyDown(event)
+	  {
+		event.preventDefault();
+	  };
 </script>
