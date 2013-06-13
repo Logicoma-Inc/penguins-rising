@@ -205,17 +205,23 @@ var World = Landscape.extend({
 		this.Score;
 		this.Level = level;
 		this.assets = [ 60, 90, 150, 180, 210, 180, 150 ,90];
+		this.mouseX = 0;
+		this.mouseY = 0;
 	}
 });
 var message = "Start you engines!";
 var world = new World(1);//Needs to be Global;
 console.log("User at Level:"+world.Level);
+var penguins = Penguins();
 var setup = function(){
-	
+	//world.mouseX=0;
+	//world.mouseY=0;
 	canvas = document.getElementById("window");
 	canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePos(canvas, evt);
         message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+		world.mouseX = mousePos.x;
+		world.mouseY = mousePos.y;
       }, false);
 	canvas.addEventListener('mousedown', onKeyDown);
 	ctx = canvas.getContext('2d');
@@ -223,9 +229,12 @@ var setup = function(){
 	canvas.height = window.innerHeight;
 	img = new Image();
 	img.onload = function(){
-		ctx.drawImage(img, 0,0, canvas.width, canvas.height);
+		//where to start clipping, size of the clipped, and where to place.
+		//lastly the size of the cut out image in the canvas. all (x,y)
+		//can not be greater than 1008 width
+		ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
 	}	
-	img.src = "landscape.jpg";
+	img.src = "landscape2.jpg";
 	//var f = new Fort("test");
 	//console.log(f.Status);
 	setInterval(animate, frameRate)
@@ -234,11 +243,17 @@ var setup = function(){
 
 var animate = function() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.drawImage(img, 0,0, canvas.width, canvas.height);
+	ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
 	ctx.font = "bold 22px Arial";
 	ctx.fillText("Score:0", 10, 25);
 	ctx.fillText("Level:"+world.Level, canvas.width - 90, 25);
 	ctx.fillText(message, 10, 45);
+	ctx.save();
+	ctx.translate(canvas.width/2, canvas.height-400);
+	ctx.rotate((world.mouseX/world.mouseY)/Math.PI);
+	ctx.drawImage(img, 0, 700, 50, 66, 0, 0, 50, 66);
+	ctx.rotate(-(world.mouseX/world.mouseY)/Math.PI);
+	ctx.restore();
 };
 function writeMessage(canvas, message) {
         var context = canvas.getContext('2d');
