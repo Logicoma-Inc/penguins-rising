@@ -16,81 +16,21 @@
             image-rendering: optimize-contrast;
 			cursor: crosshair;
         }
+		#google {
+		position: relative;
+		float:right;
+		left:-40px;
+		top:-40px;
+		}
 		</style>
 </head>
 <body id="body" onload="setup()"></body>
 <canvas id="window"></canvas>
+<img id="google" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" 
+alt="Powered by Google App Engine" />
 </html>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script>
-Array.prototype.erase = function (item) {
-	for (var i = this.length; i--; i) {
-		if (this[i] === item) this.splice(i, 1);
-	}
-
-	return this;
-};
-
-Function.prototype.bind = function (bind) {
-	var self = this;
-	return function () {
-		var args = Array.prototype.slice.call(arguments);
-		return self.apply(bind || null, args);
-	};
-};
-
-merge = function (original, extended) {
-	for (var key in extended) {
-		var ext = extended[key];
-		if (typeof (ext) != 'object' || ext instanceof Class) {
-			original[key] = ext;
-		} else {
-			if (!original[key] || typeof (original[key]) != 'object') {
-				original[key] = {};
-			}
-			merge(original[key], ext);
-		}
-	}
-	return original;
-};
-
-function copy(object) {
-	if (!object || typeof (object) != 'object' || object instanceof Class) {
-		return object;
-	} else if (object instanceof Array) {
-		var c = [];
-		for (var i = 0, l = object.length; i < l; i++) {
-			c[i] = copy(object[i]);
-		}
-		return c;
-	} else {
-		var c = {};
-		for (var i in object) {
-			c[i] = copy(object[i]);
-		}
-		return c;
-	}
-}
-
-function ksort(obj) {
-	if (!obj || typeof (obj) != 'object') {
-		return [];
-	}
-
-	var keys = [],
-		values = [];
-	for (var i in obj) {
-		keys.push(i);
-	}
-
-	keys.sort();
-	for (var i = 0; i < keys.length; i++) {
-		values.push(obj[keys[i]]);
-	}
-
-	return values;
-}
-
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -207,9 +147,9 @@ var World = Landscape.extend({
 		this.assets = [ 60, 90, 150, 180, 210, 180, 150 ,90];
 		this.mouseX = 0;
 		this.mouseY = 0;
+		this.message = "Start you engines!";
 	}
 });
-var message = "Start you engines!";
 var world = new World(1);//Needs to be Global;
 console.log("User at Level:"+world.Level);
 var penguins = Penguins();
@@ -217,7 +157,7 @@ var setup = function(){
 	canvas = document.getElementById("window");
 	canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePos(canvas, evt);
-        message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        world.message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
 		world.mouseX = mousePos.x;
 		world.mouseY = mousePos.y;
       }, false);
@@ -227,14 +167,9 @@ var setup = function(){
 	canvas.height = window.innerHeight;
 	img = new Image();
 	img.onload = function(){
-		//where to start clipping, size of the clipped, and where to place.
-		//lastly the size of the cut out image in the canvas. all (x,y)
-		//can not be greater than 1008 width
 		ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
-	}	
+	};	
 	img.src = "landscape2.png";
-	//var f = new Fort("test");
-	//console.log(f.Status);
 	setInterval(animate, frameRate)
 };
 
@@ -244,15 +179,11 @@ var animate = function() {
 	ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
 	ctx.font = "bold 22px Arial";
 	ctx.fillText("Score:0", 10, 25);
-	ctx.fillText("Level:"+world.Level, canvas.width - 90, 25);
-	ctx.fillText(message, 10, 45);
+	ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
 	ctx.save();
 	ctx.translate(canvas.width/2, canvas.height-60);
-	//ctx.rotate(Math.atan(world.mouseX, (world.mouseY+canvas.height)));
 	ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
 	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
-	//this is not needed since we have a save state and restore call.
-	//ctx.rotate(-(world.mouseX/world.mouseY)/Math.PI);
 	ctx.restore();
 };
 function writeMessage(canvas, message) {
