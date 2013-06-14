@@ -248,7 +248,8 @@ var animate = function() {
 	ctx.fillText(message, 10, 45);
 	ctx.save();
 	ctx.translate(canvas.width/2, canvas.height-60);
-	ctx.rotate(Math.atan2(world.mouseX-800, world.mouseY));
+	//ctx.rotate(Math.atan(world.mouseX, (world.mouseY+canvas.height)));
+	ctx.rotate(Math.atan2((canvas.width/2)-world.mouseX, canvas.height-world.mouseY));
 	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
 	//this is not needed since we have a save state and restore call.
 	//ctx.rotate(-(world.mouseX/world.mouseY)/Math.PI);
