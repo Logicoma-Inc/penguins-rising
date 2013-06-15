@@ -16,18 +16,19 @@
             image-rendering: optimize-contrast;
 			cursor: crosshair;
         }
-		#google {
+		.promotes {
 		position: relative;
-		float:right;
-		left:-40px;
 		top:-40px;
 		}
+		.right{ float:right; right:3%;}
+		.left{float:left; left:3%;}
 		</style>
 </head>
 <body id="body" onload="setup()"></body>
 <canvas id="window"></canvas>
-<img id="google" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" 
+<img class="promotes right" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" 
 alt="Powered by Google App Engine" />
+<img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered">
 </html>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script>
@@ -169,7 +170,7 @@ var setup = function(){
 	img.onload = function(){
 		ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
 	};	
-	img.src = "landscape2.png";
+	img.src = "images/landscape2.png";
 	setInterval(animate, frameRate)
 };
 
@@ -178,7 +179,7 @@ var animate = function() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
 	ctx.font = "bold 22px Arial";
-	ctx.fillText("Score:0", 10, 25);
+	ctx.fillText("Score:0", 25, 25);
 	ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
 	ctx.save();
 	ctx.translate(canvas.width/2, canvas.height-60);
