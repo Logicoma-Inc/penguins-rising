@@ -75,25 +75,38 @@ var frame = 0;
 var frames = [];
 var Landscape = Class.extend({
 	init: function(){
-	this.Objects;
+	this.Objects;//Later will add objects on the field.
 	}
 });
 var Weapon = Class.extend({
 	init: function(){
+	this.angle = Math.atan2(world.mouseX-(window.innerWidth/2), (window.innerHeight-60)-world.mouseY);
+	this.shot = false;
 	this.Rate;//speed of the weapon
 	this.Type;
 	this.Animation;
 	this.Box;
 	this.Bullets;//bullet count before reload
 	this.Sound;
+	},
+	shoot: function(){
+			ctx.fillRect(player.Position[0] +20,player.Position[1]+20 ,5,5);
 	}
 });
 var Player = Class.extend({
 	init: function(){
-		this.Position;
-		this.Animation;
+		this.Position = { x = (window.innerWidth/2), y=(window.innerHeight-60) };
 		this.Box;
 		this.Rotation;
+	}, 
+	Animate: function(){
+	ctx.save();
+	//ctx.translate(canvas.width/2, canvas.height-60);
+	//ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
+	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
+	ctx.restore();
+	ctx.rect(403, 500, 29, 26);
+	ctx.stroke();
 	}
 });
 var Penguins = Class.extend({
@@ -101,25 +114,39 @@ var Penguins = Class.extend({
 	this.Level;
 	this.Position;
 	this.Speed;
-	this.Animation;
+	this.Assets = [90, 90, 90];
 	this.Box;
 	this.Sound;
 	this.Hit;
+	},
+	animate: function(){
+		ctx.drawImage(img, 50, 702, 39, 30, 402, 500, 29, 27);
 	}
+	
 });
 var World = Landscape.extend({
 	init: function(level){
 		this.Score;
 		this.Level = level;
-		this.assets = [ 60, 90, 150, 180, 210, 180, 150 ,90];
+		//this.assets = [ 60, 90, 150, 180, 210, 180, 150 ,90];
 		this.mouseX = 0;
 		this.mouseY = 0;
 		this.message = "Start you engines!";
+	},
+	/*vertical: function() {
+	var i=0; 
+	for (i<canvas.width)
+	{
+	 i+= 27;
 	}
+	 return i;
+   }*/
 });
 var world = new World(1);//Needs to be Global;
 console.log("User at Level:"+world.Level);
-var penguins = Penguins();
+var penguins = new Penguins();
+var weapon = new Weapon();
+var player = new Player();
 var setup = function(){
 	canvas = document.getElementById("window");
 	canvas.addEventListener('mousemove', function(evt) {
@@ -147,11 +174,15 @@ var animate = function() {
 	ctx.font = "bold 22px Arial";
 	ctx.fillText("Score:0", 25, 25);
 	ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
-	ctx.save();
-	ctx.translate(canvas.width/2, canvas.height-60);
-	ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
-	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
-	ctx.restore();
+	player.Animate();
+	if(penguins.notShot())
+	{
+	penguins.animate();
+	}
+	if(weapon.shot)
+	{
+		weapon.shoot();
+	}
 };
 function writeMessage(canvas, message) {
         var context = canvas.getContext('2d');
@@ -171,4 +202,5 @@ function getMousePos(canvas, evt) {
       };
 function onKeyDown(event){
 		event.preventDefault();
+		weapon.shot = true;
 	  };
