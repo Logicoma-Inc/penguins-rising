@@ -80,33 +80,38 @@ var Landscape = Class.extend({
 });
 var Weapon = Class.extend({
 	init: function(){
-	this.angle = Math.atan2(world.mouseX-(window.innerWidth/2), (window.innerHeight-60)-world.mouseY);
+	this.angle;
 	this.shot = false;
 	this.Rate;//speed of the weapon
 	this.Type;
 	this.Animation;
 	this.Box;
+	this.i = 0;
 	this.Bullets;//bullet count before reload
 	this.Sound;
 	},
 	shoot: function(){
-			ctx.fillRect(player.Position[0] +20,player.Position[1]+20 ,5,5);
+			ctx.save();
+			ctx.translate(canvas.width/2, canvas.height-60);
+			ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
+			ctx.fillRect(-1,-35-this.i,3,3);
+			ctx.restore();
+			this.i += 4;
 	}
 });
 var Player = Class.extend({
 	init: function(){
-		this.Position = { x = (window.innerWidth/2), y=(window.innerHeight-60) };
+		this.Position = [(window.innerWidth/2),(window.innerHeight-60)];
 		this.Box;
 		this.Rotation;
 	}, 
 	Animate: function(){
+	
 	ctx.save();
-	//ctx.translate(canvas.width/2, canvas.height-60);
-	//ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
+	ctx.translate(canvas.width/2, canvas.height-60);
+	ctx.rotate(this.angle);
 	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
 	ctx.restore();
-	ctx.rect(403, 500, 29, 26);
-	ctx.stroke();
 	}
 });
 var Penguins = Class.extend({
@@ -175,10 +180,9 @@ var animate = function() {
 	ctx.fillText("Score:0", 25, 25);
 	ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
 	player.Animate();
-	if(penguins.notShot())
-	{
 	penguins.animate();
-	}
+		ctx.rect(403, 500, 29, 26);
+	ctx.stroke();
 	if(weapon.shot)
 	{
 		weapon.shoot();
@@ -203,4 +207,7 @@ function getMousePos(canvas, evt) {
 function onKeyDown(event){
 		event.preventDefault();
 		weapon.shot = true;
+		var x = world.mouseX;
+		var y = world.mouseY;
+		weapon.angle = Math.atan2(x-(window.innerWidth/2), (window.innerHeight-60)- y);
 	  };
