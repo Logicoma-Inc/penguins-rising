@@ -93,7 +93,7 @@ var Weapon = Class.extend({
 	shoot: function(){
 			ctx.save();
 			ctx.translate(canvas.width/2, canvas.height-60);
-			ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
+			ctx.rotate(this.angle);
 			ctx.fillRect(-1,-35-this.i,3,3);
 			ctx.restore();
 			this.i += 4;
@@ -109,7 +109,7 @@ var Player = Class.extend({
 	
 	ctx.save();
 	ctx.translate(canvas.width/2, canvas.height-60);
-	ctx.rotate(this.angle);
+	ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
 	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
 	ctx.restore();
 	}
