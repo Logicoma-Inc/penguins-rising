@@ -84,19 +84,22 @@ var Weapon = Class.extend({
 	this.shot = false;
 	this.Rate;//speed of the weapon
 	this.Type;
-	this.Animation;
-	this.Box;
+	this.x ;//= -1+(window.innerWidth/2);
+	this.y ;//= -35+(window.innerHeight-60);
 	this.i = 0;
 	this.Bullets;//bullet count before reload
 	this.Sound;
 	},
 	shoot: function(){
+			if((this.i-35) < canvas.height)
+			{
 			ctx.save();
 			ctx.translate(canvas.width/2, canvas.height-60);
 			ctx.rotate(this.angle);
-			ctx.fillRect(-1,-35-this.i,3,3);
+			ctx.fillRect(-1,-35,3,3);
 			ctx.restore();
 			this.i += 4;
+			}
 	}
 });
 var Player = Class.extend({
@@ -113,21 +116,6 @@ var Player = Class.extend({
 	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
 	ctx.restore();
 	}
-});
-var Penguins = Class.extend({
-	init: function(){
-	this.Level;
-	this.Position;
-	this.Speed;
-	this.Assets = [90, 90, 90];
-	this.Box;
-	this.Sound;
-	this.Hit;
-	},
-	animate: function(){
-		ctx.drawImage(img, 50, 702, 39, 30, 402, 500, 29, 27);
-	}
-	
 });
 var World = Landscape.extend({
 	init: function(level){
@@ -149,7 +137,6 @@ var World = Landscape.extend({
 });
 var world = new World(1);//Needs to be Global;
 console.log("User at Level:"+world.Level);
-var penguins = new Penguins();
 var weapon = new Weapon();
 var player = new Player();
 var setup = function(){
@@ -171,8 +158,6 @@ var setup = function(){
 	img.src = "images/landscape2.png";
 	setInterval(animate, frameRate)
 };
-
-
 var animate = function() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
@@ -180,13 +165,21 @@ var animate = function() {
 	ctx.fillText("Score:0", 25, 25);
 	ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
 	player.Animate();
-	penguins.animate();
-		ctx.rect(403, 500, 29, 26);
+	//penguins.animate();
+	ctx.rect(403, 500, 29, 26);
 	ctx.stroke();
-	if(weapon.shot)
-	{
-		weapon.shoot();
-	}
+	 if(weapon.shot)
+	 {
+		 weapon.shoot();
+		 weapon.angel = weapon.angle / Math.PI * 180;
+		 weapon.x = window.innerWidth/2;
+		 weapon.y = window.innerHeight-60;
+		 var el1 = {x:weapon.x, y:weapon.y, r:weapon.angle};
+		 el1 = getXYR(el1);
+		 ctx.fillText("Angle:"+weapon.angle, 20, 120);
+		 ctx.fillText("X:"+el1.x+" Y"+el1.y+" R:"+el1.r, 20, 50);
+	 }
+	
 };
 function writeMessage(canvas, message) {
         var context = canvas.getContext('2d');
@@ -205,9 +198,36 @@ function getMousePos(canvas, evt) {
         };
       };
 function onKeyDown(event){
-		event.preventDefault();
+		event.preventDefault()
 		weapon.shot = true;
 		var x = world.mouseX;
 		var y = world.mouseY;
-		weapon.angle = Math.atan2(x-(window.innerWidth/2), (window.innerHeight-60)- y);
+	    weapon.angle = Math.atan2(world.mouseX-(window.innerWidth/2), (window.innerHeight-60)- world.mouseY);
 	  };
+var deg2rad, rad2deg, getXYR;
+
+deg2rad = function ( d ) { return d * Math.PI / 180 };
+rad2deg = function ( r ) { return r / Math.PI * 180 };
+
+getXYR = function ( node ) {
+  var x, y, r,
+      parentXYR, pX, pY, pR,
+      nX, nY;
+
+  x = y = r = 0;
+
+  if ( node ) {
+    parentXYR = getXYR( node.parent );
+    pX = parentXYR.x;
+    pY = parentXYR.y;
+    pR = deg2rad( parentXYR.r );
+    nX = node.x;
+    nY = node.y;
+
+    x = pX + nX * Math.cos( pR ) - nY * Math.sin( pR );
+    y = pY + nX * Math.sin( pR ) + nY * Math.cos( pR );
+    r = rad2deg( pR + deg2rad( node.r ) );
+  }
+
+  return { x:x, y:y, r:r };
+};
