@@ -2,6 +2,7 @@ $(window).resize(function () {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight; 
 });
+
 var ctx = null;
 var img = null;
 var frameRate = 1000/60;
@@ -15,18 +16,15 @@ var Weapon = Class.extend({
 	this.y ;//= -35+(window.innerHeight-60);
 	this.i = 0;
 	this.Bullets;//bullet count before reload
-	this.Sound;
+	this.Sound = document.getElementById("gunshot"); 
 	},
 	shoot: function(){
-			if((this.i-35) < canvas.height)
-			{
-			ctx.save();
-			ctx.translate(canvas.width/2, canvas.height-60);
-			ctx.rotate(this.angle);
-			ctx.fillRect(-1,-35,3,3);
-			ctx.restore();
-			//this.i += 4;
-			}
+	    world.weapon.Sound.play();
+		ctx.save();
+		ctx.translate(canvas.width/2, canvas.height-60);
+		ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
+		ctx.drawImage(img, 40, 730, 100, 30, -10, -62, 100, 30);
+		ctx.restore();
 	}
 });
 var Player = Class.extend({
@@ -36,18 +34,17 @@ var Player = Class.extend({
 		this.Rotation;
 	}, 
 	Animate: function(){
-	
 	ctx.save();
 	ctx.translate(canvas.width/2, canvas.height-60);
 	ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
-	ctx.drawImage(img, 0, 702, 50, 65, -25, -33, 50, 66);
+	ctx.drawImage(img, 0, 702, 42, 64, -21, -33, 42, 64);
 	ctx.restore();
 	}
 });
 var World = Class.extend({
 	init: function(level){
 		this.Score;
-		//var framecount = 0;
+		this.framecount = 0;
 		this.Level = level;
 		this.mouseX = 0;
 		this.mouseY = 0;
@@ -66,17 +63,27 @@ var World = Class.extend({
 });
 var Penguin = Class.extend({
 	init:function(pos){
-		//var frame = 0;
+		this.frame = 0;
 		//var frames = [];
 		this.x = pos.x;//x position top left corner
 		this.y = pos.y;//y position top left corner
-		this.assets = [ 43, 90, 150, 180, 210, 180, 150 ,90];
-		this.width = 38;
+		this.assets = [39, 82];//39, 130, 60, 130];
+		this.width = 37;
 		this.height = 26;
+		this.shot = false;
 	},
-	Animate:function(x){
-	if(!x)
-	ctx.drawImage(img, this.assets[0], 702, 50, 65, this.x, 0, 50, 66);
+	Animate:function(){
+	 if(!this.shot)
+	 { 
+	   if((world.framecount%20)==0)
+	   { this.frame = (this.frame+1) %this.assets.length;
+		 if(this.y < canvas.height%80)
+		 {
+		 this.y += 12;
+		 }
+	   }
+	   ctx.drawImage(img, this.assets[this.frame], 702, 46, 37, this.x, this.y, 46, 37);
+	 }
 	}
 });
 
@@ -95,29 +102,35 @@ var setup = function(){
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	img = new Image();
-	img.onload = function(){
-		ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
-	};	
-	img.src = "images/landscape2.png";
+	img = document.getElementById("background");
+	$('body').append('<img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered"> <img class="promotes right" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />');
 	setInterval(animate, frameRate)
 };
 var animate = function() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.drawImage(img, 0,0, 1008, 700, 0, 0, canvas.width, canvas.height);
+	ctx.drawImage(img, 0,0, 1003, 695, 0, 0, canvas.width, canvas.height);
 	writeMessage();
 	world.player.Animate();
-	world.penguins.Animate(collides(world, world.penguins));
+	world.penguins.Animate();
 	if(world.weapon.shot)
 	{
-	  //world.weapon.shoot();
-	  ctx.fillText("X:"+world.mouseX+" Y:"+world.mouseY, 20, 50);
+	  	if(!world.weapon.Sound.ended)
+		{
+		 ctx.fillText("Wait", 20, 80);
+		}
+		else {
+		ctx.fillText("Ready", 20, 100);
+		world.penguins.shot = collides(world, world.penguins);
+		}
 	}
+	world.framecount +=1;
 };
 
 function writeMessage() {
 	ctx.font = "bold 22px Arial";
 	ctx.fillText("Score:0", 25, 25);
 	ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
+	//ctx.fillText("X:"+world.mouseX+" Y:"+world.mouseY, 20, 50);
 };
 
 //Input engine!  
@@ -130,14 +143,16 @@ function getMousePos(canvas, evt) {
       };
 function mouseClick(event){
 		event.preventDefault()
+		if(!world.weapon.shot)
+		{
 		world.weapon.shot = true;
-		//world.weapon.x = world.mouseX;
-		//world.weapon.y = world.mouseY;
+		world.weapon.shoot();
+		} else (world.weapon.Sound.ended)
+		{
+		 world.weapon.Sound.play();
+		}
 		world.x = world.mouseX;
 		world.y = world.mouseY;
-		var myVideo=document.getElementById("video1"); 
-		myVideo.play(); 
-	    world.weapon.angle = Math.atan2(world.mouseX-(window.innerWidth/2), (window.innerHeight-60)- world.mouseY);
 };
 function collides(a, b) {
   return a.x >= b.x && a.x <= b.x+b.width &&

@@ -8,16 +8,17 @@
 	<link rel="icon" type="image/png" href="images/myicon.png">
 	<link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
-<body id="body" onload="setup()"></body>
+<body id="body" onload="setup()" class="loading">
+<img src="images/landscape.png" width="1200" id="background" style="display:none;" alt="Here is my world" />
 <canvas id="window"></canvas>
-<img class="promotes right" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" 
-alt="Powered by Google App Engine" />
-<audio id="video1">
-  <source src="gunshot.wav" type="audio/wav">
-  <source src="gunshot.mp3" type="audio/mpeg">
+
+<audio id="gunshot">
+  <source src="sounds/gunshot.wav" type="audio/wav">
+  <source src="sounds/gunshot.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio>
-<img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered">
+<!--img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered"-->
+</body>
 </html>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="scripts/class.js"></script>
