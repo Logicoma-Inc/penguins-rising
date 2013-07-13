@@ -9,8 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
 <body id="body" onload="setup()" class="loading">
-<img src="images/landscape.png" width="1200" id="background" style="display:none;" alt="Here is my world" />
-<canvas id="window"></canvas>
+<img src="images/landscape.png" width="1200" id="background" style="display:none;" alt="Here is my world" onloadstart="showProgressBar()"  onprogress="updateProgressBar(event)" onloadend="hideProgressBar()"/>
+<canvas id="window">Sorry but Canvas is not Supported</canvas>
 
 <audio id="gunshot">
   <source src="sounds/gunshot.wav" type="audio/wav">

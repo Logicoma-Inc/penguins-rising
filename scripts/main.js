@@ -2,6 +2,27 @@ $(window).resize(function () {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight; 
 });
+var progressBar;
+     
+function showProgressBar()
+{
+    progressBar = document.createElement("progress");
+    progressBar.value = 0;
+    progressBar.max = 100;
+    document.body.appendChild(progressBar);
+ }
+           
+ function updateProgressBar(e)
+ {
+    if (e.lengthComputable)
+       progressBar.value = e.loaded / e.total * 100;
+    else
+        progressBar.removeAttribute("value");
+    }
+            
+ function hideProgressBar()
+ { document.body.removeChild(progressBar); }
+            
 
 var ctx = null;
 var img = null;
@@ -75,13 +96,10 @@ var Penguin = Class.extend({
 	Animate:function(){
 	 if(!this.shot)
 	 { 
-	   if((world.framecount%20)==0)
-	   { this.frame = (this.frame+1) %this.assets.length;
-		 if(this.y < canvas.height%80)
-		 {
-		 this.y += 12;
-		 }
-	   }
+	   if((world.framecount%15)==0)
+	   { this.frame = (this.frame+1) %this.assets.length;}
+	   if((world.framecount%25)==0)
+	   { this.y += 3; }
 	   ctx.drawImage(img, this.assets[this.frame], 702, 46, 37, this.x, this.y, 46, 37);
 	 }
 	}
@@ -120,7 +138,6 @@ var animate = function() {
 		}
 		else {
 		ctx.fillText("Ready", 20, 100);
-		world.penguins.shot = collides(world, world.penguins);
 		}
 	}
 	world.framecount +=1;
@@ -153,6 +170,7 @@ function mouseClick(event){
 		}
 		world.x = world.mouseX;
 		world.y = world.mouseY;
+		world.penguins.shot = collides(world, world.penguins);
 };
 function collides(a, b) {
   return a.x >= b.x && a.x <= b.x+b.width &&
