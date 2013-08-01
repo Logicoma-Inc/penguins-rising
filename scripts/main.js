@@ -121,13 +121,12 @@ var setup = function(){
 	canvas.height = window.innerHeight;
 	img = new Image();
 	img = document.getElementById("background");
-	$('body').append('<img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered"> <img class="promotes right" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />');
 	setInterval(animate, frameRate)
 };
 var animate = function() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(img, 0,0, 1003, 695, 0, 0, canvas.width, canvas.height);
-	writeMessage();
+	//writeMessage();
 	world.player.Animate();
 	world.penguins.Animate();
 	if(world.weapon.shot)
@@ -143,12 +142,12 @@ var animate = function() {
 	world.framecount +=1;
 };
 
-function writeMessage() {
-	ctx.font = "bold 22px Arial";
-	ctx.fillText("Score:0", 25, 25);
-	ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
-	//ctx.fillText("X:"+world.mouseX+" Y:"+world.mouseY, 20, 50);
-};
+// function writeMessage() {
+	// ctx.font = "bold 22px Arial";
+	// ctx.fillText("Score:0", 25, 25);
+	// ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
+	// //$('body').append('<img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered"> <img class="promotes right" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />');
+// };
 
 //Input engine!  
 function getMousePos(canvas, evt) {
