@@ -1,155 +1,125 @@
-$(window).resize(function () { 
+var img = null;
+var mousePos = { x:0, y:0};
+canvas = document.getElementById("window");
+ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.addEventListener('mousemove', function(evt) {
+	mousePos = getMousePos(canvas, evt);
+  }, false);
+var player = {
+  x: (canvas.width/2),
+  y: (canvas.height-60),
+  vx: 0,
+  vy: 0,
+  Bullets: [],
+  draw: function() {
+	ctx.save();
+	ctx.translate(canvas.width/2, canvas.height-60);
+	ctx.rotate(Math.atan2(mousePos.x-this.x, this.y-mousePos.y));
+	ctx.drawImage(img, 0, 702, 42, 64, -21, -33, 42, 64);
+	ctx.restore();
+  },
+  shoot: function() {
+		var angle = Math.atan2(player.x- mousePos.x, player.y - mousePos.y);
+		this.Bullets.push(Bullet({
+		radian: angle,
+		speed: 6,
+		x: Math.cos(angle)+player.x,
+		y: Math.sin(angle)+player.y-30,
+	  }));
+	}
+};
+ 
+enemies = [];
+
+function Enemy(I) {
+  I = I || {};
+
+  I.active = true;
+  I.age = Math.floor(Math.random() * 128);
+  
+  I.x = canvas.width / 4 + Math.random() * canvas.width / 2;
+  I.y = 0;
+  I.xVelocity = 0
+  I.yVelocity = 2;
+
+  I.width = 32;
+  I.height = 32;
+
+  I.inBounds = function() {
+	return I.x >= 0 && I.x <= canvas.width &&
+	  I.y >= 0 && I.y <= canvas.height;
+  };
+
+  I.draw = function() {
+	ctx.drawImage(img, 39, 702, 46, 37, this.x, this.y, 46, 37);
+  };
+
+  I.update = function() {
+	I.x += I.xVelocity;
+	I.y += I.yVelocity;
+	I.xVelocity = 3 * Math.sin(I.age * Math.PI / 64);
+	I.age++;
+	I.active = I.active && I.inBounds();
+  };
+  return I;
+};
+        
+function Bullet(I) {
+  I.active = true;
+  I.radian = Math.atan2(player.x- mousePos.x, player.y - mousePos.y);
+  I.xVelocity = -I.speed * Math.sin(I.radian);
+  I.yVelocity = -I.speed * Math.cos(I.radian);
+  I.width = 3;
+  I.height = 3;
+  I.color = "#000";
+
+  I.inBounds = function() {
+	return I.x >= 0 && I.x <= canvas.width &&
+	  I.y >= 0 && I.y <= canvas.height;
+  };
+
+  I.draw = function() {
+	ctx.fillStyle = this.color;
+	ctx.fillRect(this.x, this.y, this.width, this.height);
+  };
+  
+  I.update = function() {
+	I.x += I.xVelocity;
+	I.y += I.yVelocity;
+
+	I.active = I.active && I.inBounds();
+  };
+  return I;
+}
+
+var setup = function(){
+	//canvas.addEventListener('mousedown', mouseClick);
+	img = new Image();
+	img = document.getElementById("background");
+	canvas.addEventListener('mousedown', mouseClick);
+	setInterval(function() {
+          update();
+          draw();
+		  $(window).resize(function () { 
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight; 
 });
-var progressBar;
-     
-function showProgressBar()
-{
-    progressBar = document.createElement("progress");
-    progressBar.value = 0;
-    progressBar.max = 100;
-    document.body.appendChild(progressBar);
- }
-           
- function updateProgressBar(e)
- {
-    if (e.lengthComputable)
-       progressBar.value = e.loaded / e.total * 100;
-    else
-        progressBar.removeAttribute("value");
-    }
-            
- function hideProgressBar()
- { document.body.removeChild(progressBar); }
-            
-
-var ctx = null;
-var img = null;
-var frameRate = 1000/60;
-var Weapon = Class.extend({
-	init: function(){//Function for all vars.
-	this.angle;
-	this.shot = false;
-	this.Rate;//speed of the weapon
-	this.Type;
-	this.x ;//= -1+(window.innerWidth/2);
-	this.y ;//= -35+(window.innerHeight-60);
-	this.i = 0;
-	this.Bullets;//bullet count before reload
-	this.Sound = document.getElementById("gunshot"); 
-	},
-	shoot: function(){
-	    world.weapon.Sound.play();
-		ctx.save();
-		ctx.translate(canvas.width/2, canvas.height-60);
-		ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
-		ctx.drawImage(img, 40, 730, 100, 30, -10, -62, 100, 30);
-		ctx.restore();
-	}
-});
-var Player = Class.extend({
-	init: function(){
-		this.Position = [(window.innerWidth/2),(window.innerHeight-60)];
-		this.Box;
-		this.Rotation;
-	}, 
-	Animate: function(){
-	ctx.save();
-	ctx.translate(canvas.width/2, canvas.height-60);
-	ctx.rotate(Math.atan2(world.mouseX-(canvas.width/2), canvas.height-world.mouseY));
-	ctx.drawImage(img, 0, 702, 42, 64, -21, -33, 42, 64);
-	ctx.restore();
-	}
-});
-var World = Class.extend({
-	init: function(level){
-		this.Score;
-		this.framecount = 0;
-		this.Level = level;
-		this.mouseX = 0;
-		this.mouseY = 0;
-		this.x = this.mouseX;
-		this.y = this.mouseY;
-		this.message = "Start you engines!";
-		this.Penguins = new Array();
-		this.weapon = new Weapon();
-		this.player = new Player();
-		//will remove soon..
-		this.penguins = new Penguin(pos = {x:window.innerWidth/2, y:0});
-	},
-	setup: function(){
-		
-	}
-});
-var Penguin = Class.extend({
-	init:function(pos){
-		this.frame = 0;
-		//var frames = [];
-		this.x = pos.x;//x position top left corner
-		this.y = pos.y;//y position top left corner
-		this.assets = [39, 82];//39, 130, 60, 130];
-		this.width = 37;
-		this.height = 26;
-		this.shot = false;
-	},
-	Animate:function(){
-	 if(!this.shot)
-	 { 
-	   if((world.framecount%15)==0)
-	   { this.frame = (this.frame+1) %this.assets.length;}
-	   if((world.framecount%25)==0)
-	   { this.y += 3; }
-	   ctx.drawImage(img, this.assets[this.frame], 702, 46, 37, this.x, this.y, 46, 37);
-	 }
-	}
-});
-
-var world = new World(1);//Needs to be Global;
-
-var setup = function(){
-	canvas = document.getElementById("window");
-	canvas.addEventListener('mousemove', function(evt) {
-        var mousePos = getMousePos(canvas, evt);
-        world.message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-		world.mouseX = mousePos.x;
-		world.mouseY = mousePos.y;
-      }, false);
-	canvas.addEventListener('mousedown', mouseClick);
-	ctx = canvas.getContext('2d');
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-	img = new Image();
-	img = document.getElementById("background");
-	setInterval(animate, frameRate)
+        }, 100/6);
 };
-var animate = function() {
+function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.drawImage(img, 0,0, 1003, 695, 0, 0, canvas.width, canvas.height);
-	//writeMessage();
-	world.player.Animate();
-	world.penguins.Animate();
-	if(world.weapon.shot)
-	{
-	  	if(!world.weapon.Sound.ended)
-		{
-		 ctx.fillText("Wait", 20, 80);
-		}
-		else {
-		ctx.fillText("Ready", 20, 100);
-		}
-	}
-	world.framecount +=1;
+	player.draw();
+	player.Bullets.forEach(function(bullet) {
+		bullet.draw();
+	  });
+	 enemies.forEach(function(enemy) {
+            //enemy.draw();
+     });
 };
-
-// function writeMessage() {
-	// ctx.font = "bold 22px Arial";
-	// ctx.fillText("Score:0", 25, 25);
-	// ctx.fillText("Level:"+world.Level, canvas.width - 100, 25);
-	// //$('body').append('<img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered"> <img class="promotes right" src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" alt="Powered by Google App Engine" />');
-// };
-
-//Input engine!  
+ 
 function getMousePos(canvas, evt) {
         var rect = canvas.getBoundingClientRect();
         return {
@@ -158,20 +128,44 @@ function getMousePos(canvas, evt) {
         };
       };
 function mouseClick(event){
-		event.preventDefault()
-		if(!world.weapon.shot)
-		{
-		world.weapon.shot = true;
-		world.weapon.shoot();
-		} else (world.weapon.Sound.ended)
-		{
-		 world.weapon.Sound.play();
-		}
-		world.x = world.mouseX;
-		world.y = world.mouseY;
-		world.penguins.shot = collides(world, world.penguins);
+		event.preventDefault();
+		player.shoot();
 };
-function collides(a, b) {
-  return a.x >= b.x && a.x <= b.x+b.width &&
-		 a.y >= b.y && a.y <= b.y+b.height;
+function update() {
+          //if(shoot) {
+            //player.shoot();
+			player.Bullets.forEach(function(bullet) {
+            bullet.update();
+          });
+		  player.Bullets = player.Bullets.filter(function(bullet) {
+            return bullet.active;
+          });
+		   enemies.forEach(function(enemy) {
+            //enemy.update();
+          });
+        
+          enemies = enemies.filter(function(enemy) {
+            return enemy.active;
+          });
+		  handleCollisions();
+		  if(Math.random() < 0.1) {
+            enemies.push(Enemy());
+          }
 }
+        
+function collides(a, b) {
+          return a.x < b.x + b.width &&
+            a.x + a.width > b.x &&
+            a.y < b.y + b.height &&
+            a.y + a.height > b.y;
+        }
+        
+        function handleCollisions() {
+          player.Bullets.forEach(function(bullet) {
+            enemies.forEach(function(enemy) {
+              if(collides(bullet, enemy)) {
+                bullet.active = false;
+              }
+            });
+          });
+        }
