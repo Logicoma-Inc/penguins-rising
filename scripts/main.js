@@ -25,8 +25,8 @@ var player = {
 		this.Bullets.push(Bullet({
 		radian: angle,
 		speed: 6,
-		x: Math.cos(angle)+player.x,
-		y: Math.sin(angle)+player.y-30,
+		x: player.x + -18*Math.sin(angle),
+		y: player.y + -18*Math.cos(angle),
 	  }));
 	}
 };
@@ -39,7 +39,7 @@ function Enemy(I) {
   I.active = true;
   I.age = Math.floor(Math.random() * 128);
   
-  I.x = canvas.width / 4 + Math.random() * canvas.width / 2;
+  I.x = canvas.width / 4 + Math.random() * canvas.width/2;
   I.y = 0;
   I.xVelocity = 0
   I.yVelocity = 2;
@@ -57,11 +57,14 @@ function Enemy(I) {
   };
 
   I.update = function() {
-	I.x += I.xVelocity;
+	//I.x += I.xVelocity;
 	I.y += I.yVelocity;
-	I.xVelocity = 3 * Math.sin(I.age * Math.PI / 64);
+	I.xVelocity = 1;//Math.sin(I.age * Math.PI / 64);
 	I.age++;
 	I.active = I.active && I.inBounds();
+  };
+  I.deactive = function() {
+    this.active = false;
   };
   return I;
 };
@@ -95,7 +98,6 @@ function Bullet(I) {
 }
 
 var setup = function(){
-	//canvas.addEventListener('mousedown', mouseClick);
 	img = new Image();
 	img = document.getElementById("background");
 	canvas.addEventListener('mousedown', mouseClick);
@@ -116,7 +118,7 @@ function draw() {
 		bullet.draw();
 	  });
 	 enemies.forEach(function(enemy) {
-            //enemy.draw();
+            enemy.draw();
      });
 };
  
@@ -132,23 +134,21 @@ function mouseClick(event){
 		player.shoot();
 };
 function update() {
-          //if(shoot) {
-            //player.shoot();
-			player.Bullets.forEach(function(bullet) {
+	player.Bullets.forEach(function(bullet) {
             bullet.update();
           });
 		  player.Bullets = player.Bullets.filter(function(bullet) {
             return bullet.active;
           });
 		   enemies.forEach(function(enemy) {
-            //enemy.update();
+            enemy.update();
           });
         
           enemies = enemies.filter(function(enemy) {
             return enemy.active;
           });
 		  handleCollisions();
-		  if(Math.random() < 0.1) {
+		  if(Math.random() < 0.01) {
             enemies.push(Enemy());
           }
 }
@@ -164,6 +164,7 @@ function collides(a, b) {
           player.Bullets.forEach(function(bullet) {
             enemies.forEach(function(enemy) {
               if(collides(bullet, enemy)) {
+		enemy.deactive();
                 bullet.active = false;
               }
             });
