@@ -50,11 +50,8 @@ function Enemy(I) {
   I.active = true;
   I.age = Math.floor(Math.random() * 128);
   
-<<<<<<< HEAD
   I.x = canvas.width / 4 + Math.random() * canvas.width/2;
-=======
   I.x = Math.random() * canvas.width ;
->>>>>>> Been testing google login locally.
   I.y = 0;
   I.xVelocity = 0
   I.yVelocity = 1;
@@ -97,13 +94,11 @@ function Enemy(I) {
   };
 
   I.update = function() {
-<<<<<<< HEAD
 	//I.x += I.xVelocity;
 	I.y += I.yVelocity;
 	I.xVelocity = 1;//Math.sin(I.age * Math.PI / 64);
 	I.age++;
 	I.active = I.active && I.inBounds();
-=======
     if(this.active)
 	{
 		I.x += I.xVelocity;
@@ -131,7 +126,6 @@ function Enemy(I) {
   };
   I.deactive = function() {
 	    this.active = false;
->>>>>>> Been testing google login locally.
   };
   I.deactive = function() {
     this.active = false;
@@ -208,11 +202,8 @@ function mouseClick(event){
 		player.shoot();
 };
 function update() {
-<<<<<<< HEAD
 	player.Bullets.forEach(function(bullet) {
-=======
 		  player.Bullets.forEach(function(bullet) {
->>>>>>> Been testing google login locally.
             bullet.update();
           });
 		  player.Bullets = player.Bullets.filter(function(bullet) {
@@ -227,11 +218,8 @@ function update() {
              return enemy.active;
            });
 		  handleCollisions();
-<<<<<<< HEAD
 		  if(Math.random() < 0.01) {
-=======
 		  if(Math.random() < .02) {
->>>>>>> Been testing google login locally.
             enemies.push(Enemy());
           }
 }
@@ -247,13 +235,10 @@ function collides(a, b) {
           player.Bullets.forEach(function(bullet) {
             enemies.forEach(function(enemy) {
               if(collides(bullet, enemy)) {
-<<<<<<< HEAD
 		enemy.deactive();
-=======
 				snd.play();
 				enemy.deactive();
 				TheDead.push(enemy);
->>>>>>> Been testing google login locally.
                 bullet.active = false;
               }
             });
