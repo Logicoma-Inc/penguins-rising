@@ -17,79 +17,42 @@
 import webapp2
 game = '''
 <!DOCTYPE html>
-<html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Penguins Rising</title>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script src="static/countdown.js" type="text/javascript"></script>
-<script>
-$(function() {
-$( "#dialog-modal" ).dialog({
-	  open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); $('.ui-dialog-titlebar').hide(); },
-	  height: 340,
-	  width: 400,
-	  modal: true
-	});
-});
-
-</script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>Penguins Rising</title>
+    <meta name="description" content="Penguins Rising"/>
+	<link rel="icon" type="image/png" href="images/myicon.png">
+	<link rel="stylesheet" type="text/css" href="static/index.css">
 </head>
-<body style="background-color:#EDEDED">
-<audio id="Bleed">
-  <source src="static/Bleed.ogg" type="audio/ogg">
-  <source src="static/Bleed.mp3" type="audio/mpeg">
-  Your browser does not support this audio format.
-</audio>
-<video autoplay loop poster="#" style="-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;  position: fixed;  top: 0;
-  left: 0; bottom: 0; right: 0;  z-index: -1000;">
-  <source src="static/GamePlay.mp4" type="video/mp4">
-  <source src="static/Gameplay.ogg" type"video/ogg">
-  Your browser does not support this video format.
-</video>
-<div id="dialog-modal">
-<button id="enabled" class="ui-state-default ui-corner-all" style="float:right;" onclick="Play();" title="Turn Volume On"><span class="ui-icon ui-icon-volume-on"></span></button>
-<button style="display:none;float:right;" id="disabled" onclick="Stop();" class="ui-state-default ui-corner-all" title="Turn Volume Off"><span class="ui-icon ui-icon-volume-off"></span></button>
-<h2 style="color:red; font-family: Viner Hand ITC;">Penguins Rising</h2>
-<p>Coming Soon...</p>
-<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Penguins%20Rising%20Release&dates=20131001/20131002&details=Are%20you%20ready%3F&location=&trp=true&sprop=Penguins%20Rising&sprop=name:http%3A%2F%2Fwww.penguinsontherise.appspot.com" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
-<script type="application/javascript">
- var Count = new Countdown({
-								 	year: 2013, 
-									month: 10,
-									day: 1,
-									width:300, 
-									height:60,  
-									rangeHi:"month",
-									style:"flip"	// <- no comma on last item!									});
-});
-function Play(){
-    var bleed=document.getElementById("Bleed"); 
-    bleed.play();
-    $("#disabled").show();
-    $("#enabled").hide();
-};
-function Stop(){
-    var bleed=document.getElementById("Bleed"); 
-    bleed.pause();
-    $("#disabled").hide();
-    $("#enabled").show();
-};
-</script>
+<body id="body" onload="setup()" class="loading">
+<img src="static/landscape.png" width="1200" id="background" style="display:none;" alt="Please Wait..." onloadstart="showProgressBar()"  onprogress="updateProgressBar(event)" onloadend="hideProgressBar()"/>
+<div id="SplashScreen">
+<h1>Penguins Rising</h1>
+<input id="StartButton" type="button" value="Start" style="display:none;"/>
+    <span id="signinButton">
+        <span class="g-signin"
+            data-scope="https://www.googleapis.com/auth/games"
+            data-requestvisibleactions="http://schemas.google.com/AddActivity"
+            data-clientId="ID HERE!"
+            data-callback="signinCallback"
+            data-cookiepolicy="single_host_origin">
+        </span>
+    </span>
 </div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<canvas id="window" >Sorry but Canvas is not Supported</canvas>
+<audio id="gunshot">
+  <source src="static/gunshot.wav" type="audio/wav">
+  <source src="static/gunshot.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<!--img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered"-->
+</body><script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=onLoadCallback"></script>
+<script src="static/main.js"></script>
 
-  ga('create', 'UA-41648493-1', 'penguinsontherise.appspot.com');
-  ga('send', 'pageview');
-
-</script>
-</body>
+    </script>
 </html>
 '''
 
