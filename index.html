@@ -5,34 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <title>Penguins Rising</title>
     <meta name="description" content=""/>
-	<link rel="icon" type="image/png" href="images/myicon.png">
-	<link rel="stylesheet" type="text/css" href="static/index.css">
+	<link rel="stylesheet" type="text/css" href="styles/index.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 </head>
-<body id="body" onload="setup()" class="loading">
-<img src="static/landscape.png" width="1200" id="background" style="display:none;" alt="Please Wait..." onloadstart="showProgressBar()"  onprogress="updateProgressBar(event)" onloadend="hideProgressBar()"/>
+<body id="body">
+<img src="images/landscape.png" width="1200" id="background" style="display:none;" alt="Please Wait..."/>
 <div id="SplashScreen">
-<h1>Penguins Rising</h1>
-<input id="StartButton" type="button" value="Start" style="display:none;"/>
-    <span id="signinButton">
-        <span class="g-signin"
-            data-scope="https://www.googleapis.com/auth/games"
-            data-requestvisibleactions="http://schemas.google.com/AddActivity"
-            data-clientId="ID HERE!"
-            data-callback="signinCallback"
-            data-cookiepolicy="single_host_origin">
-        </span>
-    </span>
+      <h2 id="dialogHeader" >Penguins Rising<h2/>
+      <div id="loginDiv" style="display: none;"><a href="javascript:login.showLoginDialog()"><img src="static/images/gplus_signin_normal.png"></a></div>
+      <div id="welcome" style="display: none;">
+        <div class="startMenu" id="message">Welcome, playername!</div>
+        <input type="button" id="playGameHard" disabled="true" value="Play Game" onclick="welcome.startGame(game.HARD)" />
+        <input type="button" id="welcomeAchievements" disabled="true"  value="Achievements" onclick="welcome.showAchievements()"/>
+        <input type="button" id="welcomeleaderboards" disabled="true" value="Leaderboards" onclick="welcome.showLeaderboards()" />
+        <input type="button" id="seeFriends" disabled="true" value="See my friends!" onclick="welcome.seeFriends()" />
+        <input type="button" id="showAdmin" disabled="true" value="Admin tasks" onclick="welcome.showAdmin()" />
+        <input type="button" value="Load Previous"/>
+        <input type="button" value="Game Credits" />
+        </div>
 </div>
-<canvas id="window" >Sorry but Canvas is not Supported</canvas>
+
+<div id="game" style="display:none;">
+    <canvas id="window" >Sorry but Canvas is not Supported</canvas>
+</div>
 <audio id="gunshot">
   <source src="static/gunshot.wav" type="audio/wav">
   <source src="static/gunshot.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio>
-<!--img class="promotes left" src="images/HTML5_Logo_32.png" width="32" height="32" alt="HTML5 Powered" title="HTML5 Powered"-->
-</body><script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://apis.google.com/js/client.js?onload=onLoadCallback"></script>
-<script src="static/main.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script>
+    var apisLoaded = function() {
+      console.log("Ready to init");
+      login.init();
+    }
+  </script>
+<!--script src="https://apis.google.com/js/client.js?onload=onLoadCallback"></script-->
+ <script src="js/achievementManager.js"></script>
+  <script src="js/achievementTable.js"></script>
+  <script src="static/js/achievementWidget.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/challenge.js"></script>
+  <script src="js/constants.js"></script>
+  <script src="static/js/friendsTable.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/leaderboardManager.js"></script>
+  <script src="js/leaderboardsTable.js"></script>
+  <script src="js/leaderboardTable.js"></script>
+  <script src="js/leaderboardWidget.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/welcome.js"></script>
 
-    </script>
+  <!-- Start the process of loading the Google JavaScript client library -->
+  <script src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+</body>
 </html>

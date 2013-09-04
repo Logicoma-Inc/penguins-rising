@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>Penguins Rising</title>
+    <meta name="description" content=""/>
+	<link rel="stylesheet" type="text/css" href="static/style/index.css">
+</head>
+<body id="body" class="loading">
+<img src="static/images/landscape.png" width="1200" id="background" style="display:none;" alt="Please Wait..." onloadstart="showProgressBar()"  onprogress="updateProgressBar(event)" onloadend="hideProgressBar()"/>
+<div id="SplashScreen">
+      <div id="loginDiv" style="display: none;">Welcome! <a href="javascript:login.showLoginDialog()"><img src="static/gplus_signin_normal.png"></a></div>
+      <div id="welcome" style="display: none;">
+        <div id="message">Welcome, playername!</div>
+        <input type="button" id="welcomeAchievements" disabled="true"  value="View achievements" onclick="welcome.showAchievements()"/>
+        <input type="button" id="welcomeleaderboards" disabled="true" value="View leaderboards" onclick="welcome.showLeaderboards()" />
+        <input type="button" id="playGameEasy" disabled="true" value="Play Game (Easy)" onclick="welcome.startGame(game.EASY)" />
+        <input type="button" id="playGameHard" disabled="true" value="Play Game (Hard)" onclick="welcome.startGame(game.HARD)" />
+        <input type="button" id="seeFriends" disabled="true" value="See my friends!" onclick="welcome.seeFriends()" />
+        <input type="button" id="showAdmin" disabled="true" value="Admin tasks" onclick="welcome.showAdmin()" />
+      </div>
+</div>
+
+<div id="game" style="display:none;">
+<canvas id="window" >Sorry but Canvas is not Supported</canvas>
+</div>
+<audio id="gunshot">
+  <source src="static/gunshot.wav" type="audio/wav">
+  <source src="static/gunshot.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+    var apisLoaded = function() {
+      console.log("Ready to init");
+      login.init();
+    }
+  </script>
+<!--script src="https://apis.google.com/js/client.js?onload=onLoadCallback"></script-->
+ <script src="static/js/achievementManager.js"></script>
+  <script src="static/js/achievementTable.js"></script>
+  <script src="static/js/achievementWidget.js"></script>
+  <script src="static/js/admin.js"></script>
+  <script src="static/js/challenge.js"></script>
+  <script src="static/js/constants.js"></script>
+  <script src="static/js/friendsTable.js"></script>
+  <script src="static/js/game.js"></script>
+  <script src="static/js/leaderboardManager.js"></script>
+  <script src="static/js/leaderboardsTable.js"></script>
+  <script src="static/js/leaderboardTable.js"></script>
+  <script src="static/js/leaderboardWidget.js"></script>
+  <script src="static/js/login.js"></script>
+  <script src="static/js/player.js"></script>
+  <script src="static/js/utils.js"></script>
+  <script src="static/js/welcome.js"></script>
+
+  <!-- Start the process of loading the Google JavaScript client library -->
+  <script src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+</body>
+</html>
