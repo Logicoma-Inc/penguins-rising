@@ -1,4 +1,4 @@
-penguinsrising
+Penguins Rising
 ==============
 
 Peguins Rising
