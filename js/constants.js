@@ -14,5 +14,3 @@ constants.LEADERBOARD_HARD = 'CgkInoXkzIgWEAIQKg';
 
 constants.CLIENT_ID = '758222750366.apps.googleusercontent.com';
 constants.APP_ID = '758222750366';
-
-//constants.LINK_PAGE_BASE = 'http://localhost:9080';

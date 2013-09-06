@@ -28,7 +28,7 @@ login.loadClient = function() {
     leadManager.preloadData();
     welcome.loadUp();
     //game.init();
-    challenge.tryToLoad();
+    //challenge.tryToLoad();
   });
 
   // Load up v1management
@@ -50,7 +50,6 @@ login.handleAuthResult = function(auth) {
     console.log('Hooray! You\'re logged in!');
     $('#loginDiv').fadeOut();
     login.loadClient();
-
   } else {
     $('#loginDiv').fadeIn();
   }
