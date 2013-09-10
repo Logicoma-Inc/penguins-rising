@@ -20,17 +20,11 @@
 </audio>
 <video autoplay loop poster="#" style="-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;  position: fixed;  top: 0;
   left: 0; bottom: 0; right: 0;  z-index: -1000;">
-  <source src="static/GamePlay.mp4" type="video/mp4">
-  <source src="static/Gameplay.ogg" type"video/ogg">
+  <source src="content/GamePlay.mp4" type="video/mp4">
+  <source src="content/Gameplay.ogg" type"video/ogg">
   Your browser does not support this video format.
 </video>
-<div id="dialog-modal">
-<button id="enabled" class="ui-state-default ui-corner-all" style="float:right;" onclick="Play();" title="Turn Volume On"><span class="ui-icon ui-icon-volume-on"></span></button>
-<button style="display:none;float:right;" id="disabled" onclick="Stop();" class="ui-state-default ui-corner-all" title="Turn Volume Off"><span class="ui-icon ui-icon-volume-off"></span></button>
-<h2 style="color:red; font-family: Viner Hand ITC;">Penguins Rising</h2>
-<p>Coming Soon...</p>
-<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Penguins%20Rising%20Release&dates=20131001/20131002&details=Are%20you%20ready%3F&location=&trp=true&sprop=Penguins%20Rising&sprop=name:http%3A%2F%2Fwww.penguinsontherise.appspot.com" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
-<script type="application/javascript">
+<script>
 $(function() {
 $( "#dialog-modal" ).dialog({
 	  open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); $('.ui-dialog-titlebar').hide(); },
@@ -39,6 +33,14 @@ $( "#dialog-modal" ).dialog({
 	  modal: true
 	});
 });
+</script>
+<div id="dialog-modal">
+<button id="enabled" class="ui-state-default ui-corner-all" style="float:right;" onclick="Play();" title="Turn Volume On"><span class="ui-icon ui-icon-volume-on"></span></button>
+<button style="display:none;float:right;" id="disabled" onclick="Stop();" class="ui-state-default ui-corner-all" title="Turn Volume Off"><span class="ui-icon ui-icon-volume-off"></span></button>
+<h2 style="color:red; font-family: Viner Hand ITC;">Penguins Rising</h2>
+<p>Coming Soon...</p>
+<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Penguins%20Rising%20Release&dates=20131001/20131002&details=Are%20you%20ready%3F&location=&trp=true&sprop=Penguins%20Rising&sprop=name:http%3A%2F%2Fwww.penguinsontherise.appspot.com" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
+<script type="application/javascript">
  var Count = new Countdown({
 								 	year: 2013, 
 									month: 10,
