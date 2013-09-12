@@ -7,15 +7,15 @@
     <meta name="description" content=""/>
 	<link rel="stylesheet" type="text/css" href="styles/index.css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/countdown.js" type="text/javascript"></script>
 </head>
 <body id="body">
 <img src="images/landscape.png" width="1200" id="background" style="display:none;" alt="Please Wait..."/>
 <audio id="Bleed">
-  <source src="static/Bleed.ogg" type="audio/ogg">
-  <source src="static/Bleed.mp3" type="audio/mpeg">
+  <source src="content/Bleed.ogg" type="audio/ogg">
+  <source src="content/Bleed.mp3" type="audio/mpeg">
   Your browser does not support this audio format.
 </audio>
 <video autoplay loop poster="#" style="-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;  position: fixed;  top: 0;
@@ -24,7 +24,13 @@
   <source src="content/Gameplay.ogg" type"video/ogg">
   Your browser does not support this video format.
 </video>
-<script>
+<div id="dialog-modal" style="display:none">
+<button id="enabled" class="ui-state-default ui-corner-all" style="float:right;" onclick="Play();" title="Turn Volume On"><span class="ui-icon ui-icon-volume-on"></span></button>
+<button style="display:none;float:right;" id="disabled" onclick="Stop();" class="ui-state-default ui-corner-all" title="Turn Volume Off"><span class="ui-icon ui-icon-volume-off"></span></button>
+<h2 style="color:red; font-family: Viner Hand ITC;">Penguins Rising</h2>
+<p>Coming Soon...</p>
+<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Penguins%20Rising%20Release&dates=20131001/20131002&details=Are%20you%20ready%3F&location=&trp=true&sprop=Penguins%20Rising&sprop=name:http%3A%2F%2Fwww.penguinsontherise.appspot.com" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
+<script type="application/javascript">
 $(function() {
 $( "#dialog-modal" ).dialog({
 	  open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); $('.ui-dialog-titlebar').hide(); },
@@ -33,14 +39,6 @@ $( "#dialog-modal" ).dialog({
 	  modal: true
 	});
 });
-</script>
-<div id="dialog-modal">
-<button id="enabled" class="ui-state-default ui-corner-all" style="float:right;" onclick="Play();" title="Turn Volume On"><span class="ui-icon ui-icon-volume-on"></span></button>
-<button style="display:none;float:right;" id="disabled" onclick="Stop();" class="ui-state-default ui-corner-all" title="Turn Volume Off"><span class="ui-icon ui-icon-volume-off"></span></button>
-<h2 style="color:red; font-family: Viner Hand ITC;">Penguins Rising</h2>
-<p>Coming Soon...</p>
-<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Penguins%20Rising%20Release&dates=20131001/20131002&details=Are%20you%20ready%3F&location=&trp=true&sprop=Penguins%20Rising&sprop=name:http%3A%2F%2Fwww.penguinsontherise.appspot.com" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
-<script type="application/javascript">
  var Count = new Countdown({
 								 	year: 2013, 
 									month: 10,
@@ -64,7 +62,7 @@ function Stop(){
 };
 </script>
 </div>
-<div id="SplashScreen">
+<div id="SplashScreen" style="display:none">
       <div id="loginDiv" style="display: none;">
 		<a href="javascript:login.showLoginDialog()"><img src="images/gplus_signin_normal.png"></a>
 	  </div>
