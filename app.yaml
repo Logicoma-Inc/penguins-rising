@@ -23,7 +23,7 @@ handlers:
   upload: favicon\.ico
 
 - url: /
-  static_files: ./index.html
+  static_files: index.html
   upload: index.html
   
 error_handlers:
