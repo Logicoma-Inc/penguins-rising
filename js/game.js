@@ -5,7 +5,7 @@ canvas = document.getElementById("window");
 ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-var snd = new Audio("./static/images/PenguinCry1.wav"); // buffers automatically when created
+
 canvas.addEventListener('mousemove', function(evt) {
 	mousePos = getMousePos(canvas, evt);
   }, false);
@@ -27,8 +27,8 @@ var player = {
 		this.Bullets.push(Bullet({
 		radian: angle,
 		speed: 6,
-		x: this.x + -18*Math.sin(angle),
-		y: this.y + -18*Math.cos(angle),
+		x: player.x + -18*Math.sin(angle),
+		y: player.y + -18*Math.cos(angle),
 	  }));
 	}
 };
@@ -75,7 +75,7 @@ function Enemy(I) {
 	  I.reset = function() {
   I.elapsed = 0;
   I.index = 0;
-  I.frame = this.animation.frames[this.index];
+  I.frame = I.animation.frames[I.index];
 };
   I.reset();
   I.length = I.animation.frames.length;
@@ -85,25 +85,25 @@ function Enemy(I) {
   };
 
   I.draw = function() {
-	if (this.active)
-	ctx.drawImage(img, I.frame.x, 702, 46, 37, this.x, this.y, 46, 37);
+	if (I.active)
+	ctx.drawImage(img, I.frame.x, 702, 46, 37, I.x, I.y, 46, 37);
 	else
-	ctx.drawImage(img, 165, 702, 46, 37, this.x, this.y , 46, 37);
+	ctx.drawImage(img, 165, 702, 46, 37, I.x, I.y , 46, 37);
   };
 
   I.update = function() {
-    if(this.active)
+    if(I.active)
 	{
 		I.x += I.xVelocity;
 		I.y += I.yVelocity;
 		I.xVelocity = Math.sin(I.age * Math.PI / 64);
 		I.age++;
 		I.active = I.active && I.inBounds(); 
-		this.elapsed = this.elapsed + 30;
+		I.elapsed = I.elapsed + 30;
 
-  if(this.elapsed >= this.frame.length) {
-    this.index++;
-    this.elapsed = this.elapsed - I.frame.length;
+  if(I.elapsed >= I.frame.length) {
+    I.index++;
+    I.elapsed = I.elapsed - I.frame.length;
   }
 
   if(this.index >= this.length) {
@@ -114,11 +114,11 @@ function Enemy(I) {
     }
   }
 
-  this.frame = this.animation.frames[this.index];
+  I.frame = I.animation.frames[I.index];
 	}
   };
   I.deactive = function() {
-	    this.active = false;
+	    I.active = false;
   };
   return I;
 };
@@ -138,8 +138,8 @@ function Bullet(I) {
   };
 
   I.draw = function() {
-	ctx.fillStyle = this.color;
-	ctx.fillRect(this.x, this.y, this.width, this.height);
+	ctx.fillStyle = I.color;
+	ctx.fillRect(I.x, I.y, I.width, I.height);
   };
   
   I.update = function() {
@@ -223,7 +223,6 @@ function collides(a, b) {
           player.Bullets.forEach(function(bullet) {
             enemies.forEach(function(enemy) {
               if(collides(bullet, enemy)) {
-				snd.play();
 				enemy.deactive();
 				TheDead.push(enemy);
                 bullet.active = false;

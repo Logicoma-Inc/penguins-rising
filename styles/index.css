@@ -57,14 +57,14 @@ input:active {
 	top:1px;
 
 }
-#SplashScreen {
+/*#SplashScreen {
  position:fixed;
  top: 50%;
  left: 50%; 
  margin-top:-140px;
  magin-left:-170px;
  
-}
+}*/
 #showAdmin { display:none;}
 table { border-collapse: collapse; text-align: right;}
 th {padding: 10px; background-color: #0000ee; color: #fcfcfc; font-size: 1.1em;
@@ -102,8 +102,26 @@ footer{
    height:25px;   /* Height of the footer */
    background:#6cf;
 }
+#GameData {
+   display:none;
+}
 /*{
   opacity:0.4;
    filter:alpha(opacity=40); /* For IE8 and earlier */
-}*/
-/*http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page*/
+/*}*/
+/*jhttp://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page*/
+
+video {
+    -webkit-background-size: cover; 
+    -moz-background-size: cover; 
+    -o-background-size: cover; 
+    background-size: cover; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    bottom: 0; 
+    right: 0; 
+    z-index: -1000;
+    clear:none;
+    display:block;
+}

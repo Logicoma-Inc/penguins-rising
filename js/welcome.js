@@ -55,6 +55,7 @@ welcome.activateButtonsIfReady = function()
     // Go right to a challenge if there's one already
     //if (challenge.isActive)
     //{
+	  $('#game').show();
       welcome.startGame(/*challenge.difficulty*/);
     //}
   }
@@ -80,6 +81,7 @@ welcome.showLeaderboards = function() {
 welcome.startGame = function(/*difficulty*/) {
   $('#welcome').fadeOut();
   $('#game').fadeIn();
+  $('#dialog-modal').dialog('close');
   game.startGame();
 };
 

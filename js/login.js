@@ -27,6 +27,7 @@ login.loadClient = function() {
     achManager.loadData();
     leadManager.preloadData();
     welcome.loadUp();
+    $('#BetaInfo').hide();
     //game.init();
     //challenge.tryToLoad();
   });
