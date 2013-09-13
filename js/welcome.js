@@ -80,8 +80,8 @@ welcome.showLeaderboards = function() {
 
 welcome.startGame = function(/*difficulty*/) {
   $('#welcome').fadeOut();
-  $('#game').fadeIn();
   $('#dialog-modal').dialog('close');
+  $('#game').fadeIn();
   game.startGame();
 };
 
