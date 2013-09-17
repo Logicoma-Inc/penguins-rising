@@ -167,7 +167,7 @@ game.startGame = function(){
 
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.drawImage(img, 0,0, 1003, 695, 0, 0, canvas.width, canvas.height);
+	//ctx.drawImage(img, 0,0, 1003, 695, 0, 0, canvas.width, canvas.height);
 	 TheDead.forEach(function(enemy) {
 		enemy.draw();
 	 });
