@@ -34,7 +34,7 @@ var player = {
 };
  
 enemies = [];
-TheDead = [];
+TheTrulyDead = [];
 function AnimationData(frames, options) {
   this.frames = frames || [{ x: 0, y: 0, w: 0, h: 0, length: 0 }];
   this.options = options || {
@@ -150,10 +150,10 @@ function Bullet(I) {
   };
   return I;
 }
-
-game.startGame = function(){
+game.startGame = function () {
+    game.LvlEnemies = 15;
 	img = new Image();
-	img = document.getElementById("background");
+	img.src = "/images/landscape2.png";
 	canvas.addEventListener('mousedown', mouseClick);
 	setInterval(function() {
           update();
@@ -162,13 +162,12 @@ game.startGame = function(){
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight; 
 });
-        }, 100/6);
+        }, 100/4);
 };
 
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	//ctx.drawImage(img, 0,0, 1003, 695, 0, 0, canvas.width, canvas.height);
-	 TheDead.forEach(function(enemy) {
+	 TheTrulyDead.forEach(function(enemy) {
 		enemy.draw();
 	 });
 	player.draw();
@@ -177,7 +176,8 @@ function draw() {
 	  });
 	 enemies.forEach(function(enemy) {
             enemy.draw();
-     });
+	 });
+	 ctx.fillText("Kills:"+TheTrulyDead.length, 10, 50);
 };
  
 function getMousePos(canvas, evt) {
@@ -191,25 +191,35 @@ function mouseClick(event){
 		event.preventDefault();
 		player.shoot();
 };
+game.LvlComplete = false;
 function update() {
-		  player.Bullets.forEach(function(bullet) {
+    if (TheTrulyDead.length > 2)
+        game.LvlComplete = true;
+    if (!game.LvlComplete) {
+        player.Bullets.forEach(function (bullet) {
             bullet.update();
-          });
-		  player.Bullets = player.Bullets.filter(function(bullet) {
+        });
+        player.Bullets = player.Bullets.filter(function (bullet) {
             return bullet.active;
-          });
-		   enemies.forEach(function(enemy) {
+        });
+        enemies.forEach(function (enemy) {
             enemy.update();
-          });
-        
-           enemies = enemies.filter(function(enemy) {
-			// //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-             return enemy.active;
-           });
-		  handleCollisions();
-		  if(Math.random() < .02) {
-            enemies.push(Enemy());
-          }
+        });
+
+        enemies = enemies.filter(function (enemy) {
+            return enemy.active;
+        });
+        handleCollisions();
+        if (game.LvlEnemies > enemies.length) {
+            if (Math.random() < .01) {
+                enemies.push(Enemy());
+            }
+        }
+    } else {
+        enemies = [];
+        TheTrulyDead = [];
+        game.LvlComplete = false;
+    }
 }
         
 function collides(a, b) {
@@ -224,7 +234,7 @@ function collides(a, b) {
             enemies.forEach(function(enemy) {
               if(collides(bullet, enemy)) {
 				enemy.deactive();
-				TheDead.push(enemy);
+				TheTrulyDead.push(enemy);
                 bullet.active = false;
               }
             });

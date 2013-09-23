@@ -112,7 +112,7 @@ footer{
 /*}*/
 /*jhttp://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page*/
 
-img {
+img#landscape {
     -webkit-background-size: cover; 
     -moz-background-size: cover; 
     -o-background-size: cover; 
@@ -125,6 +125,8 @@ img {
     z-index: -1000;
     clear:none;
     display:block;
+    width:100%;
+    height:100%;
 }
 #dialog-modal {
     background-color:white;
