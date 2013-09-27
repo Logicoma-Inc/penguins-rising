@@ -32,44 +32,23 @@
     </div>
     <div id="dialog-modal" style="display: none">
         <div id="BetaInfo">
-        <button id="enabled" class="ui-state-default ui-corner-all" style="float: right;" onclick="Play();" title="Turn Volume On"><span class="ui-icon ui-icon-volume-on"></span></button>
-        <button style="display: none; float: right;" id="disabled" onclick="Stop();" class="ui-state-default ui-corner-all" title="Turn Volume Off"><span class="ui-icon ui-icon-volume-off"></span></button>
-        <h2 style="color: red; font-family: Viner Hand ITC;">Penguins Rising</h2>
-        <p>Coming Soon...</p>
-        <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Penguins%20Rising%20Release&dates=20131001/20131002&details=Are%20you%20ready%3F&location=&trp=true&sprop=Penguins%20Rising&sprop=name:http%3A%2F%2Fwww.penguinsontherise.appspot.com" target="_blank">
-            <img src="//www.google.com/calendar/images/ext/gc_button2.gif" border="0"></a>
-        <script type="application/javascript">
-            $(function () {
-                $("#dialog-modal").dialog({
-                    open: function (event, ui) { $(".ui-dialog-titlebar-close").hide();$('.ui-dialog-titlebar').hide(); },
-                    height: 300,
-                    width: 350,
-                    modal: true
+            <button id="enabled" class="ui-state-default ui-corner-all" style="float: right;" onclick="Play();" title="Turn Volume On"><span class="ui-icon ui-icon-volume-on"></span></button>
+            <button style="display: none; float: right;" id="disabled" onclick="Stop();" class="ui-state-default ui-corner-all" title="Turn Volume Off"><span class="ui-icon ui-icon-volume-off"></span></button>
+            <h2 style="color: red; font-family: Viner Hand ITC;">Penguins Rising</h2>
+            <p>Coming Soon...</p>
+            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Penguins%20Rising%20Release&dates=20131001/20131002&details=Are%20you%20ready%3F&location=&trp=true&sprop=Penguins%20Rising&sprop=name:http%3A%2F%2Fwww.penguinsontherise.appspot.com" target="_blank">
+                <img src="//www.google.com/calendar/images/ext/gc_button2.gif" border="0"></a>
+            <script type="application/javascript">
+                $(function () {
+                    $("#dialog-modal").dialog({
+                        open: function (event, ui) { $(".ui-dialog-titlebar-close").hide(); $('.ui-dialog-titlebar').hide(); },
+                        height: 350,
+                        width: 350,
+                        modal: true
+                    });
                 });
-            });
-            var Count = new Countdown({
-                year: 2013,
-                month: 10,
-                day: 1,
-                width: 300,
-                height: 60,
-                rangeHi: "month",
-                style: "flip"
-            });
-            function Play() {
-                var bleed = document.getElementById("Bleed");
-                bleed.play();
-                $("#disabled").show();
-                $("#enabled").hide();
-            };
-            function Stop() {
-                var bleed = document.getElementById("Bleed");
-                bleed.pause();
-                $("#disabled").hide();
-                $("#enabled").show();
-            };
-        </script>
-        <p>Sign in to Google Plus Now and Play the Beta!</p>
+            </script>
+            <p>Sign in to Google Plus Now and Play the Beta!</p>
         </div>
         <div id="SplashScreen" style="display: none">
             <div id="loginDiv" style="display: none;">
@@ -79,19 +58,12 @@
             <div id="welcome" style="display: none;">
                 <div class="startMenu" id="message">Welcome, anonymous! I'm going to eat you...</div>
                 <input type="button" id="playGameHard" value="Play Game" onclick="welcome.startGame()" />
-                <input type="button" id="welcomeAchievements" disabled value="Achievements" onclick="welcome.showAchievements()" />
-                <input type="button" id="welcomeleaderboards" disabled value="Leaderboards" onclick="welcome.showLeaderboards()" />
-                <!--input type="button" id="seeFriends" disabled="true" value="See my friends!" onclick="welcome.seeFriends()" /-->
-                <input type="button" id="showAdmin" disabled value="Admin tasks" onclick="welcome.showAdmin()" />
+                <input type="button" id="welcomeAchievements" value="Achievements" onclick="welcome.showAchievements()" />
+                <input type="button" id="welcomeleaderboards" value="Leaderboards" onclick="welcome.showLeaderboards()" />
                 <input type="button" value="Load Previous" />
                 <input type="button" value="Game Credits" />
             </div>
         </div>
-    </div>
-
-    <div id="game" style="display: none;">
-        <canvas id="window">Sorry but Canvas is not Supported</canvas>
-    </div>
     <div id="achievements" style="display: none;">
         <table id="achievementsTable">
             <thead>
@@ -140,36 +112,8 @@
         <input type="button" id="leaderboardBack" value="Go back" onclick="leaderboardTable.goBack()"/>
       </div>
 
-      <div id="friends" style="display: none;">
-          <div id="friendsTitle"></div>
-          <table id="friendsTable">
-              <thead>
-              <tr>
-                  <th>Avatar</th>
-                  <th>Player</th>
-              </tr>
-              </thead>
-              <tbody>
-              </tbody>
-          </table>
-          <input type="button" id="pageFriendsPrev" value="Prev" onclick="friendsTable.showPrev()"/>
-          <input type="button" id="pageFriendsNext" value="Next" onclick="friendsTable.showNext()"/>
-
-          <input type="button" id="friendsBack" value="Go back" onclick="friendsTable.goBack()"/>
-      </div>
-
-
-      <div id="adminPanel" style="display: none;">
-          <div id="adminNotes"><strong>Note: </strong> Only developers who are listed as testers can use these functions.</div>
-          <input type="button" id="resetAchievements" value="Reset Achievements" onclick="admin.resetAchievements()"/>
-          <input type="button" id="resetScores" value="Reset Scores" onclick="admin.resetScores()"/>
-          <input type="button" id="adminBack" value="Go back" onclick="admin.goBack()"/>
-      </div>
-
-
-
       <div id="achUnlocked" style="display:none;" class="unlockWidget">
-        <img src="" style="float: left;" class="smallIcon"/>
+        <img src="#" style="float: left;" class="smallIcon"/>
         <p>Achievement unlocked!<br/>
           <span id="achName">Name</span><br/>
           <span id="achDescrip">Achievement unlocked!</span>
@@ -180,7 +124,11 @@
         <p>New high score!<br/>
           <span id="leadName">Name</span><br/>
         </p>
+          </div>
       </div>
+            <div id="game" style="display: none;">
+        <canvas id="window">Sorry but Canvas is not Supported</canvas>
+    </div>
 <footer>
 	<div class="g-plus" data-action="share" data-href="http://www.penguinsontherise.appspot.com"></div>
 	<script type="text/javascript">

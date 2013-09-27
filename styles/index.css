@@ -66,7 +66,6 @@ input:active {
  magin-left:-170px;
  
 }*/
-#showAdmin { display:none;}
 table { border-collapse: collapse; text-align: right;}
 th {padding: 10px; background-color: #0000ee; color: #fcfcfc; font-size: 1.1em;
   border-left: 1px #fcfcfc solid;}
@@ -131,6 +130,7 @@ img#landscape {
 #dialog-modal {
     background-color:white;
     padding: 10px;
+    overflow:auto
 }
 #SplashScreen {
     padding-left: 100px;
