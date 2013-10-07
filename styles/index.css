@@ -136,3 +136,12 @@ img#landscape {
     padding-left: 100px;
     padding-top: 10px;
 }
+.right {
+    float:right;
+}
+.left {
+    float:left;
+}
+#github {
+    margin: 1px 5px -5px 3px;
+}
