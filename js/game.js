@@ -26,7 +26,6 @@ var player = {
 		var angle = Math.atan2(player.x- mousePos.x, player.y - mousePos.y);
 		this.Bullets.push(Bullet({
 		radian: angle,
-		speed: 6,
 		x: player.x + -18*Math.sin(angle),
 		y: player.y + -18*Math.cos(angle),
 	  }));
@@ -80,7 +79,7 @@ function Enemy(I) {
   I.reset();
   I.length = I.animation.frames.length;
   I.inBounds = function() {
-	return I.x >= 0 && I.x <= canvas.width &&
+	return I.x >= 0 && I.x <= canvas.width -50 && //the 100 is just for testing
 	  I.y >= 0 && I.y <= canvas.height;
   };
 
@@ -125,6 +124,7 @@ function Enemy(I) {
         
 function Bullet(I) {
   I.active = true;
+  I.speed = 12;
   I.radian = Math.atan2(player.x- mousePos.x, player.y - mousePos.y);
   I.xVelocity = -I.speed * Math.sin(I.radian);
   I.yVelocity = -I.speed * Math.cos(I.radian);
@@ -193,7 +193,7 @@ function mouseClick(event){
 };
 game.LvlComplete = false;
 function update() {
-    if (TheTrulyDead.length > 2)
+    if (TheTrulyDead.length > 100)
         game.LvlComplete = true;
     if (!game.LvlComplete) {
         player.Bullets.forEach(function (bullet) {
@@ -211,7 +211,7 @@ function update() {
         });
         handleCollisions();
         if (game.LvlEnemies > enemies.length) {
-            if (Math.random() < .01) {
+            if (Math.random() < 14.01) { //just for testing
                 enemies.push(Enemy());
             }
         }
@@ -223,20 +223,20 @@ function update() {
 }
         
 function collides(a, b) {
-          return a.x < b.x + b.width &&
-            a.x + a.width > b.x &&
-            a.y < b.y + b.height &&
-            a.y + a.height > b.y;
-        }
+    return a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y;
+}
         
-        function handleCollisions() {
-          player.Bullets.forEach(function(bullet) {
-            enemies.forEach(function(enemy) {
-              if(collides(bullet, enemy)) {
-				enemy.deactive();
-				TheTrulyDead.push(enemy);
-                bullet.active = false;
-              }
-            });
-          });
+function handleCollisions() {
+    player.Bullets.forEach(function(bullet) {
+    enemies.forEach(function(enemy) {
+        if(collides(bullet, enemy)) {
+		enemy.deactive();
+		TheTrulyDead.push(enemy);
+        bullet.active = false;
         }
+    });
+    });
+}
