@@ -141,6 +141,7 @@ img#landscape {
 }
 .left {
     float:left;
+    width: 100px;
 }
 #github {
     margin: 1px 5px -5px 3px;

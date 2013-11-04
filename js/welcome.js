@@ -89,7 +89,8 @@ welcome.seeFriends = function() {
   friendsTable.showBuddies();
 };
 
-welcome.showAdmin = function() {
+welcome.showCredits = function() {
   $('#welcome').fadeOut();
-  admin.loadUp();
+    //admin.loadUp();
+  $('#GameCredits').fadeIn();
 };

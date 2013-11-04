@@ -1,108 +1,114 @@
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <!--meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penguins Rising</title>
     <meta name="description" content="Penguins Rising - Zombie Survial Game" />
     <link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
 <body id="body">
-    <img src="images/landscape.png"  id="landscape" alt="Please Wait..." />
-    <div id="GameData">
-        <img src="images/landscape.png" width="1200" id="background" alt="Please Wait..." />
-        <audio id="Bleed">
-            <source src="content/Bleed.ogg" type="audio/ogg">
-            <source src="content/Bleed.mp3" type="audio/mpeg">
-            Your browser does not support this audio format.
-        </audio>
-        <audio id="gunshot">
-            <source src="content/gunshot.wav" type="audio/wav">
-            <source src="content/gunshot.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
-    <div id="dialog-modal" style="display: none">
-        <div id="SplashScreen" >
-            <h2 style="color: red; font-family: Viner Hand ITC;">Penguins Rising</h2>
-            <div id="loginDiv" style="display: none;">
-                <a href="javascript:login.showLoginDialog()">
-                    <img src="images/gplus_signin_normal.png"></a>
+<img src="images/landscape.png"  id="landscape" alt="Please Wait..." />
+<div id="dialog-modal" style="display: none">
+    <div id="SplashScreen">
+        <h2 style="color: red; font-family: Viner Hand ITC;">Penguins Rising</h2>
+        <div id="welcome">
+            <div class="startMenu" id="message">Welcome, anonymous!</div>
+            <input type="button" id="playGame" value="Play Game" onclick="welcome.startGame()" />
+            <div id="loginDiv">
+                <a style="text-decoration: none !important;" href="javascript:login.showLoginDialog()">
+                    <img src="images/gplus_signin_normal.png" /></a>
             </div>
-            <div id="welcome">
-                <div class="startMenu" id="message">Welcome, anonymous! I'm going to eat you...</div>
-                <input type="button" id="playGameHard" value="Play Game" onclick="welcome.startGame()" />
-                <input type="button" id="welcomeAchievements" value="Achievements" onclick="welcome.showAchievements()" />
-                <input type="button" id="welcomeleaderboards" value="Leaderboards" onclick="welcome.showLeaderboards()" />
-                <input type="button" value="Load Previous" />
-                <input type="button" value="Game Credits" />
-            </div>
+            <input type="button" id="welcomeAchievements" style="display:none;" value="Achievements" onclick="welcome.showAchievements()" />
+            <input type="button" id="welcomeleaderboards" style="display:none;" value="Leaderboards" onclick="welcome.showLeaderboards()" />
+            <!--input type="button" value="Load Previous" /-->
+            <input type="button" value="GameCredits" onclick="welcome.showCredits()" />
         </div>
-    <div id="achievements" style="display: none;">
-        <table id="achievementsTable">
+    </div>
+<div id="achievements" style="display: none;">
+    <table id="achievementsTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Icon</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <input type="button" id="achievementsBack" value="Go back" onclick="achievementTable.goBack()" />
+</div>
+
+    <div id="leaderboards" style="display: none;">
+    <table id="leaderboardsTable">
+        <thead>
+        <tr>
+        <th>Icon</th>
+        <th>Name</th>
+        <th>See it?</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <input type="button" id="leaderboardsBack" value="Go back" onclick="leaderboardsTable.goBack()"/>
+    </div>
+    <div id="leaderboard" style="display: none;">
+        <div id="leaderboardTitle"></div>
+        <table id="leaderboardTable">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Icon</th>
+                    <th>Avatar</th>
+                    <th>Player</th>
+                    <th>Score</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-
-        <input type="button" id="achievementsBack" value="Go back" onclick="achievementTable.goBack()" />
+    <input type="button" id="leaderboardBack" value="Go back" onclick="leaderboardTable.goBack()"/>
     </div>
 
-      <div id="leaderboards" style="display: none;">
-        <table id="leaderboardsTable">
-          <thead>
-          <tr>
-            <th>Icon</th>
-            <th>Name</th>
-            <th>See it?</th>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-
-        <input type="button" id="leaderboardsBack" value="Go back" onclick="leaderboardsTable.goBack()"/>
-      </div>
-      <div id="leaderboard" style="display: none;">
-        <div id="leaderboardTitle"></div>
-        <table id="leaderboardTable">
-          <thead>
-          <tr>
-            <th>Avatar</th>
-            <th>Player</th>
-            <th>Score</th>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-
-        <input type="button" id="leaderboardBack" value="Go back" onclick="leaderboardTable.goBack()"/>
-      </div>
-
-      <div id="achUnlocked" style="display:none;" class="unlockWidget">
-        <img src="#" style="float: left;" class="smallIcon"/>
-        <p>Achievement unlocked!<br/>
-          <span id="achName">Name</span><br/>
-          <span id="achDescrip">Achievement unlocked!</span>
-        </p>
-      </div>
-      <div id="leadUnlocked" style="display:none;" class="unlockWidget">
-        <!--img src="" style="float: left;" class="smallIcon"/-->
-        <p>New high score!<br/>
-          <span id="leadName">Name</span><br/>
-        </p>
-          </div>
-      </div>
-            <div id="game" style="display: none;">
-        <canvas id="window">Sorry but Canvas is not Supported</canvas>
+    <div id="achUnlocked" style="display:none;" class="unlockWidget">
+    <img src="#" style="float: left;" class="smallIcon"/>
+    <p>Achievement unlocked!<br/>
+        <span id="achName">Name</span><br/>
+        <span id="achDescrip">Achievement unlocked!</span>
+    </p>
     </div>
+    <div id="leadUnlocked" style="display:none;" class="unlockWidget">
+    <!--img src="" style="float: left;" class="smallIcon"/-->
+    <p>New high score!<br/>
+        <span id="leadName">Name</span><br/>
+    </p>
+        </div>
+    <div id="GameCredits" style="display:none;">
+        <h2>Special Thanks</h2>
+        <h3>To the Original game creators</h3>
+    </div>
+</div>
+<!--Start of the Game-->
+<div id="game" style="display: none;">
+    <canvas id="window">Sorry but Canvas is not Supported</canvas>
+</div>
+<!--Start of Game Resources-->
+<div id="GameData">
+    <img src="images/landscape.png" width="1200" id="background" alt="Please Wait..." />
+    <audio id="Bleed">
+        <source src="content/Bleed.ogg" type="audio/ogg">
+        <source src="content/Bleed.mp3" type="audio/mpeg">
+        Your browser does not support this audio format.
+    </audio>
+    <audio id="gunshot">
+        <source src="content/gunshot.wav" type="audio/wav">
+        <source src="content/gunshot.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
 <footer>
 <div class="left">
 	<div class="g-plus" data-action="share" data-href="http://www.penguinsontherise.appspot.com"></div>
@@ -117,7 +123,7 @@
 <script>
     $("#dialog-modal").dialog({
         open: function (event, ui) { $(".ui-dialog-titlebar-close").hide(); $('.ui-dialog-titlebar').hide(); },
-        height: 350,
+        height: 450,
         width: 350,
         modal: true
     });

@@ -13,6 +13,7 @@ player.loadLocalPlayer = function() {
 	response.displayName = 'anonymous';
 	}
 	$('#welcome #message').text('Welcome, ' + response.displayName + '!');
+	$('#welcomeAchievements, #welcomeleaderboards').fadeIn();
     player.displayName = response.displayName;
     player.profileUrl = response.avatarImageUrl;
     player.userId = response.playerId;
