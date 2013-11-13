@@ -10,22 +10,19 @@
 </head>
 <body id="body">
 <img src="images/landscape.png"  id="landscape" alt="Please Wait..." />
-<div id="dialog-modal" style="display: none">
-    <div id="SplashScreen">
+    <div id="dialog-modal">
         <h2 style="color: red; font-family: Viner Hand ITC;">Penguins Rising</h2>
         <div id="welcome">
-            <div class="startMenu" id="message">Welcome, anonymous!</div>
-            <input type="button" id="playGame" value="Play Game" onclick="welcome.startGame()" />
+            <div class="startMenu buttons" id="message">Welcome, anonymous!</div>          
+            <button id="playGame" class="action redbtn"  onclick="welcome.startGame()"><span class="label">Play Game</span></button>
             <div id="loginDiv">
                 <a style="text-decoration: none !important;" href="javascript:login.showLoginDialog()">
                     <img src="images/gplus_signin_normal.png" /></a>
             </div>
-            <input type="button" id="welcomeAchievements" style="display:none;" value="Achievements" onclick="welcome.showAchievements()" />
-            <input type="button" id="welcomeleaderboards" style="display:none;" value="Leaderboards" onclick="welcome.showLeaderboards()" />
-            <!--input type="button" value="Load Previous" /-->
-            <input type="button" value="GameCredits" onclick="welcome.showCredits()" />
+            <button id="welcomeAchievements" class="action redbtn" onclick="welcome.showAchievements()"><span class="label">Achievements</span></button>
+            <button id="welcomeleaderboards" class="action redbtn" onclick="welcome.showLeaderboards()"><span class="label">Leaderboards</span></button>
+            <button class="action redbtn" onclick="welcome.showCredits()"><span class="label">Credits</span></button>
         </div>
-    </div>
 <div id="achievements" style="display: none;">
     <table id="achievementsTable">
         <thead>
@@ -121,13 +118,6 @@
 <script src="js/jquery-2.0.3.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script>
-    $("#dialog-modal").dialog({
-        open: function (event, ui) { $(".ui-dialog-titlebar-close").hide(); $('.ui-dialog-titlebar').hide(); },
-        height: 450,
-        width: 350,
-        modal: true
-    });
-	$('#SplashScreen').show();
     var apisLoaded = function() {
       console.log("Ready to init");
       login.init();
