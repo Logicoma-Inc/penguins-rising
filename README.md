@@ -2,7 +2,7 @@
 ==============
 
 Peguins Rising
-Orginally inspired and created by Devroy Queen and Andrew Peek. Using an old game development tool kit on the windows xp. 
+Orginally inspired and created by Devroy Queen and Andrew Peek. Created by an old version of YOYO game's development tool kit.
 This is a port for the browser and the base line of the game functions as well as game play.
 
 Coming Soon...
