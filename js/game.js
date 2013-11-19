@@ -1,3 +1,4 @@
+/*Global Variables*/
 var game = game || {};
 var img = null;
 var mousePos = { x:0, y:0};
@@ -6,9 +7,23 @@ ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-canvas.addEventListener('mousemove', function(evt) {
+/*Event Listeners*/
+canvas.addEventListener('mousemove', function (evt) {
 	mousePos = getMousePos(canvas, evt);
-  }, false);
+}, false);
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+};
+function mouseClick(event) {
+    event.preventDefault();
+    player.shoot();
+};
+
+
 var player = {
   x: (canvas.width/2),
   y: (canvas.height-60),
@@ -19,15 +34,17 @@ var player = {
 	ctx.save();
 	ctx.translate(canvas.width/2, canvas.height-60);
 	ctx.rotate(Math.atan2(mousePos.x-this.x, this.y-mousePos.y));
-	ctx.drawImage(img, 0, 702, 42, 64, -21, -33, 42, 64);
+	ctx.drawImage(img, 0, 0, 42, 64, -18, -33, 42, 64);
 	ctx.restore();
   },
   shoot: function() {
-		var angle = Math.atan2(player.x- mousePos.x, player.y - mousePos.y);
+      var angle = Math.atan2(player.x - mousePos.x, player.y - mousePos.y);
+      var snd = new Audio("content/GunShot.wav"); // buffers automatically when created
+      snd.play();
 		this.Bullets.push(Bullet({
 		radian: angle,
-		x: player.x + -18*Math.sin(angle),
-		y: player.y + -18*Math.cos(angle),
+		x: this.x + -18*Math.sin(angle),
+		y: this.y + -18*Math.cos(angle),
 	  }));
 	}
 };
@@ -63,8 +80,8 @@ function Enemy(I) {
   I.animation = new AnimationData(
         [
           { x: 40, y: 0, w: 24, h: 24, length: 180 },
-          { x: 82, y: 0, w: 24, h: 24, length: 180 },
-		  { x: 130, y: 0, w: 24, h: 24, length: 180 }
+          { x: 78, y: 0, w: 24, h: 24, length: 180 },
+		  { x: 119, y: 0, w: 24, h: 24, length: 180 }
         ],
         {
           repeats: true,
@@ -84,10 +101,17 @@ function Enemy(I) {
   };
 
   I.draw = function() {
-	if (I.active)
-	ctx.drawImage(img, I.frame.x, 702, 46, 37, I.x, I.y, 46, 37);
-	else
-	ctx.drawImage(img, 165, 702, 46, 37, I.x, I.y , 46, 37);
+      if (I.active)
+          ctx.drawImage(img, I.frame.x, 0, 46, 37, I.x, I.y, 46, 37);
+      else {
+          var penguin = Math.floor(Math.random() * 3) + 1;
+          var x = 165;
+          //if (penguin == 2)
+          //    x = 175;
+          //else if (penguin == 3)
+          //    x = 185;
+          ctx.drawImage(img, x, 0, 46, 37, I.x, I.y, 46, 37);
+      }
   };
 
   I.update = function() {
@@ -150,10 +174,11 @@ function Bullet(I) {
   };
   return I;
 }
+
 game.startGame = function () {
-    game.LvlEnemies = 15;
+    game.LvlEnemies = 1;//Controller number on screen at a time.
 	img = new Image();
-	img.src = "/images/landscape2.png";
+	img.src = "/images/CharacterSprites.png";
 	canvas.addEventListener('mousedown', mouseClick);
 	setInterval(function() {
           update();
@@ -162,7 +187,7 @@ game.startGame = function () {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight; 
 });
-        }, 100/4);
+        }, 20);
 };
 
 function draw() {
@@ -179,19 +204,6 @@ function draw() {
 	 });
 	 ctx.fillText("Kills:"+TheTrulyDead.length, 10, 50);
 };
- 
-function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top
-        };
-      };
-function mouseClick(event){
-		event.preventDefault();
-		player.shoot();
-};
-game.LvlComplete = false;
 function update() {
     if (TheTrulyDead.length > 100)
         game.LvlComplete = true;
@@ -211,7 +223,7 @@ function update() {
         });
         handleCollisions();
         if (game.LvlEnemies > enemies.length) {
-            if (Math.random() < 14.01) { //just for testing
+            if (Math.random() < 5.00) { //just for testing
                 enemies.push(Enemy());
             }
         }
@@ -235,6 +247,8 @@ function handleCollisions() {
         if(collides(bullet, enemy)) {
 		enemy.deactive();
 		TheTrulyDead.push(enemy);
+		var snd = new Audio("content/PenguinCry1.wav");
+		snd.play();
         bullet.active = false;
         }
     });
