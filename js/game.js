@@ -31,10 +31,10 @@ var player = {
   vy: 0,
   Bullets: [],
   draw: function() {
-	ctx.save();
-	ctx.translate(canvas.width/2, canvas.height-60);
+    ctx.save();
+	ctx.translate((canvas.width/2), canvas.height-60);
 	ctx.rotate(Math.atan2(mousePos.x-this.x, this.y-mousePos.y));
-	ctx.drawImage(img, 0, 0, 42, 64, -18, -33, 42, 64);
+	ctx.drawImage(img, 0, 0, 42, 59, -18, -33, 42, 59);
 	ctx.restore();
   },
   shoot: function() {
