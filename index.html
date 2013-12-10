@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,17 +8,16 @@
     <meta name="description" content="Penguins Rising - Zombie Survial Game" />
     <link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
-<body id="body">
-<img src="images/landscape.png"  id="landscape" alt="Please Wait..." />
+<body>
     <div id="dialog-modal">
         <h2 style="color: red; font-family: Viner Hand ITC;">Penguins Rising</h2>
         <div id="welcome">
             <div class="startMenu buttons" id="message">Welcome, anonymous!</div>          
             <button id="playGame" class="action redbtn"  onclick="welcome.startGame()"><span class="label">Play Game</span></button>
-            <div id="loginDiv">
+            <!--<div id="loginDiv">
                 <a style="text-decoration: none !important;" href="javascript:login.showLoginDialog()">
                     <img src="images/gplus_signin_normal.png" /></a>
-            </div>
+            </div>-->
             <button id="welcomeAchievements" class="action redbtn" onclick="welcome.showAchievements()"><span class="label">Achievements</span></button>
             <button id="welcomeleaderboards" class="action redbtn" onclick="welcome.showLeaderboards()"><span class="label">Leaderboards</span></button>
             <button class="action redbtn" onclick="welcome.showCredits()"><span class="label">Credits</span></button>
@@ -88,13 +87,10 @@
         <h3>To the Original game creators</h3>
     </div>
 </div>
-<!--Start of the Game-->
-<div id="game" style="display: none;">
+<div id="game">
     <canvas id="window">Sorry but Canvas is not Supported</canvas>
 </div>
-<!--Start of Game Resources-->
 <div id="GameData">
-    <img src="images/landscape.png" width="1200" id="background" alt="Please Wait..." />
     <audio id="Bleed">
         <source src="content/Bleed.ogg" type="audio/ogg">
         <source src="content/Bleed.mp3" type="audio/mpeg">
@@ -111,7 +107,7 @@
 	<div class="g-plus" data-action="share" data-href="http://www.penguinsontherise.appspot.com"></div>
 </div>
 <div class="right">
-    <b>Don't forget to watch the repository for updates!</b>
+    <b>Checkout Updates</b>
     <iframe id="github" src="http://ghbtns.com/github-btn.html?user=fassetar&repo=Penguins-Rising&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
 </div>
 </footer>
@@ -138,8 +134,6 @@
   <script src="js/player.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/welcome.js"></script>
-  <!-- Start the process of loading the Google JavaScript client library -->
   <script type="text/javascript" src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
-  <script type="text/javascript" src="/_ah/channel/jsapi"></script>
 </body>
 </html>
