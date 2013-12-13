@@ -2,13 +2,6 @@
 
 var constants = constants || {};
 
-constants.ACH_PRIME = 'AAAAAAAAAA';
-constants.ACH_BORED ='BBBBBBBBBB';
-constants.ACH_HUMBLE = 'CCCCCCCCCC';
-constants.ACH_COCKY = 'DDDDDDDDDD';
-constants.ACH_LEET = 'EEEEEEEEEE';
-constants.ACH_REALLY_BORED = 'FFFFFFFFFF';
-
 constants.LEADERBOARD_EASY = 'CgkInoXkzIgWEAIQBQ';
 constants.LEADERBOARD_HARD = 'CgkInoXkzIgWEAIQKg';
 

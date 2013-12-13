@@ -25,8 +25,8 @@ function mouseClick(event) {
 
 
 var player = {
-  x: (canvas.width/2),
-  y: (canvas.height-60),
+  x: (window.innerWidth/2),
+  y: (window.innerHeight-60),
   vx: 0,
   vy: 0,
   Bullets: [],

@@ -1,8 +1,12 @@
 "use strict";
 
+var constants = constants || {};
+constants.LEADERBOARD_EASY = 'CgkInoXkzIgWEAIQBQ';
+constants.LEADERBOARD_HARD = 'CgkInoXkzIgWEAIQKg';
+constants.CLIENT_ID = '758222750366.apps.googleusercontent.com';
+constants.APP_ID = '758222750366';
+
 var login = login || {};
-
-
 login.userId = '';
 login.loggedIn = false;
 
@@ -13,17 +17,10 @@ login.init = function() {
   // Need to add this 1 ms timeout to work around an odd but annoying bug
   window.setTimeout(login.trySilentAuth, 1);
 };
-
-/**
- * This function allows us to load up the game service via the discovery doc
- * and makes calls directly through the client library instead of needing
- * to specify the REST endpoints.
- */
 login.loadClient = function() {
 
   // Load up /games/v1
   gapi.client.load('games','v1',function(response) {
-    player.loadLocalPlayer();
     achManager.loadData();
     leadManager.preloadData();
     welcome.loadUp();
@@ -43,8 +40,6 @@ login.loadClient = function() {
   });
 
 };
-
-
 login.handleAuthResult = function(auth) {
   console.log('We are in handle auth result');
   if (auth) {
@@ -55,8 +50,6 @@ login.handleAuthResult = function(auth) {
     $('#loginDiv').fadeIn();
   }
 };
-
-
 login.trySilentAuth = function() {
   console.log('Trying silent auth');
   gapi.auth.authorize({client_id: constants.CLIENT_ID, scope: login.scopes, immediate: true}, login.handleAuthResult);
@@ -65,6 +58,117 @@ login.trySilentAuth = function() {
 login.showLoginDialog=function() {
   gapi.auth.authorize({client_id: constants.CLIENT_ID, scope: login.scopes, immediate: false}, login.handleAuthResult);
 };
+var welcome = welcome || {};
 
+welcome.leaderboards_loaded = false;
+welcome.achievement_defs_loaded = false;
+welcome.achievement_progress_loaded = false;
+welcome.player_data_loaded = false;
+welcome.challenge_loaded = false;
+welcome.management_APIs_loaded = false;
+welcome.plus_APIs_loaded = false;
+
+// And an enum
+welcome.ENUM_LEADERBOARDS = 1;
+welcome.ENUM_ACHIEVEMENT_DEFS = 2;
+welcome.ENUM_ACHIEVEMENT_PROGRESS = 3;
+welcome.ENUM_PLAYER_DATA = 4;
+welcome.ENUM_CHALLENGE_DATA = 5;
+welcome.ENUM_MANAGEMENT_API = 6;
+welcome.ENUM_PLUS_API = 7;
+
+welcome.dataLoaded = function(whatData) {
+   if (whatData == welcome.ENUM_LEADERBOARDS) {
+     welcome.leaderboards_loaded = true;
+   } else if (whatData == welcome.ENUM_ACHIEVEMENT_DEFS) {
+     welcome.achievement_defs_loaded = true;
+   } else if (whatData == welcome.ENUM_ACHIEVEMENT_PROGRESS) {
+     welcome.achievement_progress_loaded = true;
+   } else if (whatData == welcome.ENUM_PLAYER_DATA) {
+     welcome.player_data_loaded = true;
+   } else if (whatData == welcome.ENUM_CHALLENGE_DATA) {
+     welcome.challenge_loaded = true;
+   } else if (whatData == welcome.ENUM_MANAGEMENT_API) {
+		welcome.management_APIs_loaded = true;
+   } else if (whatData == welcome.ENUM_PLUS_API) {
+		welcome.plus_APIs_loaded = true;
+   }
+  welcome.activateButtonsIfReady();
+
+};
+
+welcome.activateButtonsIfReady = function()
+{
+  if (welcome.leaderboards_loaded &&
+      welcome.achievement_defs_loaded &&
+      welcome.achievement_progress_loaded &&
+      welcome.player_data_loaded &&
+      welcome.challenge_loaded &&
+      welcome.management_APIs_loaded &&
+      welcome.plus_APIs_loaded)
+  {
+    $('#welcome input').attr('disabled',false);
+	  $('#game').show();
+      welcome.startGame();
+  }
+
+};
+
+
+welcome.loadUp = function() {
+  $('#welcome').fadeIn();
+};
+
+welcome.showAchievements = function() {
+  $('#welcome').fadeOut();
+  achievementTable.loadUp();
+
+};
+
+welcome.showLeaderboards = function() {
+  $('#welcome').fadeOut();
+  leaderboardsTable.showAllLeaderboards();
+};
+
+welcome.startGame = function(/*difficulty*/) {
+  $('#welcome').fadeOut();
+  $('#dialog-modal').hide();
+  $('#game').fadeIn();
+  game.startGame();
+};
+
+welcome.showCredits = function() {
+  $('#welcome').fadeOut();
+  $('#GameCredits').fadeIn();
+};
+
+
+
+
+
+
+
+var player = player || {};
+
+player.displayName = 'anonymous';
+player.profileUrl = '';
+player.userId = '';
+
+player.loadLocalPlayer = function() {
+  var request = gapi.client.games.players.get({playerId: 'me'});
+  request.execute(function(response) {
+    console.log('This is who you are ', response);
+	if(!response.displayName) {
+	response.displayName = 'anonymous';
+	}
+	$('#welcome #message').text('Welcome, ' + response.displayName + '!');
+	$('#welcomeAchievements, #welcomeleaderboards').fadeIn();
+    player.displayName = response.displayName;
+    player.profileUrl = response.avatarImageUrl;
+    player.userId = response.playerId;
+    console.log('This is the player object', player);
+    welcome.dataLoaded(welcome.ENUM_PLAYER_DATA);
+  });
+};
 
 

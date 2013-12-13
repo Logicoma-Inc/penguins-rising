@@ -5,6 +5,7 @@ html, body { width:  100%; height: 100%; background: #e8eae7; -webkit-touch-call
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none; }
+h2 { color: red; font-family: Viner Hand ITC; }
 canvas {
          display:block;
          /*image-rendering: optimizeSpeed;*/

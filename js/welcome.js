@@ -1,6 +1,5 @@
 "use strict";
 
-
 var welcome = welcome || {};
 
 welcome.leaderboards_loaded = false;
@@ -51,12 +50,8 @@ welcome.activateButtonsIfReady = function()
       welcome.plus_APIs_loaded)
   {
     $('#welcome input').attr('disabled',false);
-    // Go right to a challenge if there's one already
-    //if (challenge.isActive)
-    //{
 	  $('#game').show();
-      welcome.startGame(/*challenge.difficulty*/);
-    //}
+      welcome.startGame();
   }
 
 };
@@ -84,13 +79,7 @@ welcome.startGame = function(/*difficulty*/) {
   game.startGame();
 };
 
-welcome.seeFriends = function() {
-  $('#welcome').fadeOut();
-  friendsTable.showBuddies();
-};
-
 welcome.showCredits = function() {
   $('#welcome').fadeOut();
-    //admin.loadUp();
   $('#GameCredits').fadeIn();
 };

@@ -10,83 +10,11 @@
 </head>
 <body>
     <div id="dialog-modal">
-        <h2 style="color: red; font-family: Viner Hand ITC;">Penguins Rising</h2>
+        <h2>Penguins Rising</h2>
         <div id="welcome">
             <div class="startMenu buttons" id="message"></div></div>          
             <button id="playGame" class="action redbtn"  onclick="welcome.startGame()"><span class="label">Play Game</span></button>
-            <!--<div id="loginDiv">
-                <a style="text-decoration: none !important;" href="javascript:login.showLoginDialog()">
-                    <img src="images/gplus_signin_normal.png" /></a>
-            </div>-->
-            <button id="welcomeAchievements" class="action redbtn" onclick="welcome.showAchievements()"><span class="label">Achievements</span></button>
-            <button id="welcomeleaderboards" class="action redbtn" onclick="welcome.showLeaderboards()"><span class="label">Leaderboards</span></button>
-            <button class="action redbtn" onclick="welcome.showCredits()"><span class="label">Credits</span></button>
         </div>
-<div id="achievements" style="display: none;">
-    <table id="achievementsTable">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Icon</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <input type="button" id="achievementsBack" value="Go back" onclick="achievementTable.goBack()" />
-</div>
-
-    <div id="leaderboards" style="display: none;">
-    <table id="leaderboardsTable">
-        <thead>
-        <tr>
-        <th>Icon</th>
-        <th>Name</th>
-        <th>See it?</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <input type="button" id="leaderboardsBack" value="Go back" onclick="leaderboardsTable.goBack()"/>
-    </div>
-    <div id="leaderboard" style="display: none;">
-        <div id="leaderboardTitle"></div>
-        <table id="leaderboardTable">
-            <thead>
-                <tr>
-                    <th>Avatar</th>
-                    <th>Player</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    <input type="button" id="leaderboardBack" value="Go back" onclick="leaderboardTable.goBack()"/>
-    </div>
-
-    <div id="achUnlocked" style="display:none;" class="unlockWidget">
-    <img src="#" style="float: left;" class="smallIcon"/>
-    <p>Achievement unlocked!<br/>
-        <span id="achName">Name</span><br/>
-        <span id="achDescrip">Achievement unlocked!</span>
-    </p>
-    </div>
-    <div id="leadUnlocked" style="display:none;" class="unlockWidget">
-    <!--img src="" style="float: left;" class="smallIcon"/-->
-    <p>New high score!<br/>
-        <span id="leadName">Name</span><br/>
-    </p>
-        </div>
-    <div id="GameCredits" style="display:none;">
-        <h2>Special Thanks</h2>
-        <h3>To the Original game creators</h3>
-    </div>
-</div>
 <div id="game">
     <canvas id="window">Sorry but Canvas is not Supported</canvas>
 </div>
@@ -119,21 +47,10 @@
       login.init();
     }
   </script>
- <script src="js/achievementManager.js"></script>
-  <script src="js/achievementTable.js"></script>
-  <script src="js/achievementWidget.js"></script>
-  <script src="js/admin.js"></script>
-  <script src="js/constants.js"></script>
-  <script src="js/friendsTable.js"></script>
-  <script src="js/game.js"></script>
-  <script src="js/leaderboardManager.js"></script>
-  <script src="js/leaderboardsTable.js"></script>
-  <script src="js/leaderboardTable.js"></script>
-  <script src="js/leaderboardWidget.js"></script>
   <script src="js/login.js"></script>
-  <script src="js/player.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/welcome.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/achievementManager.js"></script>
+  <script src="js/leaderboardManager.js"></script>
   <script type="text/javascript" src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
 </body>
 </html>
