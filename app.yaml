@@ -4,6 +4,8 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
+default_expiration: "4d 5h"
+
 handlers:
 
 - url: /styles
@@ -25,6 +27,11 @@ handlers:
 - url: /
   static_files: index.html
   upload: index.html
+  
+- url: /mystaticdir/(.*\.appcache)
+  static_files: mystaticdir/\1
+  mime_type: text/cache-manifest
+  upload: mystaticdir/(.*\.appcache)
   
 error_handlers:
   - file: default_error.html

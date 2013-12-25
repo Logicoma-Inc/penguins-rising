@@ -1,15 +1,16 @@
-/*Global Variables*/
+"use strict";
+
 var game = game || {};
 var img = null;
-var mousePos = { x:0, y:0};
-canvas = document.getElementById("window");
-ctx = canvas.getContext('2d');
+game.mousePos = { x:0, y:0 };
+var canvas = document.getElementById("window");
+var ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 /*Event Listeners*/
 canvas.addEventListener('mousemove', function (evt) {
-	mousePos = getMousePos(canvas, evt);
+	game.mousePos = getMousePos(canvas, evt);
 }, false);
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
@@ -23,8 +24,8 @@ function mouseClick(event) {
     player.shoot();
 };
 
-
-var player = {
+var player = player || {};
+player = {
   x: (window.innerWidth/2),
   y: (window.innerHeight-60),
   vx: 0,
@@ -33,12 +34,12 @@ var player = {
   draw: function() {
     ctx.save();
 	ctx.translate((canvas.width/2), canvas.height-60);
-	ctx.rotate(Math.atan2(mousePos.x-this.x, this.y-mousePos.y));
+	ctx.rotate(Math.atan2(game.mousePos.x-this.x, this.y-game.mousePos.y));
 	ctx.drawImage(img, 0, 0, 42, 59, -18, -33, 42, 59);
 	ctx.restore();
   },
   shoot: function() {
-      var angle = Math.atan2(player.x - mousePos.x, player.y - mousePos.y);
+      var angle = Math.atan2(player.x - game.mousePos.x, player.y - game.mousePos.y);
       var snd = new Audio("content/GunShot.wav"); // buffers automatically when created
       snd.play();
 		this.Bullets.push(Bullet({
@@ -46,11 +47,30 @@ var player = {
 		x: this.x + -18*Math.sin(angle),
 		y: this.y + -18*Math.cos(angle),
 	  }));
-	}
+  },
+  displayName: 'anonymous',
+  profileUrl: '',
+  userId: '',
+  loadLocalPlayer: function () {
+      var request = gapi.client.games.players.get({ playerId: 'me' });
+      request.execute(function (response) {
+          //console.log('This is who you are ', response);
+          if (!response.displayName) {
+              response.displayName = 'anonymous';
+          }
+          $('#welcome #message').text('Welcome, ' + response.displayName + '!');
+          $('#welcomeAchievements, #welcomeleaderboards').fadeIn();
+          player.displayName = response.displayName;
+          player.profileUrl = response.avatarImageUrl;
+          player.userId = response.playerId;
+          //console.log('This is the player object', player);
+          welcome.dataLoaded(welcome.ENUM_PLAYER_DATA);
+      })
+  }
 };
  
-enemies = [];
-TheTrulyDead = [];
+var enemies = [];
+var TheTrulyDead = [];
 function AnimationData(frames, options) {
   this.frames = frames || [{ x: 0, y: 0, w: 0, h: 0, length: 0 }];
   this.options = options || {
@@ -96,7 +116,7 @@ function Enemy(I) {
   I.reset();
   I.length = I.animation.frames.length;
   I.inBounds = function() {
-	return I.x >= 0 && I.x <= canvas.width -50 && //the 100 is just for testing
+	return I.x >= 0 && I.x <= canvas.width -50 &&
 	  I.y >= 0 && I.y <= canvas.height;
   };
 
@@ -106,10 +126,6 @@ function Enemy(I) {
       else {
           var penguin = Math.floor(Math.random() * 3) + 1;
           var x = 165;
-          //if (penguin == 2)
-          //    x = 175;
-          //else if (penguin == 3)
-          //    x = 185;
           ctx.drawImage(img, x, 0, 46, 37, I.x, I.y, 46, 37);
       }
   };
@@ -149,7 +165,7 @@ function Enemy(I) {
 function Bullet(I) {
   I.active = true;
   I.speed = 12;
-  I.radian = Math.atan2(player.x- mousePos.x, player.y - mousePos.y);
+  I.radian = Math.atan2(player.x- game.mousePos.x, player.y - game.mousePos.y);
   I.xVelocity = -I.speed * Math.sin(I.radian);
   I.yVelocity = -I.speed * Math.cos(I.radian);
   I.width = 3;

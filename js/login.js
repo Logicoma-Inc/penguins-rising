@@ -41,9 +41,9 @@ login.loadClient = function() {
 
 };
 login.handleAuthResult = function(auth) {
-  console.log('We are in handle auth result');
+  //console.log('We are in handle auth result');
   if (auth) {
-    console.log('Hooray! You\'re logged in!');
+    //console.log('Hooray! You\'re logged in!');
     $('#loginDiv').fadeOut();
     login.loadClient();
   } else {
@@ -51,7 +51,7 @@ login.handleAuthResult = function(auth) {
   }
 };
 login.trySilentAuth = function() {
-  console.log('Trying silent auth');
+  //console.log('Trying silent auth');
   gapi.auth.authorize({client_id: constants.CLIENT_ID, scope: login.scopes, immediate: true}, login.handleAuthResult);
 };
 
@@ -140,35 +140,6 @@ welcome.startGame = function(/*difficulty*/) {
 welcome.showCredits = function() {
   $('#welcome').fadeOut();
   $('#GameCredits').fadeIn();
-};
-
-
-
-
-
-
-
-var player = player || {};
-
-player.displayName = 'anonymous';
-player.profileUrl = '';
-player.userId = '';
-
-player.loadLocalPlayer = function() {
-  var request = gapi.client.games.players.get({playerId: 'me'});
-  request.execute(function(response) {
-    console.log('This is who you are ', response);
-	if(!response.displayName) {
-	response.displayName = 'anonymous';
-	}
-	$('#welcome #message').text('Welcome, ' + response.displayName + '!');
-	$('#welcomeAchievements, #welcomeleaderboards').fadeIn();
-    player.displayName = response.displayName;
-    player.profileUrl = response.avatarImageUrl;
-    player.userId = response.playerId;
-    console.log('This is the player object', player);
-    welcome.dataLoaded(welcome.ENUM_PLAYER_DATA);
-  });
 };
 
 
