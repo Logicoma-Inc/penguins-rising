@@ -40,13 +40,18 @@
             <iframe id="github" src="http://ghbtns.com/github-btn.html?user=fassetar&repo=Penguins-Rising&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
         </div>
     </footer>
-    <script src="js/jquery-2.0.3.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
     <script>
-        var apisLoaded = function () {
-            login.init();
-        }
+        (function () {
+            var script = document.createElement('script');
+            script.setAttribute("type", "text/javascript");
+            script.setAttribute("src", "js/jquery-2.0.3.min.js");
+            document.getElementsByTagName("head")[0].appendChild(script);
+            var apisLoaded = function () {
+                login.init();
+            };
+        })();
     </script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/login.js"></script>
     <script src="js/game.js"></script>
     <script src="js/achievementManager.js"></script>
