@@ -1,20 +1,35 @@
 *{ margin: 0; padding: 0; }
-html, body { width:  100%; height: 100%; background: #e8eae7; /*-webkit-touch-callout: none;*/
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none; }
+html, body { 
+	width:  100%; 
+	height: 100%; 
+	background: #e8eae7;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+	background: url("landscape.jpg") repeat;
+}
 h2 { color: red; font-family: Viner Hand ITC; }
 canvas {
-         display:block;
-         /*image-rendering: optimizeSpeed;*/
-         image-rendering: -moz-crisp-edges;
-         image-rendering: -webkit-optimize-contrast;
-         /*image-rendering: optimize-contrast;*/
-	    cursor: crosshair;
-        background: url("landscape.jpg") repeat;
-       }
+        display:block;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-optimize-contrast;
+	cursor: crosshair;
+	background: url("LandScapeSide.jpg") left repeat-y;
+	-moz-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	    transform: scaleX(-1);
+	-ms-filter: fliph; /*IE*/
+	    filter: fliph; /*IE*/
+	
+}
+#game { 
+	background: url("LandScapeSide.jpg") left repeat-y;
+}
+
+
 .promotes { position: relative; top:-40px; }
 .right { float: right; right:3%;}
 .left { float: left;left: 3%; }
@@ -62,7 +77,7 @@ footer{
 /*}*/
 /*jhttp://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page*/
 
-img#landscape {
+/*img#landscape {
     -webkit-background-size: cover; 
     -moz-background-size: cover; 
     -o-background-size: cover; 
@@ -77,7 +92,7 @@ img#landscape {
     display:block;
     width:100%;
     height:100%;
-}
+}*/
 #dialog-modal {
 padding: 25px;
 border-left: 1px solid #CCC;
