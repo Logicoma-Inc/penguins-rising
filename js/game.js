@@ -89,8 +89,8 @@ function Enemy(I) {
     I.xVelocity = 0
     I.yVelocity = 1;
 
-    I.width = 32;
-    I.height = 32;
+    I.width = 42;
+    I.height = 37;
 
     I.length = 0;
     I.frame = undefined;
@@ -99,21 +99,12 @@ function Enemy(I) {
     I.animation = new AnimationData(
         [{
             x: 40,
-            y: 0,
-            w: 22,
-            h: 24,
             length: 180
         }, {
             x: 78,
-            y: 0,
-            w: 24,
-            h: 24,
             length: 180
         }, {
-            x: 119,
-            y: 0,
-            w: 24,
-            h: 24,
+            x: 127,
             length: 180
         }], {
             repeats: true,
@@ -134,10 +125,10 @@ function Enemy(I) {
 
     I.draw = function () {
         if (I.active)
-            ctx.drawImage(img, I.frame.x, 0, 46, 37, I.x, I.y, 46, 37);
+            ctx.drawImage(img, I.frame.x, 0,  I.width,  I.height, I.x, I.y, I.width, I.height);
         else {
             var penguin = Math.floor(Math.random() * 3) + 1;
-            var x = 165;
+            var x = 169;
             ctx.drawImage(img, x, 0, 46, 37, I.x, I.y, 46, 37);
         }
     };
@@ -149,6 +140,7 @@ function Enemy(I) {
             I.xVelocity = Math.sin(I.age * Math.PI / 64);
             I.age++;
             I.active = I.active && I.inBounds();
+			
             I.elapsed = I.elapsed + 30;
 
             if (I.elapsed >= I.frame.length) {
@@ -224,7 +216,7 @@ game.startGame = function () {
     setInterval(function () {
         update();
         draw();
-    }, 50);
+    }, 45);
 };
 /******************** DRAW METHOD ********************/
 function draw() {
