@@ -17,8 +17,7 @@ game.mousePos = {
     // canvas.width = window.innerWidth;
     // canvas.height = window.innerHeight;
 // });
-
-/******************** Event Listeners ********************/
+/******************** EVENT LISTENERS ********************/
 canvas.addEventListener('mousemove', function (evt) {
     game.mousePos = getMousePos(canvas, evt);
 }, false);
@@ -36,8 +35,8 @@ function mouseClick(event) {
 };
 /******************** PLAYER CLASS ********************/
 player = {
-    x: (canvas.width / 2),
-    y: (canvas.height - 60),
+    x: (window.innerWidth / 2),
+    y: (window.innerHeight- 60),
     vx: 0,
     vy: 0,
     Bullets: [],
@@ -101,7 +100,7 @@ function Enemy(I) {
         [{
             x: 40,
             y: 0,
-            w: 24,
+            w: 22,
             h: 24,
             length: 180
         }, {
@@ -225,7 +224,7 @@ game.startGame = function () {
     setInterval(function () {
         update();
         draw();
-    }, 20);
+    }, 50);
 };
 /******************** DRAW METHOD ********************/
 function draw() {
