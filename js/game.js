@@ -31,7 +31,11 @@ function getMousePos(canvas, evt) {
 };
 function mouseClick(event) {
     event.preventDefault();
-    player.shoot();
+    if (!player.shot) {
+        player.shoot();
+        setTimeout(function () { player.shot = false; }, 400);
+        player.shot = true;
+    }
 };
 /******************** PLAYER CLASS ********************/
 player = {
@@ -47,15 +51,16 @@ player = {
         ctx.drawImage(img, 0, 0, 42, 59, -18, -33, 42, 59);
         ctx.restore();
     },
+    shot: false,
     shoot: function () {
-        var angle = Math.atan2(player.x - game.mousePos.x, player.y - game.mousePos.y);
-        var snd = new Audio("content/GunShot.wav"); // buffers automatically when created
-        snd.play();
-        this.Bullets.push(Bullet({
-            radian: angle,
-            x: this.x + -18 * Math.sin(angle),
-            y: this.y + -18 * Math.cos(angle),
-        }));
+            var angle = Math.atan2(player.x - game.mousePos.x, player.y - game.mousePos.y);
+            var snd = new Audio("content/GunShot.wav"); // buffers automatically when created
+            snd.play();
+            this.Bullets.push(Bullet({
+                radian: angle,
+                x: this.x + -18 * Math.sin(angle),
+                y: this.y + -18 * Math.cos(angle),
+            }));
     },
     displayName: 'anonymous',
     profileUrl: '',
@@ -164,6 +169,66 @@ function Enemy(I) {
     };
     return I;
 };
+/******************** BOSS CLASS ********************/
+function Boss(lvl){
+	I = I || {};
+	I.draw = function()
+	{ 
+		if(lvl === 10)
+		{
+			
+		}
+	};
+	I.length = 0;
+    I.frame = undefined;
+    I.index = 0;
+    I.elapsed = 0;
+    I.animation = new AnimationData(
+        [{
+            x: 40,
+            length: 180
+        }, {
+            x: 78,
+            length: 180
+        }, {
+            x: 127,
+            length: 180
+        }], {
+            repeats: true,
+            keyframe: 0
+        }
+    );
+	I.update = function () {
+		if (I.active) {
+			I.x += I.xVelocity;
+			I.y += I.yVelocity;
+			I.xVelocity = Math.sin(I.age * Math.PI / 64);
+			I.age++;
+			I.active = I.active && I.inBounds();
+			
+			I.elapsed = I.elapsed + 30;
+
+			if (I.elapsed >= I.frame.length) {
+				I.index++;
+				I.elapsed = I.elapsed - I.frame.length;
+			}
+
+			if (this.index >= this.length) {
+				if (this.animation.options.repeats) {
+					this.index = this.animation.options.keyframe;
+				} else {
+					this.index--;
+				}
+			}
+
+			I.frame = I.animation.frames[I.index];
+		}
+	};
+	I.deactive = function () {
+		I.active = false;
+	};
+}
+
 /******************** BULLET CLASS ********************/
 function Bullet(I) {
     I.active = true;
@@ -209,14 +274,15 @@ function AnimationData(frames, options) {
 };
 /******************** INITALIZER METHOD ********************/
 game.startGame = function () {
-    game.LvlEnemies = 3; //Controller number on screen at a time.
+    game.LvlEnemies = 3;
+    game.Lvl = 1;
     img = new Image();
     img.src = "/images/CharacterSprites.png";
     canvas.addEventListener('mousedown', mouseClick);
     setInterval(function () {
         update();
         draw();
-    }, 45);
+    }, 40);
 };
 /******************** DRAW METHOD ********************/
 function draw() {
@@ -232,11 +298,15 @@ function draw() {
         enemy.draw();
     });
     ctx.fillText("Kills:" + TheTrulyDead.length, 10, 50);
+    ctx.fillText("Level:" + game.Lvl, 10, 70);
 };
 /******************** UPDATE METHOD ********************/
 function update() {
-    if (TheTrulyDead.length > 100)
+    if (TheTrulyDead.length > game.LvlEnemies) {
         game.LvlComplete = true;
+        game.LvlEnemies += 5;
+        game.Lvl += 1;
+    }
     if (!game.LvlComplete) {
         player.Bullets.forEach(function (bullet) {
             bullet.update();
@@ -247,16 +317,13 @@ function update() {
         enemies.forEach(function (enemy) {
             enemy.update();
         });
-
         enemies = enemies.filter(function (enemy) {
             return enemy.active;
         });
         handleCollisions();
         if (game.LvlEnemies > enemies.length) {
-            if (Math.random() < 5.00) { //just for testing
                 enemies.push(Enemy());
             }
-        }
     } else {
         enemies = [];
         TheTrulyDead = [];
