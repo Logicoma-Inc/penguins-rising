@@ -28,19 +28,19 @@
         <canvas id="window">Sorry but Canvas is not Supported</canvas>
     </div>
     <div id="GameData">
-        <audio id="Bleed">
+        <audio id="Bleed">            
+            <source src="content/Bleed.mp3" type="audio/mpeg">
             <source src="content/Bleed.ogg" type="audio/ogg">
-            <source src="content/Bleed.mp3" type="audio/mp3">
             Your browser does not support this audio format.
         </audio>
         <audio id="gunshot">
+            <source src="content/gunshot.mp3" type="audio/mpeg">
             <source src="content/gunshot.wav" type="audio/wav">
-            <source src="content/gunshot.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
         <audio autoplay loop>
-            <source src="content/ArcticWind.wav" type="audio/wav" />
-            <source src="content/ArcticWind.mp3" type="audio/mp3" />
+            <source src="content/ArcticWind.mp3" type="audio/mpeg">
+            <source src="content/ArcticWind.wav" type="audio/wav">           
         </audio>
     </div>
     <footer>
@@ -53,7 +53,6 @@
         </div>
     </footer>
     <script src="js/jquery-2.0.3.min.js"></script>
-    <script async src="js/jquery-ui.min.js"></script>
     <script async src="js/login.js"></script>
     <script async src="js/game.js"></script>
     <script async src="js/achievementManager.js"></script>
@@ -65,8 +64,66 @@
             var apisLoaded = function () {
                 login.init();
             };
-            snowStorm.flakesMaxActive = 96;  // show more snow on screen at once
-        })();
+            snowStorm.flakesMaxActive = 96;
+
+
+            function AssetManager() {
+                this.successCount = 0;
+                this.errorCount = 0;
+                this.downloadQueue = [];
+                this.cache = {};
+            }
+            AssetManager.prototype.queueDownload = function (path) {
+                this.downloadQueue.push(path);
+            }
+            AssetManager.prototype.downloadAll = function (downloadCallback) {
+                if (this.downloadQueue.length === 0) {
+                    downloadCallback();
+                }
+                for (var i = 0; i < this.downloadQueue.length; i++) {
+                    var path = this.downloadQueue[i];
+                    var img = new Image();
+                    var that = this;
+                    img.addEventListener("load", function () {
+                        console.log(this.src + ' is loaded');
+                        that.successCount += 1;
+                        if (that.isDone()) {
+                            downloadCallback();
+                        }
+                    }, false);
+                    img.addEventListener("error", function () {
+                        that.errorCount += 1;
+                        if (that.isDone()) {
+                            downloadCallback();
+                        }
+                    }, false);
+                    img.src = path;
+                    this.cache[path] = img;
+                }
+            }
+            AssetManager.prototype.isDone = function () {
+                return (this.downloadQueue.length == this.successCount + this.errorCount);
+            }
+            AssetManager.prototype.getAsset = function (path) {
+                return this.cache[path];
+            }
+
+
+
+            /*** Using the Asset Mangager ***/
+            var ASSET_MANAGER = new AssetManager();
+
+            ASSET_MANAGER.queueDownload('images/ThePrinceBoss.png');
+
+            ASSET_MANAGER.downloadAll(function () {
+                var sprite = ASSET_MANAGER.getAsset('images/ThePrinceBoss.png');
+                ctx.drawImage(sprite, sprite.width / 2, sprite.height / 2);
+            });
+            $(window).resize(function () {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+      })();
     </script>
 </body>
 </html>

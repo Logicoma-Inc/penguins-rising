@@ -13,10 +13,6 @@ game.mousePos = {
     x: 0,
     y: 0
 };
-// $(window).resize(function () {
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight;
-// });
 /******************** EVENT LISTENERS ********************/
 canvas.addEventListener('mousemove', function (evt) {
     game.mousePos = getMousePos(canvas, evt);
@@ -170,20 +166,13 @@ function Enemy(I) {
     return I;
 };
 /******************** BOSS CLASS ********************/
-function Boss(lvl){
-	I = I || {};
-	I.draw = function()
-	{ 
-		if(lvl === 10)
-		{
-			
-		}
-	};
-	I.length = 0;
-    I.frame = undefined;
-    I.index = 0;
-    I.elapsed = 0;
-    I.animation = new AnimationData(
+function Boss() {
+    this.length = 0;
+    this.frame = undefined;
+    this.Index = 0;
+    this.elapsed = 0;
+    this.self = new Image();
+    this.animation = new AnimationData(
         [{
             x: 40,
             length: 180
@@ -198,37 +187,16 @@ function Boss(lvl){
             keyframe: 0
         }
     );
-	I.update = function () {
-		if (I.active) {
-			I.x += I.xVelocity;
-			I.y += I.yVelocity;
-			I.xVelocity = Math.sin(I.age * Math.PI / 64);
-			I.age++;
-			I.active = I.active && I.inBounds();
-			
-			I.elapsed = I.elapsed + 30;
-
-			if (I.elapsed >= I.frame.length) {
-				I.index++;
-				I.elapsed = I.elapsed - I.frame.length;
-			}
-
-			if (this.index >= this.length) {
-				if (this.animation.options.repeats) {
-					this.index = this.animation.options.keyframe;
-				} else {
-					this.index--;
-				}
-			}
-
-			I.frame = I.animation.frames[I.index];
-		}
-	};
-	I.deactive = function () {
-		I.active = false;
-	};
-}
-
+    this.update = function () {
+        return true;
+    };
+    this.draw = function () {
+        ctx.drawImage(img, this.frame.x, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+    };
+    this.deactive = function () {
+        this.active = false;
+    };
+};
 /******************** BULLET CLASS ********************/
 function Bullet(I) {
     I.active = true;
@@ -272,6 +240,7 @@ function AnimationData(frames, options) {
         keyframe: 0
     };
 };
+var firstboss = new Boss();
 /******************** INITALIZER METHOD ********************/
 game.startGame = function () {
     game.LvlEnemies = 3;

@@ -18,6 +18,7 @@ handlers:
 
 - url: /content
   static_dir: content
+  mime_type: application/octet-stream
   
 - url: /favicon\.ico
   static_files: favicon.ico
