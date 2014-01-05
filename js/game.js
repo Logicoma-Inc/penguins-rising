@@ -35,27 +35,28 @@ function mouseClick(event) {
 };
 /******************** PLAYER CLASS ********************/
 player = {
-    x: (window.innerWidth / 2),
-    y: (window.innerHeight- 60),
+    x: (canvas.width / 2),
+    y: (canvas.height - 60),
     vx: 0,
     vy: 0,
     Bullets: [],
     draw: function () {
         ctx.save();
         ctx.translate((canvas.width / 2), canvas.height - 60);
-        ctx.rotate(Math.atan2(game.mousePos.x - this.x, this.y - game.mousePos.y));
+        ctx.rotate(Math.atan2(game.mousePos.x - player.x, player.y - game.mousePos.y));
         ctx.drawImage(img, 0, 0, 42, 59, -18, -33, 42, 59);
         ctx.restore();
     },
     shot: false,
+    snd : new Audio("content/GunShot.wav"), //No longer need to create so many with the timer.
     shoot: function () {
-            var angle = Math.atan2(player.x - game.mousePos.x, player.y - game.mousePos.y);
-            var snd = new Audio("content/GunShot.wav"); // buffers automatically when created
-            snd.play();
-            this.Bullets.push(Bullet({
+        var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
+            player.snd.play();
+            player.Bullets.push(Bullet({
                 radian: angle,
-                x: this.x + -18 * Math.sin(angle),
-                y: this.y + -18 * Math.cos(angle),
+                //This is where I need to fix! for the resize problem.
+                x: (canvas.width / 2) + -18 * Math.sin(angle),
+                y: (canvas.height - 60) + -18 * Math.cos(angle),
             }));
     },
     displayName: 'anonymous',
@@ -120,7 +121,7 @@ function Enemy(I) {
     I.reset();
     I.length = I.animation.frames.length;
     I.inBounds = function () {
-        return I.x >= 0 && I.x <= canvas.width - 50 &&
+        return I.x >= 0 && I.x <= canvas.width  &&
             I.y >= 0 && I.y <= canvas.height;
     };
 
@@ -128,9 +129,8 @@ function Enemy(I) {
         if (I.active)
             ctx.drawImage(img, I.frame.x, 0,  I.width,  I.height, I.x, I.y, I.width, I.height);
         else {
-            var penguin = Math.floor(Math.random() * 3) + 1;
-            var x = 169;
-            ctx.drawImage(img, x, 0, 46, 37, I.x, I.y, 46, 37);
+            //var penguin = Math.floor(Math.random() * 3) + 1;            
+            ctx.drawImage(img, 169, 0, 46, 37, I.x, I.y, 46, 37);
         }
     };
 
@@ -171,7 +171,6 @@ function Boss() {
     this.frame = undefined;
     this.Index = 0;
     this.elapsed = 0;
-    this.self = new Image();
     this.animation = new AnimationData(
         [{
             x: 40,
@@ -191,7 +190,7 @@ function Boss() {
         return true;
     };
     this.draw = function () {
-        ctx.drawImage(img, this.frame.x, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+        ctx.drawImage(self, 0, 0, 46, 37, 45, 34, 46, 37);
     };
     this.deactive = function () {
         this.active = false;
@@ -240,19 +239,22 @@ function AnimationData(frames, options) {
         keyframe: 0
     };
 };
-var firstboss = new Boss();
+var self = {};
 /******************** INITALIZER METHOD ********************/
 game.startGame = function () {
     game.LvlEnemies = 3;
     game.Lvl = 1;
     img = new Image();
     img.src = "/images/CharacterSprites.png";
+    self = new Image();
+    self.src = 'images/ThePrinceBoss.png';
     canvas.addEventListener('mousedown', mouseClick);
     setInterval(function () {
         update();
         draw();
     }, 40);
 };
+var test = new Boss();
 /******************** DRAW METHOD ********************/
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -260,6 +262,7 @@ function draw() {
         enemy.draw();
     });
     player.draw();
+    test.draw();
     player.Bullets.forEach(function (bullet) {
         bullet.draw();
     });

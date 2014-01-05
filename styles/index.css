@@ -14,8 +14,8 @@ canvas {
         image-rendering: -moz-crisp-edges;
         image-rendering: -webkit-optimize-contrast;
 	cursor: crosshair;
-	background: url("LandScapeSide.jpg") left repeat-y;
-	/*-moz-transform: scaleX(-1);
+	/*background: url("LandScapeSide.jpg") left repeat-y;
+	-moz-transform: scaleX(-1);
 	-webkit-transform: scaleX(-1);
 	-o-transform: scaleX(-1);
 	    transform: scaleX(-1);
@@ -64,34 +64,9 @@ footer{
  position:absolute;
    bottom:0;
    width:100%;
-   height:25px;   /* Height of the footer */
+   height:25px;
    background:#6cf;
 }
-#GameData {
-   display:none;
-}
-/*{
-  opacity:0.4;
-   filter:alpha(opacity=40); /* For IE8 and earlier */
-/*}*/
-/*jhttp://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page*/
-
-/*img#landscape {
-    -webkit-background-size: cover; 
-    -moz-background-size: cover; 
-    -o-background-size: cover; 
-    background-size: cover; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    bottom: 0; 
-    right: 0; 
-    z-index: -1000;
-    clear:none;
-    display:block;
-    width:100%;
-    height:100%;
-}*/
 #dialog-modal {
 padding: 25px;
 border-left: 1px solid #CCC;
@@ -159,46 +134,6 @@ button:active {
 	-webkit-box-shadow:inset 0 0 10px #D4D4D4;
 	box-shadow:inset 0 0 10px #D4D4D4;
 }
-button.bluebtn {
-	border: 1px solid #3079ED !important;
-	background: #4B8DF8;
-	background: -webkit-linear-gradient(top, #4C8FFD, #4787ED);
-	background: -moz-linear-gradient(top, #4C8FFD, #4787ED);
-	background: -ms-linear-gradient(top, #4C8FFD, #4787ED);
-	background: -o-linear-gradient(top, #4C8FFD, #4787ED);
- -webkit-transition: border .20s;
- -moz-transition: border .20s;
- -o-transition: border .20s;
- transition: border .20s;
-}
-button.bluebtn:hover {
-	border: 1px solid #2F5BB7 !important;
-	background: #3F83F1;
-	background: -webkit-linear-gradient(top, #4D90FE, #357AE8);
-	background: -moz-linear-gradient(top, #4D90FE, #357AE8);
-	background: -ms-linear-gradient(top, #4D90FE, #357AE8);
-	background: -o-linear-gradient(top, #4D90FE, #357AE8);
-}
-button.greenbtn {
-	border: 1px solid #29691D !important;
-	background: #3A8E00;
-	background: -webkit-linear-gradient(top, #3C9300, #398A00);
-	background: -moz-linear-gradient(top, #3C9300, #398A00);
-	background: -ms-linear-gradient(top, #3C9300, #398A00);
-	background: -o-linear-gradient(top, #3C9300, #398A00);
- -webkit-transition: border .20s;
- -moz-transition: border .20s;
- -o-transition: border .20s;
- transition: border .20s;
-}
-button.greenbtn:hover {
-	border: 1px solid #2D6200 !important;
-	background: #3F83F1;
-	background: -webkit-linear-gradient(top, #3C9300, #368200);
-	background: -moz-linear-gradient(top, #3C9300, #368200);
-	background: -ms-linear-gradient(top, #3C9300, #368200);
-	background: -o-linear-gradient(top, #3C9300, #368200);
-}
 button.redbtn {
 	border: 1px solid #D14836 !important;
 	background: #D64937;
@@ -229,12 +164,6 @@ button.action:active {
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 	border-color: #C6C6C6 !important;
-}
-button.bluebtn:active {
-	border-color: #2F5BB7 !important;
-}
-button.greenbtn:active {
-	border-color: #2D6200 !important;
 }
 button.redbtn:active {
 	border-color: #B0281A !important;
@@ -267,14 +196,6 @@ button:hover .label.greenbtn {
 button:hover .label.yellow {
 	color: #F7CB38;
 }
-button.bluebtn .label {
-	color: #FFF !important;
-	text-shadow: 0 1px 0 #2F5BB7 !important;
-}
-button.greenbtn .label {
-	color: #FFF !important;
-	text-shadow: 0 1px 0 #2D6200 !important;
-}
 button.redbtn .label {
 	color: #FFF !important;
 	text-shadow: 0 1px 0 #B0281A !important;
@@ -284,7 +205,4 @@ button.action .label {
 }
 button.action:active .label {
 	color: #333 !important;
-}
-button.bluebtn:active .label, button.greenbtn:active .label, button.redbtn:active .label {
-	color: #FFF !important;
 }

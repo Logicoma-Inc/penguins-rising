@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Your App Name">
+    <Require feature="rpc"/>
+    <Require feature="views"/>
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+      <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
+      <!DOCTYPE html>
 <html>
 <!--manifest="mystaticdir/Offline.appcache"-->
 <head>
@@ -7,13 +16,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penguins Rising</title>
     <meta name="description" content="Penguins Rising - Zombie Survial Game" />
-    <link rel="stylesheet" type="text/css" href="styles/index.css">
+    <link rel="stylesheet" type="text/css" href="https://penguinsontherise.appspot.com/styles/index.css">
     <style>
         @media screen and (max-width:400px) {
             .right {
                 display:none;
             }
-        }
+        }	
     </style>
 </head>
 <body>
@@ -29,18 +38,18 @@
     </div>
     <div id="GameData">
         <audio id="Bleed">            
-            <source src="content/Bleed.mp3" type="audio/mpeg">
-            <source src="content/Bleed.ogg" type="audio/ogg">
+            <source src="https://penguinsontherise.appspot.com/content/Bleed.mp3" type="audio/mpeg">
+            <source src="https://penguinsontherise.appspot.com/content/Bleed.ogg" type="audio/ogg">
             Your browser does not support this audio format.
         </audio>
         <audio id="gunshot">
-            <source src="content/gunshot.mp3" type="audio/mpeg">
-            <source src="content/gunshot.wav" type="audio/wav">
+            <source src="https://penguinsontherise.appspot.com/content/gunshot.mp3" type="audio/mpeg">
+            <source src="https://penguinsontherise.appspot.com/content/gunshot.wav" type="audio/wav">
             Your browser does not support the audio element.
         </audio>
         <audio autoplay loop>
-            <source src="content/ArcticWind.mp3" type="audio/mpeg">
-            <source src="content/ArcticWind.wav" type="audio/wav">           
+            <source src="https://penguinsontherise.appspot.com/content/ArcticWind.mp3" type="audio/mpeg">
+            <source src="https://penguinsontherise.appspot.com/content/ArcticWind.wav" type="audio/wav">           
         </audio>
     </div>
     <footer>
@@ -52,11 +61,11 @@
             <iframe id="github" src="http://ghbtns.com/github-btn.html?user=fassetar&repo=Penguins-Rising&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
         </div>
     </footer>
-    <script src="js/jquery-2.0.3.min.js"></script>
-    <script async src="js/login.js"></script>
-    <script async src="js/achievementManager.js"></script>
-    <script async src="js/leaderboardManager.js"></script>
-    <script type="text/javascript" src="js/snowstorm-min.js"></script>
+    <script src="https://penguinsontherise.appspot.com/js/jquery-2.0.3.min.js"></script>
+    <script async src="https://penguinsontherise.appspot.com/js/login.js"></script>
+    <script async src="https://penguinsontherise.appspot.com/js/achievementManager.js"></script>
+    <script async src="https://penguinsontherise.appspot.com/js/leaderboardManager.js"></script>
+    <script type="text/javascript" src="https://penguinsontherise.appspot.com/js/snowstorm-min.js"></script>
     <script async type="text/javascript" src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
     <script>
         (function () {
@@ -116,3 +125,6 @@
     <script async src="js/game.js"></script>
 </body>
 </html>
+    ]]>
+  </Content>
+</Module>
