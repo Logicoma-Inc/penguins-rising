@@ -7,8 +7,8 @@ var ctx = canvas.getContext('2d');
 var enemies = [];
 var TheTrulyDead = [];
 var player = player || {};//Later will make ready for multiple users.
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = document.documentElement.offsetWidth;
+canvas.height = document.documentElement.offsetHeight;
 game.mousePos = {
     x: 0,
     y: 0
@@ -43,7 +43,7 @@ player = {
     draw: function () {
         ctx.save();
         ctx.translate((canvas.width / 2), canvas.height - 60);
-        ctx.rotate(Math.atan2(game.mousePos.x - player.x, player.y - game.mousePos.y));
+        ctx.rotate(Math.atan2(game.mousePos.x - (canvas.width / 2), (canvas.height - 60) - game.mousePos.y));
         ctx.drawImage(img, 0, 0, 42, 59, -18, -33, 42, 59);
         ctx.restore();
     },
@@ -262,7 +262,7 @@ function draw() {
         enemy.draw();
     });
     player.draw();
-    test.draw();
+    //test.draw();
     player.Bullets.forEach(function (bullet) {
         bullet.draw();
     });

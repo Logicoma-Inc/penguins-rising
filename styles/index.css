@@ -10,22 +10,27 @@ html, body {
 }
 h2 { color: red; font-family: Viner Hand ITC; }
 canvas {
-        display:block;
+	display:block;       
         image-rendering: -moz-crisp-edges;
         image-rendering: -webkit-optimize-contrast;
 	cursor: crosshair;
-	/*background: url("LandScapeSide.jpg") left repeat-y;
 	-moz-transform: scaleX(-1);
 	-webkit-transform: scaleX(-1);
 	-o-transform: scaleX(-1);
 	    transform: scaleX(-1);
-	-ms-filter: fliph; 
-	    filter: fliph; */
-	
+	-ms-filter:fliph;
+	    filter: fliph; 
+	background: url("LandScapeSide.jpg") left repeat-y;
 }
 #game { 
+	-moz-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	    transform: scaleX(-1);
+	-ms-filter:fliph;
+	    filter: fliph; 
 	background: url("LandScapeSide.jpg") left repeat-y;
-	width: 100%;
+    	display:none;
 }
 
 
@@ -68,7 +73,7 @@ footer{
    background:#6cf;
 }
 #dialog-modal {
-padding: 25px;
+padding: 15% 42%;
 border-left: 1px solid #CCC;
 border-right: 1px solid #CCC;
 -moz-box-shadow: 0px 0px 10px #BBB;
@@ -76,10 +81,8 @@ border-right: 1px solid #CCC;
 box-shadow: 0px 0px 10px #BBB;
 background-color: white;
 position: fixed;
-width: 225px;
-top: inherit;
-left: 40%;
-top: 20%;
+width: 100%;
+height: 100%;
 }
 #SplashScreen {
     padding-left: 100px;
