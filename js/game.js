@@ -7,12 +7,16 @@ var ctx = canvas.getContext('2d');
 var enemies = [];
 var TheTrulyDead = [];
 var player = player || {};//Later will make ready for multiple users.
-canvas.width = document.documentElement.offsetWidth;
-canvas.height = document.documentElement.offsetHeight;
+canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
+canvas.height =  "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
 game.mousePos = {
     x: 0,
     y: 0
 };
+window.onresize = function (event) {
+	canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+	canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
+}
 /******************** EVENT LISTENERS ********************/
 canvas.addEventListener('mousemove', function (evt) {
     game.mousePos = getMousePos(canvas, evt);
@@ -49,7 +53,7 @@ player = {
     },
     shot: false,
     snd : new Audio("content/GunShot.wav"), //No longer need to create so many with the timer.
-    shoot: function () {
+    shoot: function () {		
         var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
             player.snd.play();
             player.Bullets.push(Bullet({
@@ -200,7 +204,7 @@ function Boss() {
 function Bullet(I) {
     I.active = true;
     I.speed = 12;
-    I.radian = Math.atan2(player.x - game.mousePos.x, player.y - game.mousePos.y);
+    I.radian = Math.atan2((canvas.width/2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
     I.xVelocity = -I.speed * Math.sin(I.radian);
     I.yVelocity = -I.speed * Math.cos(I.radian);
     I.width = 3;

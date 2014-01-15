@@ -53,7 +53,9 @@
             <iframe id="github" src="http://ghbtns.com/github-btn.html?user=fassetar&repo=Penguins-Rising&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
         </div>
     </footer>
-    <!--<script src="js/jquery-2.0.3.min.js"></script>-->
+    <noscript>
+        Well this is kinda weird... You don't have Javascript?
+    </noscript>
     <script async src="js/login.js"></script>
     <script async src="js/achievementManager.js"></script>
     <script async src="js/leaderboardManager.js"></script>
@@ -114,18 +116,6 @@
             {
                 document.getElementById("Gamer").innerHTML = "Play Game";
             }
-            window.onresize = function (event) {
-                var height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-                var width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
-                canvas.width = width;
-                console.log(height + "," + width);
-                canvas.height = height;
-            }
-            //$(window).resize(function () {
-            //    canvas.width = window.innerWidth;
-            //    canvas.height = window.innerHeight;
-            //    console.log("Done");
-            //});
       })();
     </script>
     <script async src="js/game.js"></script>
