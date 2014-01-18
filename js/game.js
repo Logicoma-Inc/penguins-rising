@@ -244,6 +244,7 @@ function AnimationData(frames, options) {
     };
 };
 var self = {};
+var timer = null;
 /******************** INITALIZER METHOD ********************/
 game.startGame = function () {
     game.LvlEnemies = 3;
@@ -253,11 +254,11 @@ game.startGame = function () {
     self = new Image();
     self.src = 'images/ThePrinceBoss.png';
     canvas.addEventListener('mousedown', mouseClick);
-    setInterval(function () {
+    timer = setInterval(function () {
         update();
         draw();
     }, 40);
-};
+}; 
 var test = new Boss();
 /******************** DRAW METHOD ********************/
 function draw() {
@@ -278,10 +279,11 @@ function draw() {
 };
 /******************** UPDATE METHOD ********************/
 function update() {
-    if (TheTrulyDead.length > game.LvlEnemies) {
+    if ((TheTrulyDead.length > game.LvlEnemies) && (enemies.length == 0)) {
         game.LvlComplete = true;
         game.LvlEnemies += 5;
         game.Lvl += 1;
+		//clearInterval(timer);
     }
     if (!game.LvlComplete) {
         player.Bullets.forEach(function (bullet) {
@@ -297,7 +299,7 @@ function update() {
             return enemy.active;
         });
         handleCollisions();
-        if (game.LvlEnemies > enemies.length) {
+        if (game.LvlEnemies > enemies.length && (TheTrulyDead.length <= game.LvlEnemies)) {
                 enemies.push(Enemy());
             }
     } else {
