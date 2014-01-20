@@ -2,10 +2,12 @@
 /******************** GLOBALS ********************/
 var game = game || {};
 var img = null;
+var bossimg = null;
 var canvas = document.getElementById("window");
 var ctx = canvas.getContext('2d');
 var enemies = [];
 var TheTrulyDead = [];
+var bosses = [];
 var player = player || {};//Later will make ready for multiple users.
 canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
 canvas.height =  "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
@@ -43,7 +45,9 @@ player = {
     y: (canvas.height - 60),
     vx: 0,
     vy: 0,
+	health: null,
     Bullets: [],
+	active: true,
     draw: function () {
         ctx.save();
         ctx.translate((canvas.width / 2), canvas.height - 60);
@@ -51,6 +55,12 @@ player = {
         ctx.drawImage(img, 0, 0, 42, 59, -18, -33, 42, 59);
         ctx.restore();
     },
+	update: function() {
+		if (player.health < 1)
+			return false;
+		else 
+			this.active;
+	},
     shot: false,
     snd : new Audio("content/GunShot.wav"), //No longer need to create so many with the timer.
     shoot: function () {		
@@ -125,15 +135,21 @@ function Enemy(I) {
     I.reset();
     I.length = I.animation.frames.length;
     I.inBounds = function () {
-        return I.x >= 0 && I.x <= canvas.width  &&
-            I.y >= 0 && I.y <= canvas.height;
+		if(I.y != canvas.height){
+			return I.x >= 0 && I.x <= canvas.width  &&
+				I.y >= 0 && I.y <= canvas.height;
+		} else 
+		{
+			console.log("HIT!");
+			player.health -= 1;
+			return false;
+		}
     };
 
     I.draw = function () {
         if (I.active)
             ctx.drawImage(img, I.frame.x, 0,  I.width,  I.height, I.x, I.y, I.width, I.height);
-        else {
-            //var penguin = Math.floor(Math.random() * 3) + 1;            
+        else {            
             ctx.drawImage(img, 169, 0, 46, 37, I.x, I.y, 46, 37);
         }
     };
@@ -170,12 +186,25 @@ function Enemy(I) {
     return I;
 };
 /******************** BOSS CLASS ********************/
-function Boss() {
-    this.length = 0;
-    this.frame = undefined;
-    this.Index = 0;
-    this.elapsed = 0;
-    this.animation = new AnimationData(
+function Boss(I) {
+    I = I || {};
+
+    I.active = true;
+    I.age = Math.floor(Math.random() * 128);
+
+    I.x = Math.random() * canvas.width;
+    I.y = 0;
+    I.xVelocity = 0
+    I.yVelocity = 1;
+
+    I.width = 42;
+    I.height = 37;
+
+    I.length = 0;
+    I.frame = undefined;
+    I.index = 0;
+    I.elapsed = 0;
+    I.animation = new AnimationData(
         [{
             x: 40,
             length: 180
@@ -190,15 +219,53 @@ function Boss() {
             keyframe: 0
         }
     );
-    this.update = function () {
-        return true;
+    I.reset = function () {
+        I.elapsed = 0;
+        I.index = 0;
+        I.frame = I.animation.frames[I.index];
     };
-    this.draw = function () {
-        ctx.drawImage(self, 0, 0, 46, 37, 45, 34, 46, 37);
+    I.reset();
+    I.length = I.animation.frames.length;
+    I.inBounds = function () {
+        return I.x >= 0 && I.x <= canvas.width  &&
+            I.y >= 0 && I.y <= canvas.height;
     };
-    this.deactive = function () {
-        this.active = false;
+
+    I.draw = function () {
+        if (I.active)
+            ctx.drawImage(bossimg, 172,0,45, 146, I.x, I.y, I.width, I.height);			
     };
+
+    I.update = function () {
+        if (I.active) {
+            I.x += I.xVelocity;
+            I.y += I.yVelocity;
+            I.xVelocity = Math.sin(I.age * Math.PI / 64);
+            I.age++;
+            I.active = I.active && I.inBounds();
+			
+            I.elapsed = I.elapsed + 30;
+
+            if (I.elapsed >= I.frame.length) {
+                I.index++;
+                I.elapsed = I.elapsed - I.frame.length;
+            }
+
+            if (this.index >= this.length) {
+                if (this.animation.options.repeats) {
+                    this.index = this.animation.options.keyframe;
+                } else {
+                    this.index--;
+                }
+            }
+
+            I.frame = I.animation.frames[I.index];
+        }
+    };
+    I.deactive = function () {
+        I.active = false;
+    };
+    return I;
 };
 /******************** BULLET CLASS ********************/
 function Bullet(I) {
@@ -243,31 +310,33 @@ function AnimationData(frames, options) {
         keyframe: 0
     };
 };
-var self = {};
+var self = [];
 var timer = null;
 /******************** INITALIZER METHOD ********************/
 game.startGame = function () {
     game.LvlEnemies = 3;
     game.Lvl = 1;
+	player.health = 10;
     img = new Image();
     img.src = "/images/CharacterSprites.png";
-    self = new Image();
-    self.src = 'images/ThePrinceBoss.png';
+    bossimg = new Image();
+    bossimg.src = 'images/ThePrinceBoss.png';
     canvas.addEventListener('mousedown', mouseClick);
     timer = setInterval(function () {
         update();
         draw();
     }, 40);
 }; 
-var test = new Boss();
 /******************** DRAW METHOD ********************/
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+	player.draw();
     TheTrulyDead.forEach(function (enemy) {
         enemy.draw();
     });
-    player.draw();
-    //test.draw();
+    // bosses.forEach(function (boss) {
+        // boss.draw();
+    // });
     player.Bullets.forEach(function (bullet) {
         bullet.draw();
     });
@@ -276,6 +345,7 @@ function draw() {
     });
     ctx.fillText("Kills:" + TheTrulyDead.length, 10, 50);
     ctx.fillText("Level:" + game.Lvl, 10, 70);
+	ctx.fillText("Health:" + player.health, 10, 100);
 };
 /******************** UPDATE METHOD ********************/
 function update() {
@@ -283,9 +353,10 @@ function update() {
         game.LvlComplete = true;
         game.LvlEnemies += 5;
         game.Lvl += 1;
+		player.health = 10;
 		//clearInterval(timer);
     }
-    if (!game.LvlComplete) {
+    if (!game.LvlComplete && player.update) {
         player.Bullets.forEach(function (bullet) {
             bullet.update();
         });
@@ -298,13 +369,23 @@ function update() {
         enemies = enemies.filter(function (enemy) {
             return enemy.active;
         });
+		bosses.forEach(function (boss) {
+            boss.update();
+        });
+		bosses = bosses.filter(function (boss) {
+            return boss.active;
+        });
         handleCollisions();
         if (game.LvlEnemies > enemies.length && (TheTrulyDead.length <= game.LvlEnemies)) {
                 enemies.push(Enemy());
+				bosses.push(Boss(this));
             }
     } else {
+		if(!player.update)
+			console.log("you died");
         enemies = [];
         TheTrulyDead = [];
+		bosses = [];
         game.LvlComplete = false;
     }
 };
