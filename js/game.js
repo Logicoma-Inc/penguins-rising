@@ -39,6 +39,25 @@ function mouseClick(event) {
         player.shot = true;
     }
 };
+function SoundTest(ver) {
+    var a = document.createElement('audio');
+    //console.log(!!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, '')));
+    if (!!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''))) {
+        if (ver) {
+            return new Audio("mp3/GunShot.mp3");
+        }
+        else {
+            new Audio("mp3/PenguinCry1.mp3");
+        }
+    }
+    else {
+        if (ver) {
+            return new Audio("content/GunShot.wav");
+        } else {
+            new Audio("content/PenguinCry1.wav");
+        }
+    }
+}
 /******************** PLAYER CLASS ********************/
 player = {
     x: (canvas.width / 2),
@@ -62,7 +81,7 @@ player = {
 			this.active;
 	},
     shot: false,
-    snd : new Audio("content/GunShot.wav"), //No longer need to create so many with the timer.
+    snd: SoundTest(true), //No longer need to create so many with the timer.
     shoot: function () {		
         var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
             player.snd.play();
@@ -403,7 +422,7 @@ function handleCollisions() {
             if (collides(bullet, enemy)) {
                 enemy.deactive();
                 TheTrulyDead.push(enemy);
-                var snd = new Audio("content/PenguinCry1.wav");
+                var snd = SoundTest(false);
                 snd.play();
                 bullet.active = false;
             }

@@ -1,15 +1,15 @@
 *{ margin: 0; padding: 0; }
 html, body { 
 	background: #e8eae7;
+	background: url("landscape.jpg") repeat;
+}
+h2 { color: red; font-family: Viner Hand ITC; }
+canvas {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none; 
-	background: url("landscape.jpg") repeat;
-}
-h2 { color: red; font-family: Viner Hand ITC; }
-canvas {
 	display:block;       
         image-rendering: -moz-crisp-edges;
         image-rendering: -webkit-optimize-contrast;
