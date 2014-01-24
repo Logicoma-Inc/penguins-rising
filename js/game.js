@@ -35,29 +35,15 @@ function mouseClick(event) {
     event.preventDefault();
     if (!player.shot) {
         player.shoot();
-        setTimeout(function () { player.shot = false; }, 400);
+        setTimeout(function () { player.shot = false; }, 500);
         player.shot = true;
     }
 };
-function SoundTest(ver) {
-    var a = document.createElement('audio');
-    //console.log(!!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, '')));
-    if (!!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''))) {
-        if (ver) {
-            return new Audio("mp3/GunShot.mp3");
-        }
-        else {
-            new Audio("mp3/PenguinCry1.mp3");
-        }
-    }
-    else {
-        if (ver) {
-            return new Audio("content/GunShot.wav");
-        } else {
-            new Audio("content/PenguinCry1.wav");
-        }
-    }
-}
+var a = document.createElement('audio');
+var SoundTest = function() {
+	console.log("new element created");
+    return(!!(a.createElement('audio').canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, '')));
+};
 /******************** PLAYER CLASS ********************/
 player = {
     x: (canvas.width / 2),
@@ -81,7 +67,7 @@ player = {
 			this.active;
 	},
     shot: false,
-    snd: SoundTest(true), //No longer need to create so many with the timer.
+    snd: new Audio((SoundTest) ? "mp3/GunShot.mp3" : "content/GunShot.wav" ), //No longer need to create so many with the timer.
     shoot: function () {		
         var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
             player.snd.play();
@@ -131,6 +117,7 @@ function Enemy(I) {
     I.frame = undefined;
     I.index = 0;
     I.elapsed = 0;
+	I.snd = new Audio((SoundTest) ? "mp3/PenguinCry1.mp3" : "content/PenguinCry1.wav");
     I.animation = new AnimationData(
         [{
             x: 40,
@@ -422,8 +409,7 @@ function handleCollisions() {
             if (collides(bullet, enemy)) {
                 enemy.deactive();
                 TheTrulyDead.push(enemy);
-                var snd = SoundTest(false);
-                snd.play();
+				enemy.snd.play();
                 bullet.active = false;
             }
         });
