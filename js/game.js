@@ -67,7 +67,7 @@ player = {
 			this.active;
 	},
     shot: false,
-    snd: new Audio((SoundTest) ? "mp3/GunShot.mp3" : "content/GunShot.wav" ), //No longer need to create so many with the timer.
+    snd: new Audio((SoundTest) ? "./mp3/gunshot.mp3" : "./content/GunShot.wav" ), //No longer need to create so many with the timer.
     shoot: function () {		
         var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
             player.snd.play();
@@ -117,7 +117,7 @@ function Enemy(I) {
     I.frame = undefined;
     I.index = 0;
     I.elapsed = 0;
-	I.snd = new Audio((SoundTest) ? "mp3/PenguinCry1.mp3" : "content/PenguinCry1.wav");
+	I.snd = new Audio((SoundTest) ? "./mp3/PenguinCry1.mp3" : "./content/PenguinCry1.wav");
     I.animation = new AnimationData(
         [{
             x: 40,

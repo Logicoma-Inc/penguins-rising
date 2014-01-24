@@ -18,7 +18,6 @@ handlers:
 
 - url: /content
   static_dir: content
-  mime_type: application/octet-stream
 
 - url: /mp3
   static_dir: mp3
