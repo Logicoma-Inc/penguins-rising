@@ -22,7 +22,7 @@
         <div id="welcome">
             <div class="startMenu buttons" id="message"></div>
         </div>
-        <button id="playGame" class="action redbtn" onclick="welcome.startGame()"><span class="label" id="Gamer">Loading</span></button>
+        <button id="playGame" class="action redbtn" onclick="welcome.startGame();"><span class="label" id="Gamer">Loading</span></button>
     </div>
     <div id="game">
         <div id="rightSide"></div>
@@ -47,11 +47,10 @@
     </div>
     <footer>
         <div class="left">
-            <div class="g-plus" data-action="share" data-href="http://www.penguinsontherise.appspot.com"></div>
+            <div class="g-plus" data-action="share" data-href="https://www.penguinsontherise.appspot.com"></div>
         </div>
         <div class="right">
-            <b>Checkout Updates</b>
-            <iframe id="github" src="http://ghbtns.com/github-btn.html?user=fassetar&repo=Penguins-Rising&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+            <a href="https://github.com/fassetar/Penguins-Rising" target="_blank"><b>Checkout Updates</b></a>
         </div>
     </footer>
     <noscript>
@@ -110,13 +109,12 @@
                 return this.cache[path];
             }
             var ASSET_MANAGER = new AssetManager();
-            ASSET_MANAGER.queueDownload('images/landscape.png');
-            ASSET_MANAGER.queueDownload('images/landscape.png');
+            //ASSET_MANAGER.queueDownload('images/landscape.png');
             ASSET_MANAGER.downloadAll(function(){});
             if (ASSET_MANAGER.isDone)
             {
                 document.getElementById("Gamer").innerHTML = "Play Game";
-            }
+            }            
       })();
     </script>
     <script async src="js/game.js"></script>

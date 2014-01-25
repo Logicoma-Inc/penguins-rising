@@ -10,10 +10,10 @@ canvas {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none; 
-	display:block;       
+	display:block;
+	cursor:url("crosshairgun1.png"), auto;      
         image-rendering: -moz-crisp-edges;
         image-rendering: -webkit-optimize-contrast;
-	cursor: crosshair;
 	-moz-transform: scaleX(-1);
 	-webkit-transform: scaleX(-1);
 	-o-transform: scaleX(-1);

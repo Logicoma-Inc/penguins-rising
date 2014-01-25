@@ -117,7 +117,7 @@ function Enemy(I) {
     I.frame = undefined;
     I.index = 0;
     I.elapsed = 0;
-	I.snd = new Audio((SoundTest) ? "./mp3/PenguinCry1.mp3" : "./content/PenguinCry1.wav");
+	I.snd =  new Audio((SoundTest) ? "./mp3/PenguinCry1.mp3" : "./content/PenguinCry1.wav");
     I.animation = new AnimationData(
         [{
             x: 40,
