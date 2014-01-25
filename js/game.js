@@ -276,7 +276,7 @@ function Boss(I) {
 /******************** BULLET CLASS ********************/
 function Bullet(I) {
     I.active = true;
-    I.speed = 12;
+    I.speed = 15;
     I.radian = Math.atan2((canvas.width/2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
     I.xVelocity = -I.speed * Math.sin(I.radian);
     I.yVelocity = -I.speed * Math.cos(I.radian);
