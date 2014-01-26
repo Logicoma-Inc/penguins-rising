@@ -6,7 +6,7 @@ Orginally inspired and created by Devroy Queen and Andrew Peek. Created by an ol
 This is a port for the browser and the base line of the game functions as well as game play.
 
 Coming Soon...
-- Android
+- Android - (Possibly)
 - Win8
 - Website  
 - Ouya 
