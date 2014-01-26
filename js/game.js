@@ -360,8 +360,13 @@ function update() {
         game.LvlEnemies += 5;
         game.Lvl += 1;
 		player.health = 10;
-		//clearInterval(timer);
     }
+	if(player.health <= 0){
+	 clearInterval(timer);
+	 alert("Your lose! Start Over?");
+	 location.reload();
+	 
+	}
     if (!game.LvlComplete && player.update) {
         player.Bullets.forEach(function (bullet) {
             bullet.update();
