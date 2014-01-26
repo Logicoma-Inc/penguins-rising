@@ -8,7 +8,7 @@ This is a port for the browser and the base line of the game functions as well a
 Coming Soon...
 - Android - (Possibly)
 - Win8
-- Website  
+- Website - (and Checked off.)
 - Ouya 
 - Google hangout (multiplayer)
 - Facebook App (and Checked off.)
