@@ -363,8 +363,10 @@ function update() {
     }
 	if(player.health <= 0){
 	 clearInterval(timer);
-	 alert("Your lose! Start Over?");
-	 location.reload();
+	 if(confirm("Your lose! Start Over?"))
+	 { 
+		location.reload();
+	 }
 	 
 	}
     if (!game.LvlComplete && player.update) {
