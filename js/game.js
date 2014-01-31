@@ -151,12 +151,15 @@ function Enemy(I) {
 			return false;
 		}
     };
-
+    I.RnP = Math.floor(Math.random() * 3);
+    I.deadAnm = [169, 215, 250];
     I.draw = function () {
         if (I.active)
             ctx.drawImage(img, I.frame.x, 0,  I.width,  I.height, I.x, I.y, I.width, I.height);
-        else {            
-            ctx.drawImage(img, 169, 0, 46, 37, I.x, I.y, 46, 37);
+        else {
+            
+            console.log(I.RnP);
+            ctx.drawImage(img, I.deadAnm[I.RnP], 0, 46, 37, I.x, I.y, 46, 37);
         }
     };
 
