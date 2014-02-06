@@ -6,123 +6,72 @@
   </ModulePrefs>
   <Content type="html">
     <![CDATA[
-      <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
       <!DOCTYPE html>
 <html>
 <!--manifest="mystaticdir/Offline.appcache"-->
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penguins Rising</title>
     <meta name="description" content="Penguins Rising - Zombie Survial Game" />
     <link rel="stylesheet" type="text/css" href="https://penguinsontherise.appspot.com/styles/index.css">
-    <style>
-        @media screen and (max-width:400px) {
-            .right {
-                display:none;
-            }
-        }	
-    </style>
 </head>
 <body>
     <div id="dialog-modal">
-        <h2>Penguins Rising</h2>
+        <h2>Penguins Rising <i>Beta</i></h2>
         <div id="welcome">
             <div class="startMenu buttons" id="message"></div>
         </div>
-        <button id="playGame" class="action redbtn" onclick="welcome.startGame()"><span class="label">Play Game</span></button>
+        <button id="playGame" class="action redbtn" onclick="welcome.startGame();"><span class="label" id="Gamer">Loading</span></button>
     </div>
     <div id="game">
-        <canvas id="window">Sorry but Canvas is not Supported</canvas>
+        <div id="rightSide"></div>
+            <canvas id="window">Sorry but Canvas is not Supported</canvas>
     </div>
     <div id="GameData">
         <audio id="Bleed">            
-            <source src="https://penguinsontherise.appspot.com/content/Bleed.mp3" type="audio/mpeg">
             <source src="https://penguinsontherise.appspot.com/content/Bleed.ogg" type="audio/ogg">
+            <source src="https://penguinsontherise.appspot.com/content/Bleed.mp3" type="audio/mpeg">
             Your browser does not support this audio format.
         </audio>
         <audio id="gunshot">
-            <source src="https://penguinsontherise.appspot.com/content/gunshot.mp3" type="audio/mpeg">
             <source src="https://penguinsontherise.appspot.com/content/gunshot.wav" type="audio/wav">
-            Your browser does not support the audio element.
+            <source src="https://penguinsontherise.appspot.com/content/gunshot.mp3" type="audio/mpeg">
+            Your browser does not support the audio format.
         </audio>
         <audio autoplay loop>
-            <source src="https://penguinsontherise.appspot.com/content/ArcticWind.mp3" type="audio/mpeg">
-            <source src="https://penguinsontherise.appspot.com/content/ArcticWind.wav" type="audio/wav">           
+            <source src="https://penguinsontherise.appspot.com/content/ArcticWind.wav" type="audio/wav"> 
+            <source src="https://penguinsontherise.appspot.com/content/ArcticWind.ogg" type="audio/ogg">          
+            <source src="https://penguinsontherise.appspot.com/mp3/ArcticWind.mp3" type="audio/mpeg">
         </audio>
     </div>
     <footer>
         <div class="left">
-            <div class="g-plus" data-action="share" data-href="http://www.penguinsontherise.appspot.com"></div>
+            <div class="g-plus" data-action="share" data-href="https://www.penguinsontherise.appspot.com"></div>
         </div>
         <div class="right">
-            <b>Checkout Updates</b>
-            <iframe id="github" src="http://ghbtns.com/github-btn.html?user=fassetar&repo=Penguins-Rising&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+            <a href="https://github.com/fassetar/Penguins-Rising" target="_blank"><b>Updates</b></a>
         </div>
     </footer>
-    <script src="https://penguinsontherise.appspot.com/js/jquery-2.0.3.min.js"></script>
+    <noscript>
+        Well this is kinda weird... You don't have Javascript?
+    </noscript>
+	<script async src="https://penguinsontherise.appspot.com/js/game.js"></script>
     <script async src="https://penguinsontherise.appspot.com/js/login.js"></script>
     <script async src="https://penguinsontherise.appspot.com/js/achievementManager.js"></script>
     <script async src="https://penguinsontherise.appspot.com/js/leaderboardManager.js"></script>
-    <script type="text/javascript" src="https://penguinsontherise.appspot.com/js/snowstorm-min.js"></script>
-    <script async type="text/javascript" src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+    <script async src="https://penguinsontherise.appspot.com/js/snowstorm-min.js"></script>
+    <script async src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+	<script async src="https://plus.google.com/hangouts/_/api/v1/hangout.js"></script>
     <script>
         (function () {
             var apisLoaded = function () {
                 login.init();
-            };
-            snowStorm.flakesMaxActive = 96;
-
-            function AssetManager() {
-                this.successCount = 0;
-                this.errorCount = 0;
-                this.downloadQueue = [];
-                this.cache = {};
-            }
-            AssetManager.prototype.queueDownload = function (path) {
-                this.downloadQueue.push(path);
-            }
-            AssetManager.prototype.downloadAll = function (downloadCallback) {
-                if (this.downloadQueue.length === 0) {
-                    downloadCallback();
-                }
-                for (var i = 0; i < this.downloadQueue.length; i++) {
-                    var path = this.downloadQueue[i];
-                    var img = new Image();
-                    var that = this;
-                    img.addEventListener("load", function () {
-                        console.log(this.src + ' is loaded');
-                        that.successCount += 1;
-                        if (that.isDone()) {
-                            downloadCallback();
-                        }
-                    }, false);
-                    img.addEventListener("error", function () {
-                        that.errorCount += 1;
-                        if (that.isDone()) {
-                            downloadCallback();
-                        }
-                    }, false);
-                    img.src = path;
-                    this.cache[path] = img;
-                }
-            }
-            AssetManager.prototype.isDone = function () {
-                return (this.downloadQueue.length == this.successCount + this.errorCount);
-            }
-            AssetManager.prototype.getAsset = function (path) {
-                return this.cache[path];
-            }
-            var ASSET_MANAGER = new AssetManager();
-            ASSET_MANAGER.queueDownload('images/ThePrinceBoss.png');
-            $(window).resize(function () {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
+            };         
+			document.getElementById("Gamer").innerHTML = "Play Game";
       })();
     </script>
-    <script async src="js/game.js"></script>
 </body>
 </html>
     ]]>
