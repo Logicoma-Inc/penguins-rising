@@ -70,6 +70,17 @@
                 login.init();
             };         
 			document.getElementById("Gamer").innerHTML = "Play Game";
+			function onMessageReceived(event) {
+			try {
+					var data = JSON.parse(event.message);
+
+				tileColor[data[2]][data[3]] = data[1];
+				droppedPackageCount(event.senderId, parseInt(data[0]));
+				showLossRates();
+				} catch (e) {
+				console.log(e);
+				}
+}
       })();
     </script>
 </body>

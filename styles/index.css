@@ -1,9 +1,8 @@
 *{ margin: 0; padding: 0; }
 html, body { 
-	background: #e8eae7;
 	background: url("landscape.jpg") repeat;
 }
-h2 { color: red; font-family: Viner Hand ITC; }
+h2 { -webkit-text-fill-color: white;  -webkit-text-stroke-width: 1px;  -webkit-text-stroke-color: black; font-size: 36px;}
 canvas {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -32,8 +31,6 @@ canvas {
 	background: url("LandScapeSide.jpg") left repeat-y;
     	display:none;
 }
-
-
 .promotes { position: relative; top:-40px; }
 .right { float: right; right:3%;}
 .left { float: left;left: 3%; }
@@ -70,19 +67,20 @@ footer{
    bottom:0;
    width:100%;
    height:25px;
-   background:#6cf;
+   
+ background: white;
 }
 #dialog-modal {
-padding: 15% 42%;
-border-left: 1px solid #CCC;
-border-right: 1px solid #CCC;
--moz-box-shadow: 0px 0px 10px #BBB;
--webkit-box-shadow: 0px 0px 10px #BBB;
-box-shadow: 0px 0px 10px #BBB;
-background-color: white;
 position: fixed;
 width: 100%;
 height: 100%;
+background: #6cf;
+display: block;
+padding: 25% 39%;
+font-family: Viner Hand ITC; /* Will override color (regardless of order) */          
+}
+h2::selection {
+	background: #ffb7b7;
 }
 #SplashScreen {
     padding-left: 100px;
@@ -148,6 +146,7 @@ button.redbtn {
  -moz-transition: border .20s;
  -o-transition: border .20s;
  transition: border .20s;
+	margin: 0px 134px;
 }
 button.redbtn:hover {
 	border: 1px solid #B0281A !important;

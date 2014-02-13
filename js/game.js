@@ -41,7 +41,6 @@ function mouseClick(event) {
 };
 var a = document.createElement('audio');
 var SoundTest = function() {
-	console.log("new element created");
     return(!!(a.createElement('audio').canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, '')));
 };
 /******************** PLAYER CLASS ********************/
@@ -67,10 +66,16 @@ player = {
 			this.active;
 	},
     shot: false,
-    snd: new Audio((SoundTest) ? "./mp3/gunshot.mp3" : "./content/GunShot.wav" ), //No longer need to create so many with the timer.
+    snd: new Audio((SoundTest) ? "https://penguinsontherise.appspot.com/mp3/gunshot.mp3" : "https://penguinsontherise.appspot.com/content/GunShot.wav" ), //No longer need to create so many with the timer.
     shoot: function () {		
         var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
             player.snd.play();
+			console.log("TEST");
+			try{
+				gapi.hangout.data.sendMessage(JSON.stringify("TEST"));
+			} catch (e) {
+				console.log(e);
+			}			
             player.Bullets.push(Bullet({
                 radian: angle,
                 //This is where I need to fix! for the resize problem.
@@ -117,7 +122,7 @@ function Enemy(I) {
     I.frame = undefined;
     I.index = 0;
     I.elapsed = 0;
-	I.snd =  new Audio((SoundTest) ? "./mp3/PenguinCry1.mp3" : "./content/PenguinCry1.wav");
+	I.snd =  new Audio((SoundTest) ? "https://penguinsontherise.appspot.com/mp3/PenguinCry1.mp3" : "https://penguinsontherise.appspot.com/content/PenguinCry1.wav");
     I.animation = new AnimationData(
         [{
             x: 40,
@@ -146,23 +151,19 @@ function Enemy(I) {
 				I.y >= 0 && I.y <= canvas.height;
 		} else 
 		{
-			console.log("HIT!");
 			player.health -= 1;
 			return false;
 		}
     };
     I.RnP = Math.floor(Math.random() * 3);
-    I.deadAnm = [169, 215, 250];
+    I.deadAnm = [169, 204, 250];
     I.draw = function () {
         if (I.active)
             ctx.drawImage(img, I.frame.x, 0,  I.width,  I.height, I.x, I.y, I.width, I.height);
-        else {
-            
-            console.log(I.RnP);
-            ctx.drawImage(img, I.deadAnm[I.RnP], 0, 46, 37, I.x, I.y, 46, 37);
+        else {           
+            ctx.drawImage(img, I.deadAnm[I.RnP], 0, 45, 37, I.x, I.y, 46, 37);
         }
     };
-
     I.update = function () {
         if (I.active) {
             I.x += I.xVelocity;
@@ -242,7 +243,8 @@ function Boss(I) {
 
     I.draw = function () {
         if (I.active)
-            ctx.drawImage(bossimg, 172,0,45, 146, I.x, I.y, I.width, I.height);			
+            ctx.drawImage(bossimg, 172,0,45, 146, I.x, I.y, I.width, I.height);		            
+            //ctx.drawImage(img, 204, 0, 46, 37, I.x, I.y, 46, 37);
     };
 
     I.update = function () {
@@ -320,22 +322,33 @@ function AnimationData(frames, options) {
     };
 };
 var self = [];
-var timer = null;
+var timer;
 /******************** INITALIZER METHOD ********************/
 game.startGame = function () {
     game.LvlEnemies = 3;
     game.Lvl = 1;
 	player.health = 10;
     img = new Image();
-    img.src = "/images/CharacterSprites.png";
+    img.src = "https://penguinsontherise.appspot.com/images/CharacterSprites.png";
     bossimg = new Image();
-    bossimg.src = 'images/ThePrinceBoss.png';
+    bossimg.src = 'https://penguinsontherise.appspot.com/images/ThePrinceBoss.png';
     canvas.addEventListener('mousedown', mouseClick);
     timer = setInterval(function () {
         update();
         draw();
     }, 40);
 }; 
+// window.requestAnimFrame = (
+    // function(callback) {
+      // return window.requestAnimationFrame ||
+          // window.webkitRequestAnimationFrame ||
+          // window.mozRequestAnimationFrame ||
+          // window.oRequestAnimationFrame ||
+          // window.msRequestAnimationFrame ||
+          // function(callback) {
+            // window.setTimeout(callback, 1000 / 30);
+          // };
+    // })();
 /******************** DRAW METHOD ********************/
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -343,9 +356,6 @@ function draw() {
     TheTrulyDead.forEach(function (enemy) {
         enemy.draw();
     });
-    // bosses.forEach(function (boss) {
-        // boss.draw();
-    // });
     player.Bullets.forEach(function (bullet) {
         bullet.draw();
     });
@@ -360,17 +370,16 @@ function draw() {
 function update() {
     if ((TheTrulyDead.length > game.LvlEnemies) && (enemies.length == 0)) {
         game.LvlComplete = true;
-        game.LvlEnemies += 5;
+        game.LvlEnemies += 15;
         game.Lvl += 1;
-		player.health = 10;
+		player.health = 1;
     }
 	if(player.health <= 0){
-	 clearInterval(timer);
-	 if(confirm("Your lose! Start Over?"))
-	 { 
-		location.reload();
-	 }
-	 
+	  if(confirm("Your lose! Start Over?"))
+		{
+		  clearInterval(timer);
+		  location.reload();
+		}
 	}
     if (!game.LvlComplete && player.update) {
         player.Bullets.forEach(function (bullet) {
@@ -384,12 +393,6 @@ function update() {
         });
         enemies = enemies.filter(function (enemy) {
             return enemy.active;
-        });
-		bosses.forEach(function (boss) {
-            boss.update();
-        });
-		bosses = bosses.filter(function (boss) {
-            return boss.active;
         });
         handleCollisions();
         if (game.LvlEnemies > enemies.length && (TheTrulyDead.length <= game.LvlEnemies)) {

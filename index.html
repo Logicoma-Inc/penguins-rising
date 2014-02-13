@@ -32,7 +32,7 @@
             <source src="content/gunshot.mp3" type="audio/mpeg">
             Your browser does not support the audio format.
         </audio>
-        <audio autoplay loop>
+        <audio loop>
             <source src="content/ArcticWind.wav" type="audio/wav"> 
             <source src="content/ArcticWind.ogg" type="audio/ogg">          
             <source src="mp3/ArcticWind.mp3" type="audio/mpeg">
@@ -43,6 +43,7 @@
             <div class="g-plus" data-action="share" data-href="https://www.penguinsontherise.appspot.com"></div>
         </div>
         <div class="right">
+            <a href="https://plus.google.com/115994908921270042556" rel="publisher">Google+</a>
             <a href="https://github.com/fassetar/Penguins-Rising" target="_blank"><b>Updates</b></a>
         </div>
     </footer>
@@ -60,6 +61,7 @@
                 login.init();
             };
             snowStorm.flakesMaxActive = 96;
+			snowStorm.followMouse = false;
 
             function AssetManager() {
                 this.successCount = 0;
@@ -111,5 +113,17 @@
       })();
     </script>
     <script async src="js/game.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-41648493-1', 'penguinsontherise.appspot.com');
+        ga('send', 'pageview');
+
+</script>
 </body>
 </html>
