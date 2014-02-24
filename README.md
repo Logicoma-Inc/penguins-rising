@@ -6,10 +6,10 @@ Orginally inspired and created by Devroy Queen and Andrew Peek. Created by an ol
 This is a port for the browser and the base line of the game functions as well as game play.
 
 Coming Soon...
-- Android - (Possibly)
-- Win8
+- Android - Not going to Happen, unless requested.
+- Win8 - Not going to Happen, unless requested. 
 - Website - (and Checked off.)
-- Ouya 
+- Ouya - Not going to Happen, unless requested.
 - Google hangout (multiplayer)
 - Facebook App (and Checked off.)
 
