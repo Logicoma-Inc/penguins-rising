@@ -1,8 +1,10 @@
-*{ margin: 0; padding: 0; }
+*{ 
+	margin: 0; 
+	padding: 0; 
+}
 html, body { 
 	background: url("landscape.jpg") repeat;
 }
-h2 { -webkit-text-fill-color: white;  -webkit-text-stroke-width: 1px;  -webkit-text-stroke-color: black; font-size: 36px;}
 canvas {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -31,28 +33,47 @@ canvas {
 	background: url("LandScapeSide.jpg") left repeat-y;
     	display:none;
 }
-.promotes { position: relative; top:-40px; }
-.right { float: right; right:3%;}
-.left { float: left;left: 3%; }
-#dialogHeader { color: red;font-family: Viner Hand ITC; }
-table { border-collapse: collapse; text-align: right;}
-th {padding: 10px; background-color: #0000ee; color: #fcfcfc; font-size: 1.1em;
-  border-left: 1px #fcfcfc solid;}
-tr { border-bottom: 2px #00008b solid;}
-td { vertical-align: top; padding: 10px; }
+.promotes { 
+	position: relative; top:-40px; 
+}
+.right { 
+	float: right; right:3%;
+}
+.left { 
+	float: left;left: 3%; 
+}
+#dialogHeader { 
+	color: red;
+	font-family: Viner Hand ITC; 
+}
+table { 
+	border-collapse: collapse; 
+	text-align: right;
+}
+th {
+	padding: 10px; 
+	background-color: #0000ee; 
+	color: #fcfcfc;
+	font-size: 1.1em;
+  	border-left: 1px #fcfcfc solid;
+}
+tr { 
+	border-bottom: 2px #00008b solid;
+}
+td { 
+	vertical-align: top; padding: 10px; 
+}
 .medIcon
 {
   width: 75px;
   height: 75px;
 }
-
 .smallIcon
 {
   width: 65px;
   height: 65px;
   padding: 5px;
 }
-
 .unlockWidget
 {
   position: absolute;
@@ -63,68 +84,52 @@ td { vertical-align: top; padding: 10px; }
   border-radius: 10px;
 }
 footer{
- position:absolute;
-   bottom:0;
-   width:100%;
-   height:25px;
-   
- background: white;
+	position: fixed;
+	bottom:0;
+	width:100%;
+	height: 25px;
+	background: white;
 }
 #dialog-modal {
-position: fixed;
-width: 100%;
-height: 100%;
-background: #6cf;
-display: block;
-padding: 25% 39%;
-font-family: Viner Hand ITC; /* Will override color (regardless of order) */          
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #6cf;
+	display: block;      
 }
-h2::selection {
-	background: #ffb7b7;
+
+#dialog-modal img { 
+	width: 100%;
+	padding-top: 5%; 
 }
+
 #SplashScreen {
     padding-left: 100px;
     padding-top: 10px;
-}
-.right {
-    float:right;
 }
 .left {
     float:left;
     width: 100px;
 }
-#github {
-    margin: 1px 5px -5px 3px;
-}
-
-
-/* Google Style buttons */
-/*Provided here:http://youhack.me/2011/11/01/create-google-plus-style-button-using-css3 */
 button {
-	text-decoration: none;
-	text-shadow: 0 1px 0 #fff;
 	font: bold 11px Helvetica, Arial, sans-serif;
 	color: #444;
 	line-height: 17px;
-	height: 18px;
 	display: inline-block;
 	float: left;
-	margin: 5px;
-	padding: 5px 6px 4px 6px;
-	background: #F3F3F3;
-	border: solid 1px #D9D9D9;
+	margin: 0px;
+	padding: 5px 5px 5px 5px;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
  -webkit-transition: border-color .20s;
  -moz-transition: border-color .20s;
  -o-transition: border-color .20s;
- transition: border-color .20s;
-	height: 29px !important;
+ 
+	height: 29px;
 	cursor: pointer;
 }
 button:hover {
-	background: #F4F4F4;
 	border-color: #C0C0C0;
 	color: #333;
 }
@@ -136,81 +141,22 @@ button:active {
 	box-shadow:inset 0 0 10px #D4D4D4;
 }
 button.redbtn {
-	border: 1px solid #D14836 !important;
-	background: #D64937;
-	background: -webkit-linear-gradient(top, #DC4A38, #D14836);
-	background: -moz-linear-gradient(top, #DC4A38, #D14836);
-	background: -ms-linear-gradient(top, #DC4A38, #D14836);
-	background: -o-linear-gradient(top, #DC4A38, #D14836);
- -webkit-transition: border .20s;
- -moz-transition: border .20s;
- -o-transition: border .20s;
- transition: border .20s;
-	margin: 0px 134px;
+	/* border: 2px solid #D14836 !important; */ 
+	background: white;
 }
 button.redbtn:hover {
-	border: 1px solid #B0281A !important;
-	background: #D14130;
-	background: -webkit-linear-gradient(top, #DC4A38, #C53727);
-	background: -moz-linear-gradient(top, #DC4A38, #C53727);
-	background: -ms-linear-gradient(top, #DC4A38, #C53727);
-	background: -o-linear-gradient(top, #DC4A38, #C53727);
+	background: beige;
 }
 button.action:hover {
 	-moz-box-shadow: 0 1px 0px #DDD;
-	-webkit-box-shadow: 0 1px 0px #DDD;
-	box-shadow: 0 1px 0px #DDD;
-}
-button.action:active {
-	-moz-box-shadow: none !important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-	border-color: #C6C6C6 !important;
-}
-button.redbtn:active {
-	border-color: #B0281A !important;
-}
-/*------------------------------------*\
-	$BUTTON LABEL
-\*------------------------------------*/
- button span.label {
-	display: inline-block;
-	float: left;
-	line-height: 17px;
-	height: 18px;
-	padding: 0 1px;
-	overflow: hidden;
-	color: #444;
- -webkit-transition: color .20s;
- -moz-transition: color .20s;
- -o-transition: color .20s;
- transition: color .20s;
 }
 button span.label {
-	line-height: 15px !important;
-}
-button:hover .label.bluebtn {
-	color: #7090C8;
-}
-button:hover .label.greenbtn {
-	color: #42B449;
-}
-button:hover .label.yellow {
-	color: #F7CB38;
-}
-button.redbtn .label {
-	color: #FFF !important;
-	text-shadow: 0 1px 0 #B0281A !important;
+	color: #444;
 }
 button.action .label {
-	padding: 0 17px !important;
+	padding: 0 10px !important;
 }
-button.action:active .label {
-	color: #333 !important;
+h2 {
+	-webkit-text-fill-color: white;
+	-webkit-text-stroke-width: 1px;
 }
-
-        @media screen and (max-width:400px) {
-            .right {
-                display:none;
-            }
-        }
