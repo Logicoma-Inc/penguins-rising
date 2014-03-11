@@ -1,10 +1,26 @@
 "use strict";
 
-var constants = constants || {};
-constants.LEADERBOARD_EASY = 'CgkInoXkzIgWEAIQBQ';
-constants.LEADERBOARD_HARD = 'CgkInoXkzIgWEAIQKg';
+var constants = constants || {}
 constants.CLIENT_ID = '758222750366.apps.googleusercontent.com';
-constants.APP_ID = '758222750366';
+constants.ACH_DONT_GET_COCKY_KID = 'CgkInoXkzIgWEAIQCA';
+constants.ACH_WERE_OUT_OF_BUBBLEGUM = 'CgkInoXkzIgWEAIQCw';
+constants.ACH_ITS_A_PRIME_LIFE = 'CgkInoXkzIgWEAIQLg';
+constants.ACH_THE_PRINCESS_ISNT_HAPPY = 'CgkInoXkzIgWEAIQEg';
+constants.ACH_GOT_LUCKY = 'CgkInoXkzIgWEAIQDg';
+constants.ACH_SAVE_IT_FOR_LATER = 'CgkInoXkzIgWEAIQBg';
+constants.ACH_A_HIGHER_FOOD_CHAIN = 'CgkInoXkzIgWEAIQBw';
+constants.ACH_MAMA_DONT_LIKE_TATTLETALES = 'CgkInoXkzIgWEAIQDA';
+constants.ACH_KICKIN_IT_OLD_SKOOL = 'CgkInoXkzIgWEAIQDQ';
+constants.ACH_A_TASTE_FOR_BLOOD = 'CgkInoXkzIgWEAIQDw';
+constants.ACH_NEED_NOT_HATE_ALL = 'CgkInoXkzIgWEAIQEQ';
+constants.ACH_THE_GUN_OF_A_THOUSAND_TRUTHS = 'CgkInoXkzIgWEAIQEw';
+constants.ACH_DONT_FEAR_THE_REPEAR = 'CgkInoXkzIgWEAIQKA';
+constants.ACH_BIRDS_THE_WORD = 'CgkInoXkzIgWEAIQKQ';
+constants.ACH_CAKE_AND_ICE_CREAM_ON_LEVEL_100 = 'CgkInoXkzIgWEAIQLA';
+constants.LEAD_HIGH_SCORES = 'CgkInoXkzIgWEAIQBQ';
+constants.LEAD_LONGEST_LIVED = 'CgkInoXkzIgWEAIQKg';
+constants.LEAD_TOP_NO_LIFERS = 'CgkInoXkzIgWEAIQKw';
+
 
 var login = login || {};
 login.userId = '';
