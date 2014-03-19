@@ -37,7 +37,12 @@ canvas {
 	position: relative; top:-40px; 
 }
 .right { 
-	float: right; right:3%;
+	float: right; 
+	margin-right: 10px;
+	color: #666;  
+	font: 13px Roboto,arial,sans-serif;  
+	line-height: 2;              
+};
 }
 .left { 
 	float: left;left: 3%; 
@@ -114,15 +119,17 @@ footer{
 button {
 	font: bold 11px Helvetica, Arial, sans-serif;
 	color: #444;
-	line-height: 17px;
-	display: inline-block;
 	float: left;
-	margin: 0px;
-	padding: 5px 5px 5px 5px;
+	line-height: 2px;
+	font-size: 100%;
+	margin: 0px 40% 0px;
+	padding: 21px 0px 21px;
+	width: 20%;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
- -webkit-transition: border-color .20s;
+ 
+	-webkit-transition: border-color .20s;
  -moz-transition: border-color .20s;
  -o-transition: border-color .20s;
  
@@ -141,7 +148,7 @@ button:active {
 	box-shadow:inset 0 0 10px #D4D4D4;
 }
 button.redbtn {
-	/* border: 2px solid #D14836 !important; */ 
+	border: 2px solid #D14836 !important; 
 	background: white;
 }
 button.redbtn:hover {
