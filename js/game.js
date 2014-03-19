@@ -69,8 +69,7 @@ player = {
     snd: new Audio((SoundTest) ? "https://penguinsontherise.appspot.com/mp3/gunshot.mp3" : "https://penguinsontherise.appspot.com/content/GunShot.wav" ), //No longer need to create so many with the timer.
     shoot: function () {		
         var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
-            player.snd.play();
-			console.log("TEST");
+            player.snd.play();			
 			try{
 				gapi.hangout.data.sendMessage(JSON.stringify("TEST"));
 			} catch (e) {
@@ -321,9 +320,19 @@ function AnimationData(frames, options) {
         keyframe: 0
     };
 };
-var self = [];
-var timer;
 /******************** INITALIZER METHOD ********************/
+ window.requestAnimFrame = (
+     function(callback) {
+       return window.requestAnimationFrame ||
+           window.webkitRequestAnimationFrame ||
+           window.mozRequestAnimationFrame ||
+           window.oRequestAnimationFrame ||
+           window.msRequestAnimationFrame ||
+           function(callback) {
+              window.setTimeout(callback, 1000/30);
+           };
+})();
+game.over = false;
 game.startGame = function () {
     game.LvlEnemies = 3;
     game.Lvl = 1;
@@ -333,22 +342,19 @@ game.startGame = function () {
     bossimg = new Image();
     bossimg.src = 'https://penguinsontherise.appspot.com/images/ThePrinceBoss.png';
     canvas.addEventListener('mousedown', mouseClick);
-    timer = setInterval(function () {
-        update();
-        draw();
-    }, 40);
+    (function gameloop(){
+		if(!game.over){
+			requestAnimFrame(gameloop);
+			update();
+			draw();
+		}else {
+			if(confirm("Your lose! Start Over?"))
+			{
+				location.reload();
+			}
+		}		
+	})();
 }; 
-// window.requestAnimFrame = (
-    // function(callback) {
-      // return window.requestAnimationFrame ||
-          // window.webkitRequestAnimationFrame ||
-          // window.mozRequestAnimationFrame ||
-          // window.oRequestAnimationFrame ||
-          // window.msRequestAnimationFrame ||
-          // function(callback) {
-            // window.setTimeout(callback, 1000 / 30);
-          // };
-    // })();
 /******************** DRAW METHOD ********************/
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -374,12 +380,8 @@ function update() {
         game.Lvl += 1;
 		player.health = 1;
     }
-	if(player.health <= 0){
-	  if(confirm("Your lose! Start Over?"))
-		{
-		  clearInterval(timer);
-		  location.reload();
-		}
+	if(player.health <= 0){	  
+		 game.over = true;
 	}
     if (!game.LvlComplete && player.update) {
         player.Bullets.forEach(function (bullet) {
