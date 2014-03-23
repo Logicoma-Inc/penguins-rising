@@ -120,32 +120,19 @@ button {
 	font: bold 11px Helvetica, Arial, sans-serif;
 	color: #444;
 	float: left;
+	font-size: medium;
 	line-height: 2px;
-	font-size: 100%;
-	margin: 0px 40% 0px;
-	padding: 21px 0px 21px;
-	width: 20%;
+	margin: 5px 35% 0px;
+	padding: 25px 0px 25px;
+	width: 30%;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
  
-	-webkit-transition: border-color .20s;
- -moz-transition: border-color .20s;
- -o-transition: border-color .20s;
+ 
+ 
  
 	height: 29px;
 	cursor: pointer;
-}
-button:hover {
-	border-color: #C0C0C0;
-	color: #333;
-}
-button:active {
-	border-color: #4D90FE;
-	color: #4D90FE;
-	-moz-box-shadow:inset 0 0 10px #D4D4D4;
-	-webkit-box-shadow:inset 0 0 10px #D4D4D4;
-	box-shadow:inset 0 0 10px #D4D4D4;
 }
 button.redbtn {
 	border: 2px solid #D14836 !important; 
@@ -156,12 +143,6 @@ button.redbtn:hover {
 }
 button.action:hover {
 	-moz-box-shadow: 0 1px 0px #DDD;
-}
-button span.label {
-	color: #444;
-}
-button.action .label {
-	padding: 0 10px !important;
 }
 h2 {
 	-webkit-text-fill-color: white;

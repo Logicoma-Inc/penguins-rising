@@ -147,11 +147,8 @@ welcome.showLeaderboards = function() {
 };
 
 welcome.startGame = function(/*difficulty*/) {
-  //$('#welcome').fadeOut();
-    //$('#dialog-modal').hide();
-    document.getElementById("dialog-modal").style.display = "none";
-    document.getElementById("game").style.display = "block";
-  //$('#game').fadeIn();
+  document.getElementById("dialog-modal").style.display = "none";
+  document.getElementById("game").style.display = "block";  
   game.startGame();
 };
 

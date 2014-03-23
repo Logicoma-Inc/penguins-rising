@@ -16,6 +16,7 @@
             <div class="startMenu buttons" id="message"></div>
         </div>
         <button id="playGame" class="action redbtn" onclick="welcome.startGame();"><span class="label" id="Gamer">Loading</span></button>
+		<button class="action redbtn"><span class="label" id="Gamer">Credits</span></button>
     </div>
     <div id="game">
         <div id="rightSide"></div>
@@ -108,7 +109,7 @@
             ASSET_MANAGER.downloadAll(function(){});
             if (ASSET_MANAGER.isDone)
             {
-                document.getElementById("Gamer").innerHTML = "Play Game";
+                document.getElementById("Gamer").innerHTML = "Play";
             }            
       })();
     </script>
@@ -123,7 +124,6 @@
 
         ga('create', 'UA-41648493-1', 'penguinsontherise.appspot.com');
         ga('send', 'pageview');
-
 </script>
 </body>
 </html>
