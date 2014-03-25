@@ -120,10 +120,10 @@ button {
 	font: bold 11px Helvetica, Arial, sans-serif;
 	color: #444;
 	float: left;
-	font-size: medium;
+	font-size: 2.2vw;
 	line-height: 2px;
 	margin: 5px 35% 0px;
-	padding: 25px 0px 25px;
+	padding: 2% 0px;
 	width: 30%;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
@@ -131,11 +131,11 @@ button {
  
  
  
-	height: 29px;
+	min-height: 30px;
 	cursor: pointer;
 }
 button.redbtn {
-	border: 2px solid #D14836 !important; 
+	border: 3px solid #D14836 !important; 
 	background: white;
 }
 button.redbtn:hover {
