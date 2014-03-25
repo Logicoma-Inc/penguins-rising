@@ -38,11 +38,9 @@ canvas {
 }
 .right { 
 	float: right; 
-	margin-right: 10px;
-	color: #666;  
-	font: 13px Roboto,arial,sans-serif;  
+	margin-right: 15px;  
+	font: 11px Roboto,arial,sans-serif;  
 	line-height: 2;              
-};
 }
 .left { 
 	float: left;left: 3%; 
@@ -99,8 +97,7 @@ footer{
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	background: #6cf;
-	display: block;      
+	background: #6cf;      
 }
 
 #dialog-modal img { 
@@ -120,22 +117,18 @@ button {
 	font: bold 11px Helvetica, Arial, sans-serif;
 	color: #444;
 	float: left;
-	font-size: medium;
+	font-size: 2.2vw;
 	line-height: 2px;
 	margin: 5px 35% 0px;
-	padding: 25px 0px 25px;
+	padding: 2% 0px;
 	width: 30%;
 	border-radius: 2px;
-	-webkit-border-radius: 2px;
- 
- 
- 
- 
-	height: 29px;
+	-webkit-border-radius: 2px; 
+	min-height: 30px;
 	cursor: pointer;
 }
 button.redbtn {
-	border: 2px solid #D14836 !important; 
+	border: 3px solid #D14836 !important; 
 	background: white;
 }
 button.redbtn:hover {
@@ -144,7 +137,18 @@ button.redbtn:hover {
 button.action:hover {
 	-moz-box-shadow: 0 1px 0px #DDD;
 }
-h2 {
-	-webkit-text-fill-color: white;
-	-webkit-text-stroke-width: 1px;
+#credits h2, #credits p {  
+	margin: 0 35% 0px;    
+	width: 30%;  
+	color: #6cf;  
+	font-size: xx-large;
+	padding: 2% 0px;
+	text-align: center;
+}
+#credits {
+	display:none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
 }

@@ -135,6 +135,12 @@ welcome.loadUp = function() {
   $('#welcome').fadeIn();
 };
 
+welcome.showCredits = function toggle(obj, obj2) {
+	var el = document.getElementById(obj);
+	el.style.display = (el.style.display != 'none' ? 'none' : '' );
+	document.getElementById(obj2).style.display = (document.getElementById(obj2).style.display == 'block' ? 'none' : 'block'  );	
+}
+
 welcome.showAchievements = function() {
   $('#welcome').fadeOut();
   achievementTable.loadUp();
@@ -146,15 +152,10 @@ welcome.showLeaderboards = function() {
   leaderboardsTable.showAllLeaderboards();
 };
 
-welcome.startGame = function(/*difficulty*/) {
+welcome.startGame = function() {
   document.getElementById("dialog-modal").style.display = "none";
+  //document.getElementById("footer").style.background = "#6cf";
   document.getElementById("game").style.display = "block";  
   game.startGame();
 };
-
-welcome.showCredits = function() {
-  $('#welcome').fadeOut();
-  $('#GameCredits').fadeIn();
-};
-
 
