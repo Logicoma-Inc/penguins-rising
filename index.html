@@ -16,8 +16,16 @@
             <div class="startMenu buttons" id="message"></div>
         </div>
         <button id="playGame" class="action redbtn" onclick="welcome.startGame();"><span class="label" id="Gamer">Loading</span></button>
-		<button class="action redbtn"><span class="label" id="Gamer">Credits</span></button>
+		<button class="action redbtn" onclick="welcome.showCredits('dialog-modal', 'credits');"><span class="label" id="Gamer">Credits</span></button>
     </div>
+	<div id="credits">
+		<h2>Developers</h2>					
+		<p>Devory Queen</p>
+		<p>Andrew Peek</p>
+		<p>Anthony Fassett</p>
+		<p><i>Your Name Here</i></p>
+			<button class="action redbtn" onclick="welcome.showCredits('dialog-modal', 'credits');"><span class="label" id="Gamer">Back</span></button>
+	</div>
     <div id="game">
         <div id="rightSide"></div>
             <canvas id="window">Sorry but Canvas is not Supported</canvas>
@@ -39,7 +47,7 @@
             <source src="mp3/ArcticWind.mp3" type="audio/mpeg">
         </audio>
     </div>
-    <footer>
+    <footer id="footer">
         <div class="left">
             <div class="g-plus" data-action="share" data-href="https://www.penguinsontherise.appspot.com"></div>
         </div>

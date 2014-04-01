@@ -105,34 +105,24 @@ player = {
 /******************** ENEMY CLASS ********************/
 function Enemy(I) {
     I = I || {};
-
     I.active = true;
     I.age = Math.floor(Math.random() * 128);
-
     I.x = Math.random() * canvas.width;
     I.y = 0;
     I.xVelocity = 0
-    I.yVelocity = 1;
-
+    I.yVelocity = .5;
     I.width = 42;
     I.height = 37;
-
     I.length = 0;
     I.frame = undefined;
     I.index = 0;
     I.elapsed = 0;
 	I.snd =  new Audio((SoundTest) ? "https://penguinsontherise.appspot.com/mp3/PenguinCry1.mp3" : "https://penguinsontherise.appspot.com/content/PenguinCry1.wav");
     I.animation = new AnimationData(
-        [{
-            x: 40,
-            length: 180
-        }, {
-            x: 78,
-            length: 180
-        }, {
-            x: 127,
-            length: 180
-        }], {
+        [{ x: 40, length: 180 }, {
+           x: 78, length: 180 }, {
+           x: 127, length: 180}]
+		, {
             repeats: true,
             keyframe: 0
         }
@@ -280,7 +270,7 @@ function Boss(I) {
 /******************** BULLET CLASS ********************/
 function Bullet(I) {
     I.active = true;
-    I.speed = 15;
+    I.speed = 10;
     I.radian = Math.atan2((canvas.width/2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
     I.xVelocity = -I.speed * Math.sin(I.radian);
     I.yVelocity = -I.speed * Math.cos(I.radian);
@@ -329,7 +319,7 @@ function AnimationData(frames, options) {
            window.oRequestAnimationFrame ||
            window.msRequestAnimationFrame ||
            function(callback) {
-              window.setTimeout(callback, 1000/30);
+              window.setTimeout(callback, 100/2);
            };
 })();
 game.over = false;
