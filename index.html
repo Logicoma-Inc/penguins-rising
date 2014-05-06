@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
 <body>
+    <!--<div id="loginDiv" style="display: none;">Welcome! <a href="javascript:login.showLoginDialog()"><img src="/images/gplus_signin_normal.png"></a></div>-->
     <div id="dialog-modal">
         <img src="images/SplashScreen.png" alt="Penguins Rising"/>
         <div id="welcome">
@@ -52,23 +53,26 @@
             <div class="g-plus" data-action="share" data-href="https://www.penguinsontherise.appspot.com"></div>
         </div>
         <div class="right">
-            <a href="https://plus.google.com/115994908921270042556" rel="publisher">Google+</a>
+            <a href="https://plus.google.com/115994908921270042556" rel="publisher" target="_blank">Google+</a>
             <a href="https://github.com/fassetar/Penguins-Rising" target="_blank">Updates</a>
         </div>
     </footer>
     <noscript>
         Well this is kinda weird... You don't have Javascript?
     </noscript>
-    <script async src="js/login.js"></script>
-    <script async src="js/achievementManager.js"></script>
-    <script async src="js/leaderboardManager.js"></script>
-    <script type="text/javascript" src="js/snowstorm-min.js"></script>
-    <script async type="text/javascript" src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+    <script src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+    <script src="js/login.js"></script>
+    <script src="js/achievementManager.js"></script>
+    <script src="js/leaderboardManager.js"></script>
+    <script src="js/snowstorm-min.js"></script>    
     <script>
         (function () {
-            var apisLoaded = function () {
-                login.init();
-            };
+            var signinCallback = function (auth) {
+                login.handleAuthResult(auth)
+            }
+            //var apisLoaded = function () {
+            //    login.init();
+            //};
             snowStorm.flakesMaxActive = 96;
 			snowStorm.followMouse = false;
 
