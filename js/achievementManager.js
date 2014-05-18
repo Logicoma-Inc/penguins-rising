@@ -187,3 +187,4 @@ achievementWidget.showAchievementWidget = function(achId)
 
   //TODO: Update our internal model as well
 };
+	

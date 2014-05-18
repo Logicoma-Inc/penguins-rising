@@ -56,14 +56,28 @@ login.loadClient = function() {
 
 };
 login.handleAuthResult = function(auth) {
-  //console.log('We are in handle auth result');
-  if (auth) {
-    //console.log('Hooray! You\'re logged in!');
-    $('#loginDiv').fadeOut();
-    login.loadClient();
-  } else {
-    $('#loginDiv').fadeIn();
-  }
+  //console.log('We are in handle auth result'); 
+   var script = document.createElement("SCRIPT");
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+    script.type = 'text/javascript';
+    document.getElementsByTagName("head")[0].appendChild(script);
+	checkReady(function($) {
+	if (auth) {
+		$('#loginDiv').fadeOut();
+		  login.loadClient();
+		} else {
+			$('#loginDiv').fadeIn();
+		}
+    });
+};
+// Poll for jQuery to come into existance
+var checkReady = function(callback) {
+	if (window.jQuery) {
+		callback(jQuery);
+	}
+	else {
+		window.setTimeout(function() { checkReady(callback); }, 100);
+	}
 };
 login.trySilentAuth = function() {
   //console.log('Trying silent auth');

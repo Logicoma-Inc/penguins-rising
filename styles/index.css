@@ -114,7 +114,7 @@ footer{
     width: 100px;
 }
 button {
-	font: bold 11px Helvetica, Arial, sans-serif;
+	font: bold 10px Helvetica, Arial, sans-serif;
 	color: #444;
 	float: left;
 	font-size: 2.2vw;
@@ -142,8 +142,9 @@ button.action:hover {
 	width: 30%;  
 	color: #6cf;  
 	font-size: xx-large;
-	padding: 2% 0px;
+	padding: 1.5% 0px;
 	text-align: center;
+	white-space: nowrap;
 }
 #credits {
 	display:none;
