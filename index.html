@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
 <body>
-    <!--<div id="loginDiv" style="display: none;">Welcome! <a href="javascript:login.showLoginDialog()"><img src="/images/gplus_signin_normal.png"></a></div>-->
-    <div id="dialog-modal">
+    <div id="dialog-modal">	
+	<div id="loginDiv" style="position: fixed;left: 5px;z-index: 1;"><a href="javascript:login.showLoginDialog()"><img src="/images/gplus_signin_normal.png"></a></div>
         <img src="images/SplashScreen.png" alt="Penguins Rising"/>
         <div id="welcome">
             <div class="startMenu buttons" id="message"></div>
@@ -25,7 +25,8 @@
 		<p>Andrew Peek</p>
 		<p>Anthony Fassett</p>
 		<p><i>Your Name Here</i></p>
-			<button class="action redbtn" onclick="welcome.showCredits('dialog-modal', 'credits');"><span class="label" id="Gamer">Back</span></button>
+		<p><a href="https://github.com/fassetar/Penguins-Rising/raw/master/.Concepts/Penguins%20Rising%202.exe" onclick="achManager.unlockAchievement('CgkInoXkzIgWEAIQDQ');">Orginal Game</a></p>
+		<button class="action redbtn" onclick="welcome.showCredits('dialog-modal', 'credits');"><span class="label" id="Gamer">Back</span></button>
 	</div>
     <div id="game">
         <div id="rightSide"></div>
@@ -50,7 +51,7 @@
     </div>
     <footer id="footer">
         <div class="left">
-            <div class="g-plus" data-action="share" data-href="https://www.penguinsontherise.appspot.com"></div>
+            <div class="g-plus" data-action="share" data-annotation="bubble" onclick="achManager.unlockAchievement('CgkInoXkzIgWEAIQDw');" data-href="http://www.penguinsontherise.appspot.com"></div>
         </div>
         <div class="right">
             <a href="https://plus.google.com/115994908921270042556" rel="publisher" target="_blank">Google+</a>
@@ -71,7 +72,7 @@
                 login.handleAuthResult(auth)
             }
             //var apisLoaded = function () {
-            //    login.init();
+              //  login.init();
             //};
             snowStorm.flakesMaxActive = 96;
 			snowStorm.followMouse = false;
