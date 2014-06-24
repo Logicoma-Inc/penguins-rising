@@ -6,7 +6,7 @@ Orginally inspired and created by Devroy Queen and Andrew Peek. Which they used 
 This is a port for the browser and the base line of the game.
 
 - [Website](http://www.penguinsontherise.appspot.com/)
-- Google hangout (multiplayer) coming soon...
+- Google hangout (multiplayer) possibly coming soon...
 - [Facebook App](https://apps.facebook.com/penguinsrising/?fb_source=fbpage)
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a>
