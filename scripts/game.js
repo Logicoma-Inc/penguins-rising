@@ -66,15 +66,10 @@ player = {
 			this.active;
 	},
     shot: false,
-    snd: new Audio((SoundTest) ? "https://penguinsontherise.appspot.com/mp3/gunshot.mp3" : "https://penguinsontherise.appspot.com/content/GunShot.wav" ), //No longer need to create so many with the timer.
+    snd: new Audio((SoundTest) ? "content/mp3/gunshot.mp3" : "content/GunShot.wav" ), //No longer need to create so many with the timer.
     shoot: function () {		
         var angle = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
-            player.snd.play();			
-			try{
-				gapi.hangout.data.sendMessage(JSON.stringify("TEST"));
-			} catch (e) {
-				console.log(e);
-			}			
+            player.snd.play();					
             player.Bullets.push(Bullet({
                 radian: angle,
                 //This is where I need to fix! for the resize problem.
@@ -117,7 +112,7 @@ function Enemy(I) {
     I.frame = undefined;
     I.index = 0;
     I.elapsed = 0;
-	I.snd =  new Audio((SoundTest) ? "https://penguinsontherise.appspot.com/mp3/PenguinCry1.mp3" : "https://penguinsontherise.appspot.com/content/PenguinCry1.wav");
+	I.snd =  new Audio((SoundTest) ? "content/mp3/PenguinCry1.mp3" : "content/PenguinCry1.wav");
     I.animation = new AnimationData(
         [{ x: 40, length: 180 }, {
            x: 78, length: 180 }, {
@@ -248,9 +243,9 @@ game.startGame = function () {
     game.Lvl = 1;
 	player.health = 10;
     img = new Image();
-    img.src = "https://penguinsontherise.appspot.com/images/CharacterSprites.png";
+    img.src = "content/images/CharacterSprites.png";
     bossimg = new Image();
-    bossimg.src = 'https://penguinsontherise.appspot.com/images/ThePrinceBoss.png';
+    bossimg.src = 'content/images/ThePrinceBoss.png';
     canvas.addEventListener('mousedown', mouseClick);
     (function gameloop(){
 		if(!game.over){
