@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
-<!--manifest="mystaticdir/Offline.appcache"-->
+<html manifest="mystaticdir/Offline.appcache">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -11,8 +10,8 @@
 </head>
 <body>
     <div id="dialog-modal">	
-	<div id="loginDiv" style="position: fixed;left: 5px;z-index: 1;"><a href="javascript:login.showLoginDialog()"><img src="/images/gplus_signin_normal.png"></a></div>
-        <img src="images/SplashScreen.png" alt="Penguins Rising"/>
+	<div id="loginDiv" style="position: fixed;left: 5px;z-index: 1;"><a href="javascript:login.showLoginDialog()"><img src="content/images/gplus_signin_normal.png"></a></div>
+        <img src="content/images/SplashScreen.png" alt="Penguins Rising"/>
         <div id="welcome">
             <div class="startMenu buttons" id="message"></div>
         </div>
@@ -46,7 +45,7 @@
         <audio loop>
             <source src="content/ArcticWind.wav" type="audio/wav"> 
             <source src="content/ArcticWind.ogg" type="audio/ogg">          
-            <source src="mp3/ArcticWind.mp3" type="audio/mpeg">
+            <source src="content/mp3/ArcticWind.mp3" type="audio/mpeg">
         </audio>
     </div>
     <footer id="footer">
@@ -61,11 +60,11 @@
     <noscript>
         Well this is kinda weird... You don't have Javascript?
     </noscript>
-    <script src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
-    <script src="js/login.js"></script>
-    <script src="js/achievementManager.js"></script>
-    <script src="js/leaderboardManager.js"></script>
-    <script src="js/snowstorm-min.js"></script>    
+    <script async src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+    <script async src="scripts/login.js"></script>
+    <script async src="scripts/achievementManager.js"></script>
+    <script async src="scripts/leaderboardManager.js"></script>
+    <script src="scripts/snowstorm-min.js"></script>    
     <script>
         (function () {
             var signinCallback = function (auth) {
@@ -126,7 +125,7 @@
             }            
       })();
     </script>
-    <script async src="js/game.js"></script>
+    <script async src="scripts/game.js"></script>
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {

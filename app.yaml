@@ -12,13 +12,13 @@ handlers:
 - url: /images
   static_dir: images
 
-- url: /js
-  static_dir: js
+- url: /scripts
+  static_dir: scripts
 
 - url: /content
   static_dir: content
 
-- url: /mp3
+- url: /content/mp3
   static_dir: mp3
   mime_type: audio/mpeg
   
