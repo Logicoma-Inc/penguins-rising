@@ -1,16 +1,13 @@
 CACHE MANIFEST
 CACHE:
 ../styles/index.css
-../js/achievementManager.js
-../js/game.js
-../js/jquery-2.0.3.min.js
-../js/jquery-ui.min.js
-../js/leaderboardManager.js
-../js/login.js
+../scripts/achievementManager.js
+../scripts/game.js
+../scripts/leaderboardManager.js
+../scripts/login.js
 ../styles/landscape.jpg
-../content/Bleed.ogg
 ../content/GunShot.wav
-../images/CharacterSprites.png
+../content/images/CharacterSprites.png
 https://apis.google.com/js/client:plusone.js?onload=apisLoaded
 
 NETWORK:
