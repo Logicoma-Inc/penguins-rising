@@ -1,7 +1,7 @@
 "use strict";
 
 var constants = constants || {}
-constants.CLIENT_ID = '758222750366.apps.googleusercontent.com';
+constants.CLIENT_ID = '926286388840-qbj01r8d9on9dvnnba1m8iiknrtulrb1.apps.googleusercontent.com';
 constants.ACH_DONT_GET_COCKY_KID = 'CgkInoXkzIgWEAIQCA';
 constants.ACH_WERE_ALL_OUT_OF_BUBBLEGUM = 'CgkInoXkzIgWEAIQCw';
 constants.ACH_PRIME_TIME_FOR_YOUR_LIFE = 'CgkInoXkzIgWEAIQLg';
