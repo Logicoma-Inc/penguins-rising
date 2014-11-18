@@ -27,10 +27,10 @@ handlers:
   static_files: index.html
   upload: index.html
   
-- url: /mystaticdir/(.*\.appcache)
-  static_files: mystaticdir/\1
+- url: /static/(.*\.appcache)
+  static_files: static/\1
   mime_type: text/cache-manifest
-  upload: mystaticdir/(.*\.appcache)
+  upload: staticdir/(.*\.appcache)
   
 error_handlers:
   - file: default_error.html
