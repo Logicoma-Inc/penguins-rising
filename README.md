@@ -1,8 +1,6 @@
 [Penguins Rising](http://www.penguinsontherise.appspot.com/)
 ==============
-
-Orginally inspired and created by Devroy Queen and Andrew Peek. Which they used an old version of [YOYO game's](http://www.yoyogames.com/studio) development tool kit.
-This is a port for the browser and the base line of the game.
+Originally inspired by Devroy Queen and Andrew Peek. Colleagues of mine who used an old version of [YOYO game's](http://www.yoyogames.com/studio) tool kit back in 2008. This is a port that expands far from the original material but uses their work as a base. It was first targeted towards browsers and used to experiement with hybrid web development.
 
 - [Website](http://www.penguinsontherise.appspot.com/)
 - Google hangout (multiplayer) possibly coming soon...
