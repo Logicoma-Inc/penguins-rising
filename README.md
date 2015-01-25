@@ -1,7 +1,6 @@
 [Penguins Rising](http://www.penguinsontherise.appspot.com/)
 ==============
 
-Peguins Rising
 Orginally inspired and created by Devroy Queen and Andrew Peek. Which they used an old version of [YOYO game's](http://www.yoyogames.com/studio) development tool kit.
 This is a port for the browser and the base line of the game.
 
