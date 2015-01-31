@@ -1,6 +1,6 @@
 [Penguins Rising](http://www.penguinsontherise.appspot.com/)
 ==============
-<a href="https://www.gittip.com/fassetar/"><img src="http://img.shields.io/gittip/fassetar.png" alt="Gittip"></a>
+<a href="https://www.gittip.com/fassetar/"><img src="http://img.shields.io/gittip/fassetar.png" alt="Gittip"></a>[![devDependency Status](https://david-dm.org/fassetar/penguins-rising/dev-status.svg)](https://david-dm.org/fassetar/penguins-rising#info=devDependencies)
 <br/>
 Originally inspired by Devroy Queen and Andrew Peek. Colleagues of mine who used an old version of [YOYO game's](http://www.yoyogames.com/studio) tool kit back in 2008. This is a port that expands far from the original material but uses their work as a base. It was first targeted towards browsers and used to experiement with hybrid web development.
 
