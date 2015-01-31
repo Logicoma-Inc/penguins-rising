@@ -49,7 +49,7 @@ module.exports = function ( grunt ) {
 		cssmin: {
 		  target: {			
 			files: [{
-			  'content/index.css': ['src/content/*.css']			  		 
+			  'content/index.css': ['src/content/*.css']
 			 }]
 		  }
 		},
@@ -89,28 +89,39 @@ module.exports = function ( grunt ) {
 					filter: 'isFile'
 				},
 			]}
+		}, 
+		jshint: {
+			files: {
+				src: ['src/js/*.js']
+			},
+			options: {
+				 jshintrc: 'src/js/.jshintrc'
+			}
+		},
+		"jsbeautifier" : {
+			files : ['src/js/*.js'],
+			options : {
+				js: {
+				  braceStyle: "collapse",
+				  breakChainedMethods: false,
+				  e4x: false,
+				  evalCode: false,
+				  indentChar: " ",
+				  indentLevel: 0,
+				  indentSize: 4,
+				  indentWithTabs: false,
+				  jslintHappy: false,
+				  keepArrayIndentation: false,
+				  keepFunctionIndentation: false,
+				  maxPreserveNewlines: 10,
+				  preserveNewlines: true,
+				  spaceBeforeConditional: true,
+				  spaceInParen: false,
+				  unescapeStrings: false,
+				  wrapLineLength: 0
+			  }
+			}
 		}
-		//, watch: {
-			// uglify: {
-				// files: 'src/js/{,*/}*.js',
-				// tasks: ['uglify']
-			// },
-			// htmlmin: {
-				// files: 'src/{,*/}*.html',
-				// tasks: ['htmlmin']
-			// },
-			// livereload: {
-				// options: {
-					// livereload: 8080
-				// },
-				// files: [
-					// '{,*/}*.html',
-					// 'content/css/*.css',
-					// 'js/{,*/}*.js',
-					// 'content/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-				// ]
-			// }
-		// }
 	});
 
 	grunt.registerTask( 'default' , [
@@ -118,9 +129,9 @@ module.exports = function ( grunt ) {
 		'uglify',
 		'htmlmin',
 		'imagemin',
-		'copy'
-		//,'connect:livereload',
-		//'watch'
+		'jshint',
+		'copy',
+		'jsbeautifier'
 	]);
 
 };
