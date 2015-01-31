@@ -6,16 +6,13 @@ threadsafe: yes
 
 handlers:
 
-- url: /styles
-  static_dir: styles
-
-- url: /scripts
-  static_dir: scripts
+- url: /js
+  static_dir: js
 
 - url: /content
   static_dir: content
 
-- url: /content/mp3
+- url: /content/audio/mp3
   static_dir: mp3
   mime_type: audio/mpeg
   
@@ -30,7 +27,7 @@ handlers:
 - url: /static/(.*\.appcache)
   static_files: static/\1
   mime_type: text/cache-manifest
-  upload: staticdir/(.*\.appcache)
+  upload: static/(.*\.appcache)
   
 error_handlers:
   - file: default_error.html

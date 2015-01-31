@@ -8,6 +8,11 @@ Originally inspired by Devroy Queen and Andrew Peek. Colleagues of mine who used
 - Google hangout (multiplayer) possibly coming soon...
 - [Facebook App](https://apps.facebook.com/penguinsrising/?fb_source=fbpage)
 
+
+Getting Started
+=============
+Install [Google App Engine](https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python) plus Python 2.7 which is what I used.
+
 License
 =============
 For more information about the license, <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>
