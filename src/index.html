@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html manifest="static/Offline.appcache">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,7 +18,7 @@
         <button id="playGame" class="action redbtn" onclick="welcome.startGame();"><span class="label" id="Gamer">Loading</span></button>
 		<button class="action redbtn" onclick="welcome.showCredits('dialog-modal', 'credits');"><span class="label" id="Gamer">Credits</span></button>
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<div style="width=45%"><ins class="adsbygoogle" style="display:block"
+	<div><ins class="adsbygoogle" style="display:block"
      data-ad-client="ca-pub-6757046260312313"
      data-ad-slot="3599229400"
      data-ad-format="auto">
@@ -27,6 +27,7 @@
 	(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
 	</div>
+		
     </div>
 	<div id="credits">
 		<h2>Developers</h2>
@@ -64,8 +65,8 @@
     </footer>
     <noscript>
         Well this is kinda weird... You don't have Javascript?
-    </noscript>
-    <script async src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
-    <script async src="js/game.min.js"></script>
+    </noscript> 
+   <script async src="https://apis.google.com/js/client:plusone.js?onload=apisLoaded"></script>
+   <script async src="js/game.min.js"></script>
 </body>
 </html>
