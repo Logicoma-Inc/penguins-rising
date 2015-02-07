@@ -295,7 +295,7 @@ function draw() {
 function update() {
     if ((TheTrulyDead.length > game.LvlEnemies) && (enemies.length === 0)) {
         game.LvlComplete = true;
-        game.LvlEnemies += 15;
+        game.LvlEnemies += 5;
         game.Lvl += 1;
         player.health = 1;
     }
