@@ -24,6 +24,10 @@ handlers:
   static_files: index.html
   upload: index.html
   
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+  
 - url: /static/(.*\.appcache)
   static_files: static/\1
   mime_type: text/cache-manifest
