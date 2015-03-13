@@ -55,4 +55,10 @@
 
     ga('create', 'UA-41648493-1', 'penguinsontherise.appspot.com');
     ga('send', 'pageview');
+	window.addEventListener('error', function (e) {
+		ga('send', 'event', 'Javascript Error', e.filename + ':  ' + e.lineno, e.message); 
+	});  
+	$(document).ajaxError(function (e, request, settings) {
+		ga('send', 'event', 'API Error', settings.url, e.result);                 
+	});
 })();
