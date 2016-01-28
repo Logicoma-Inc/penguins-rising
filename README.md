@@ -1,6 +1,6 @@
 [Penguins Rising](http://www.penguinsontherise.appspot.com/)
 ==============
-[![devDependency Status](https://david-dm.org/fassetar/penguins-rising/dev-status.svg)](https://david-dm.org/fassetar/penguins-rising#info=devDependencies)  <a href="https://www.gittip.com/fassetar/">
+[![devDependency Status](https://travis-ci.org/fassetar/penguins-rising.svg?branch=master)](https://david-dm.org/fassetar/penguins-rising#info=devDependencies)  <a href="https://www.gittip.com/fassetar/">
 [![Coverage Status](https://coveralls.io/repos/fassetar/Penguins-Rising/badge.svg?branch=master&service=github)](https://coveralls.io/github/fassetar/Penguins-Rising?branch=master)
 <img src="http://img.shields.io/gittip/fassetar.png" alt="Gittip"></a>
 <br/>
