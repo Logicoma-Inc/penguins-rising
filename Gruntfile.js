@@ -98,6 +98,12 @@ module.exports = function ( grunt ) {
 				 jshintrc: 'src/js/.jshintrc'
 			}
 		},
+		'gh-pages': {
+		    options: {
+		        base: './'
+		    },
+		    src: ['**']
+		},
 		"jsbeautifier" : {
 			files : ['src/js/*.js'],
 			options : {
