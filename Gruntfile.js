@@ -1,10 +1,4 @@
-var lrSnippet = require( 'connect-livereload' )({
-	port: 8080
-});
-
-var mountFolder = function ( connect, dir ) {
-	return connect.static( require( 'path' ).resolve( dir ) );
-};
+'use strict';
 
 module.exports = function ( grunt ) {
 
@@ -84,7 +78,7 @@ module.exports = function ( grunt ) {
 		},
 		'gh-pages': {
 		    options: {
-		        base: 'dist'		        
+		        base: 'src'		        
 		    },
 		    src: ['**']
 		}		
