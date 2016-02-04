@@ -11,23 +11,7 @@ module.exports = function ( grunt ) {
 	pkg: grunt.file.readJSON('package.json'),
 	require( 'matchdep' ).filterDev('grunt-*').forEach( grunt.loadNpmTasks );
 
-	grunt.initConfig({
-		connect: {
-			options: {
-				port: 9000,
-				hostname: 'localhost'
-			},
-			livereload: {
-				options: {
-					middleware: function ( connect ) {
-						return [
-							lrSnippet,
-							mountFolder(connect, 'dist')
-						];
-					}
-				}
-			}
-		},
+	grunt.initConfig({		
 		tag: {
 			banner: "/*!\n" +
 					" * Penguins Rising\n" +
@@ -100,34 +84,10 @@ module.exports = function ( grunt ) {
 		},
 		'gh-pages': {
 		    options: {
-		        base: './'
+		        base: 'dist'		        
 		    },
 		    src: ['**']
-		},
-		"jsbeautifier" : {
-			files : ['src/js/*.js'],
-			options : {
-				js: {
-				  braceStyle: "collapse",
-				  breakChainedMethods: false,
-				  e4x: false,
-				  evalCode: false,
-				  indentChar: " ",
-				  indentLevel: 0,
-				  indentSize: 4,
-				  indentWithTabs: false,
-				  jslintHappy: false,
-				  keepArrayIndentation: false,
-				  keepFunctionIndentation: false,
-				  maxPreserveNewlines: 10,
-				  preserveNewlines: true,
-				  spaceBeforeConditional: true,
-				  spaceInParen: false,
-				  unescapeStrings: false,
-				  wrapLineLength: 0
-			  }
-			}
-		}
+		}		
 	});
 
 	grunt.registerTask( 'default' , [
@@ -136,8 +96,7 @@ module.exports = function ( grunt ) {
 		'htmlmin',
 		'imagemin',
 		'jshint',
-		'copy',
-		'jsbeautifier'
+		'copy'
 	]);
 
 };
