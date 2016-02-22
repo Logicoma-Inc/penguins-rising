@@ -2,7 +2,6 @@
 ==============
 [![Build Status](https://travis-ci.org/fassetar/penguins-rising.svg?branch=master)](https://travis-ci.org/fassetar/penguins-rising)
 [![devDependency Status](https://david-dm.org/fassetar/penguins-rising/dev-status.svg)](https://david-dm.org/fassetar/penguins-rising#info=devDependencies)
-[![Coverage Status](https://coveralls.io/repos/fassetar/Penguins-Rising/badge.svg?branch=master&service=github)](https://coveralls.io/github/fassetar/Penguins-Rising?branch=master)
 <br/>
 Originally inspired by Devroy Queen and Andrew Peek. Colleagues of mine who used an old version of [YOYO game's](http://www.yoyogames.com/studio) tool kit back in 2008. This is a port that expands far from the original material but uses their work as a base. It was first targeted towards browsers and used to experiement with hybrid web development.
 
