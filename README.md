@@ -7,6 +7,7 @@ Originally inspired by Devroy Queen and Andrew Peek. Colleagues of mine who used
 
 - [Website](http://www.penguinsontherise.appspot.com/)
 - Google hangout (multiplayer) possibly coming soon...
+  - https://developers.google.com/+/hangouts/writing
 - [Facebook App](https://apps.facebook.com/penguinsrising/?fb_source=fbpage)
 
 
