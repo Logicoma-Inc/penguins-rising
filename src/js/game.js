@@ -1,4 +1,13 @@
 'use script';
+
+var img = new Image();
+img.src = "http://fassetar.github.io/penguins-rising/content/img/characters.png";
+var canvas = document.getElementById("window");
+var ctx = canvas.getContext('2d');
+var enemies = [];
+var TheTrulyDead = [];
+var bosses = [];
+var player = {};
 var game = {
   paused: false,
   timer: null,
@@ -8,8 +17,9 @@ var game = {
     x: 0,
     y: 0
   },
+  clock: null,
   loop: function() {
-    if (!game.over) {
+    if (!game.over && !game.paused) {
       update();
       draw();
     } else {
@@ -17,58 +27,36 @@ var game = {
         location.reload();
       }
     }
+    requestAnimFrame(game.loop);
   },
   over: false,
   startGame: function() {
-    img = new Image();
-    img.src = "http://fassetar.github.io/penguins-rising/content/img/characters.png";
     canvas.addEventListener('mousedown', mouseClick);
-        if ( animFrame !== null ) {
-        var recursiveAnim = function() {
-            game.loop();
-            animFrame( recursiveAnim );
-        };
-
-        // start the mainloop
-        animFrame( recursiveAnim );
-    } else {
-        var ONE_FRAME_TIME = 1000.0 / 60.0 ;
-        setInterval( game.loop, ONE_FRAME_TIME );
-    }
+    window.requestAnimFrame = (
+      function(callback) {
+        return window.requestAnimationFrame ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame ||
+          window.oRequestAnimationFrame ||
+          window.msRequestAnimationFrame ||
+          function(callback) {
+            window.setTimeout(callback, 100 / 2);
+          };
+      })();
+    game.loop();
   }
 };
-// window.requestAnimFrame = (
-//   function(callback) {
-//     return window.requestAnimationFrame ||
-//       window.webkitRequestAnimationFrame ||
-//       window.mozRequestAnimationFrame ||
-//       window.oRequestAnimationFrame ||
-//       window.msRequestAnimationFrame ||
-//       function(callback) {
-//         window.setTimeout(callback, 100 / 2);
-//       };
-//   })();
 
-
-var animFrame = window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame    ||
-            window.oRequestAnimationFrame      ||
-            window.msRequestAnimationFrame     ||
-            null;
-
-var img = new Image("http://fassetar.github.io/penguins-rising/content/img/characters.png");
-var canvas = document.getElementById("window");
-var ctx = canvas.getContext('2d');
-var enemies = [];
-var TheTrulyDead = [];
-var bosses = [];
-var player = {}; 
-
-window.onresize = function(event) {
+document.onkeypress = function(evt) {
+  evt = evt || window.event;
+  var charCode = evt.keyCode || evt.which;
+  var charStr = String.fromCharCode(charCode);
+  if (charStr === "p") game.paused = !game.paused;
+};
+window.onresize = (function(event) {
   canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
   canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
-}();
+})();
 
 // EVENT LISTENERS
 canvas.addEventListener('mousemove', function(evt) {
@@ -368,23 +356,4 @@ function handleCollisions() {
       }
     });
   });
-}
-
-document.onkeypress = function(evt) {
-  evt = evt || window.event;
-  var charCode = evt.keyCode || evt.which;
-  var charStr = String.fromCharCode(charCode);
-  if (charStr === "p") pauseGame();
-  //alert(charStr);
-};
-
-function pauseGame() {
-  if (!game.paused) {
-    game.paused = true;
-    //game.loop = requestAnimFrame(game.loop);
-    window.cancelAnimationFrame(game.loop);
-  } else if (game.paused) {
-    //Unpause
-    game.paused = false;
-  }
 }
