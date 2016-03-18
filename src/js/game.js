@@ -1,6 +1,4 @@
 'use script';
-
-var canvas = document.getElementById("window");
 var game = {
   paused: false,
   timer: null,
@@ -12,71 +10,66 @@ var game = {
   },
   loop: function() {
     if (!game.over) {
-      requestAnimFrame(game.loop);
       update();
       draw();
     } else {
-      var cf = confirm("Your lose! Start Over?");
-      if (cf) {
+      if (confirm("Your lose! Start Over?")) {
         location.reload();
       }
     }
   },
   over: false,
   startGame: function() {
-    player.health = 10;
     img = new Image();
     img.src = "http://fassetar.github.io/penguins-rising/content/img/characters.png";
     canvas.addEventListener('mousedown', mouseClick);
-    game.loop();
+        if ( animFrame !== null ) {
+        var recursiveAnim = function() {
+            game.loop();
+            animFrame( recursiveAnim );
+        };
+
+        // start the mainloop
+        animFrame( recursiveAnim );
+    } else {
+        var ONE_FRAME_TIME = 1000.0 / 60.0 ;
+        setInterval( game.loop, ONE_FRAME_TIME );
+    }
   }
 };
-window.requestAnimFrame = (
-  function(callback) {
-    return window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.oRequestAnimationFrame ||
-      window.msRequestAnimationFrame ||
-      function(callback) {
-        window.setTimeout(callback(), 100 / 2);
-      };
-  })();
-
-window.loop = function () {
-  window.requestAnimFrame = (
-  function(callback) {
-    return window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.oRequestAnimationFrame ||
-      window.msRequestAnimationFrame ||
-      function(callback) {
-        window.setTimeout(callback(), 100 / 2);
-      };
-  })();
-  
-  // Whatever your main loop needs to do.
-};
-
-// INITALIZER METHOD
+// window.requestAnimFrame = (
+//   function(callback) {
+//     return window.requestAnimationFrame ||
+//       window.webkitRequestAnimationFrame ||
+//       window.mozRequestAnimationFrame ||
+//       window.oRequestAnimationFrame ||
+//       window.msRequestAnimationFrame ||
+//       function(callback) {
+//         window.setTimeout(callback, 100 / 2);
+//       };
+//   })();
 
 
+var animFrame = window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            window.oRequestAnimationFrame      ||
+            window.msRequestAnimationFrame     ||
+            null;
 
-var img = null;
+var img = new Image("http://fassetar.github.io/penguins-rising/content/img/characters.png");
 var canvas = document.getElementById("window");
 var ctx = canvas.getContext('2d');
 var enemies = [];
 var TheTrulyDead = [];
 var bosses = [];
 var player = {}; 
-canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
-canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
 
 window.onresize = function(event) {
   canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
   canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
-};
+}();
+
 // EVENT LISTENERS
 canvas.addEventListener('mousemove', function(evt) {
   game.mousePos = getMousePos(canvas, evt);
@@ -111,7 +104,7 @@ player = {
   y: (canvas.height - 60),
   vx: 0,
   vy: 0,
-  health: null,
+  health: 10,
   Bullets: [],
   active: true,
   draw: function() {
@@ -381,18 +374,17 @@ document.onkeypress = function(evt) {
   evt = evt || window.event;
   var charCode = evt.keyCode || evt.which;
   var charStr = String.fromCharCode(charCode);
-  if (charStr == "p") pauseGame();
+  if (charStr === "p") pauseGame();
   //alert(charStr);
 };
 
 function pauseGame() {
   if (!game.paused) {
     game.paused = true;
-    game.loop = requestAnimFrame(game.loop);
-    //window.cancelAnimationFrame(game.loop);
+    //game.loop = requestAnimFrame(game.loop);
+    window.cancelAnimationFrame(game.loop);
   } else if (game.paused) {
-    console.log(game.loop);
-    game.startGame();
+    //Unpause
     game.paused = false;
   }
 }
