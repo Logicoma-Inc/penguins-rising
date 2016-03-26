@@ -7,26 +7,25 @@ var ctx = canvas.getContext('2d');
 var enemies = [];
 var TheTrulyDead = [];
 var bosses = [];
-var player = {};
 var game = {
   paused: false,
   timer: null,
   Lvl: 1,
+  Lvlcomplete: false,
   LvlEnemies: 3,
   mousePos: {
     x: 0,
     y: 0
   },
-  clock: null,
   loop: function() {
     if (!game.over && !game.paused) {
       update();
       draw();
-    } else {
+    } else if (game.over) {
       if (confirm("Your lose! Start Over?")) {
         location.reload();
       }
-    }
+    } //TODO: Create Pause Menu
     requestAnimFrame(game.loop);
   },
   over: false,
@@ -46,12 +45,25 @@ var game = {
     game.loop();
   }
 };
+window.onblur = function(evt) {
+  Pause(true);
+}
+var Pause = function(flag) {
+  game.paused = (flag) ? flag : !game.paused;
+  if (game.paused) {
+    document.getElementsByClassName("pause")[0].style.display = "block";
+  } else {
+    document.getElementsByClassName("pause")[0].style.display = "none";
+  }
+}
 
 document.onkeypress = function(evt) {
   evt = evt || window.event;
   var charCode = evt.keyCode || evt.which;
   var charStr = String.fromCharCode(charCode);
-  if (charStr === "p") game.paused = !game.paused;
+  if (charStr === "p") {
+    Pause();
+  }
 };
 window.onresize = (function(event) {
   canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
@@ -87,7 +99,7 @@ var SoundTest = function() {
 };
 
 //PLAYER CLASS
-player = {
+var player = {
   x: (canvas.width / 2),
   y: (canvas.height - 60),
   vx: 0,
@@ -95,6 +107,12 @@ player = {
   health: 10,
   Bullets: [],
   active: true,
+  weapons: {
+    selected: [0, 0, 0],
+    choice: ["Uzi", "Hunting Rifle", "Shotgun", "Minigun"],
+    secondary: ["Grenade", "Mine", "Ice Cracker", "Reaper"],
+    support: ["Upgrade Wall", "Barbes Wire", "Eskimo Guards", "Polar Bear", "Mortar Support"]
+  },
   draw: function() {
     ctx.save();
     ctx.translate((canvas.width / 2), canvas.height - 60);
@@ -116,7 +134,6 @@ player = {
     player.snd.play();
     player.Bullets.push(Bullet({
       radian: angle,
-      //This is where I need to fix! for the resize problem.
       x: (canvas.width / 2) + -18 * Math.sin(angle),
       y: (canvas.height - 60) + -18 * Math.cos(angle)
     }));
@@ -172,12 +189,11 @@ function Enemy(I) {
       repeats: true,
       keyframe: 0
     });
-  I.reset = function() {
+  I.reset = (function() {
     I.elapsed = 0;
     I.index = 0;
     I.frame = I.animation.frames[I.index];
-  };
-  I.reset();
+  })();
   I.length = I.animation.frames.length;
   I.inBounds = function() {
     if (I.y !== canvas.height) {
@@ -204,7 +220,6 @@ function Enemy(I) {
       I.xVelocity = Math.sin(I.age * Math.PI / 64);
       I.age++;
       I.active = I.active && I.inBounds();
-
       I.elapsed = I.elapsed + 30;
 
       if (I.elapsed >= I.frame.length) {
@@ -235,6 +250,7 @@ Boss.prototype = new Enemy();
 
 // BULLET CLASS
 function Bullet(I) {
+  I.type = 0;
   I.active = true;
   I.speed = 10;
   I.radian = Math.atan2((canvas.width / 2) - game.mousePos.x, (canvas.height - 60) - game.mousePos.y);
@@ -278,9 +294,12 @@ function AnimationData(frames, options) {
   };
 }
 
+var border = new Image();
+border.src = "https://raw.githubusercontent.com/fassetar/penguins-rising/master/src/content/img/borderline.jpg";
 // DRAW METHOD
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(border, 23, canvas.height - 150, canvas.width - 45, 100);
   player.draw();
   TheTrulyDead.forEach(function(enemy) {
     enemy.draw();
@@ -299,15 +318,18 @@ function draw() {
 //UPDATE METHOD
 function update() {
   if ((TheTrulyDead.length > game.LvlEnemies) && (enemies.length === 0)) {
-    game.complete = true;
+    game.Lvlcomplete = true;
     game.LvlEnemies += 5;
     game.Lvl += 1;
     player.health = 10;
   }
+  //TODO: Remove or shorten this!
+  canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+  canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
   if (player.health <= 0) {
     game.over = true;
   }
-  if (!game.complete && player.update) {
+  if (!game.Lvlcomplete && player.update) {
     player.Bullets.forEach(function(bullet) {
       bullet.update();
     });
@@ -332,7 +354,9 @@ function update() {
     enemies = [];
     TheTrulyDead = [];
     bosses = [];
-    game.complete = false;
+    game.Lvlcomplete = false;
+    document.getElementsByClassName("LvlComplete")[0].style.display = "block";
+    game.paused = true;
   }
 }
 
