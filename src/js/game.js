@@ -19,13 +19,14 @@ var game = {
   },
   loop: function() {
     if (!game.over && !game.paused) {
-      update();
+      game.update();
       draw();
     } else if (game.over) {
-      if (confirm("Your lose! Start Over?")) {
+      var cf = confirm("Your lose! Start Over?");
+      if (cf) {
         location.reload();
       }
-    } //TODO: Create Pause Menu
+    } //Create Pause Menu
     requestAnimFrame(game.loop);
   },
   over: false,
@@ -43,7 +44,51 @@ var game = {
           };
       })();
     game.loop();
+  },
+  update: function() { //UPDATE METHOD
+    if ((TheTrulyDead.length > game.LvlEnemies) && (enemies.length === 0)) {
+      game.Lvlcomplete = true;
+      game.LvlEnemies += 5;
+      game.Lvl += 1;
+      player.health = 10;
+    }
+    //Remove or shorten this!
+    canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
+    if (player.health <= 0) {
+      game.over = true;
+    }
+    if (!game.Lvlcomplete && player.update) {
+      player.Bullets.forEach(function(bullet) {
+        bullet.update();
+      });
+      player.Bullets = player.Bullets.filter(function(bullet) {
+        return bullet.active;
+      });
+      enemies.forEach(function(enemy) {
+        enemy.update();
+      });
+      enemies = enemies.filter(function(enemy) {
+        return enemy.active;
+      });
+      handleCollisions();
+      if (game.LvlEnemies > enemies.length && (TheTrulyDead.length <= game.LvlEnemies)) {
+        enemies.push(Enemy());
+        bosses.push(Boss(this));
+      }
+    } else {
+      if (!player.update) {
+        console.log("you died");
+      }
+      enemies = [];
+      TheTrulyDead = [];
+      bosses = [];
+      game.Lvlcomplete = false;
+      document.getElementsByClassName("LvlComplete")[0].style.display = "block";
+      game.paused = true;
+    }
   }
+
 };
 window.onblur = function(evt) {
   Pause(true);
@@ -56,15 +101,19 @@ var Pause = function(flag) {
     document.getElementsByClassName("pause")[0].style.display = "none";
   }
 }
+function NextLevel() {
+  Pause(false);
+  document.getElementsByClassName("LvlComplete")[0].style.display = "none";
+}
 
-document.onkeypress = function(evt) {
+document.onkeypress = (function(evt) {
   evt = evt || window.event;
   var charCode = evt.keyCode || evt.which;
   var charStr = String.fromCharCode(charCode);
   if (charStr === "p") {
     Pause();
   }
-};
+});
 window.onresize = (function(event) {
   canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
   canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
@@ -315,50 +364,6 @@ function draw() {
   ctx.fillText("Health:" + player.health, 10, 100);
 }
 
-//UPDATE METHOD
-function update() {
-  if ((TheTrulyDead.length > game.LvlEnemies) && (enemies.length === 0)) {
-    game.Lvlcomplete = true;
-    game.LvlEnemies += 5;
-    game.Lvl += 1;
-    player.health = 10;
-  }
-  //TODO: Remove or shorten this!
-  canvas.height = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-  canvas.width = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
-  if (player.health <= 0) {
-    game.over = true;
-  }
-  if (!game.Lvlcomplete && player.update) {
-    player.Bullets.forEach(function(bullet) {
-      bullet.update();
-    });
-    player.Bullets = player.Bullets.filter(function(bullet) {
-      return bullet.active;
-    });
-    enemies.forEach(function(enemy) {
-      enemy.update();
-    });
-    enemies = enemies.filter(function(enemy) {
-      return enemy.active;
-    });
-    handleCollisions();
-    if (game.LvlEnemies > enemies.length && (TheTrulyDead.length <= game.LvlEnemies)) {
-      enemies.push(Enemy());
-      bosses.push(Boss(this));
-    }
-  } else {
-    if (!player.update) {
-      console.log("you died");
-    }
-    enemies = [];
-    TheTrulyDead = [];
-    bosses = [];
-    game.Lvlcomplete = false;
-    document.getElementsByClassName("LvlComplete")[0].style.display = "block";
-    game.paused = true;
-  }
-}
 
 // COLLIDE METHOD
 function collides(a, b) {
