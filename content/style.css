@@ -1,84 +1,115 @@
-*{ 
-	margin: 0; 
-	padding: 0; 
+body {
+  margin: 0;
+  padding: 0;
+  background:url("http://fassetar.github.io/penguins-rising/content/img/landscape.jpg") repeat;
 }
-html, body { 
-	background: url("img/landscape.jpg") repeat;
-}
+
 canvas {
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none; 
-	display:block;
-	cursor: crosshair;
-        image-rendering: -moz-crisp-edges;
-        image-rendering: -webkit-optimize-contrast;
-	-moz-transform: scaleX(-1);
-	-webkit-transform: scaleX(-1);
-	-o-transform: scaleX(-1);
-	    transform: scaleX(-1);
-	-ms-filter:fliph;
-	    filter: fliph; 
-	background: url("img/landscapeside.jpg") left repeat-y;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+  cursor: crosshair;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+  -ms-filter: fliph;
+  filter: fliph;
+  background: url("http://fassetar.github.io/penguins-rising/content/img/landscapeside.jpg") left repeat-y;
 }
-#game { 
-	-moz-transform: scaleX(-1);
-	-webkit-transform: scaleX(-1);
-	-o-transform: scaleX(-1);
-	    transform: scaleX(-1);
-	-ms-filter:fliph;
-	    filter: fliph; 
-	background: url("img/landscapeside.jpg") left repeat-y;
-    	display:none;
+
+#game {
+  -ms-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+  -ms-filter: fliph;
+  filter: fliph;
+  background: url("http://fassetar.github.io/penguins-rising/content/img/landscapeside.jpg") left repeat-y;
+  display: none;
 }
-.promotes { 
-	position: relative; top:-40px; 
+
+.pause  {
+  background: white;
+  border: 3px solid grey;
+  border-radius:3px;
+  width: 200px;
+  height: 50px;
+  margin: -70px 0 0 -120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index:100;
+  display:none;
 }
-.right { 
-	float: right; 
-	margin-right: 15px;  
-	font: 11px Roboto,arial,sans-serif;  
-	line-height: 2;              
+.pause  {
+  padding:20px;
+  text-align:center;
 }
-.left { 
-	float: left;left: 3%; 
+
+.promotes {
+  position: relative;
+  top: -40px;
 }
-#dialogHeader { 
-	color: red;
-	font-family: Viner Hand ITC; 
+
+.right {
+  float: right;
+  margin-right: 15px;
+  font: 11px Roboto, arial, sans-serif;
+  line-height: 2;
 }
-table { 
-	border-collapse: collapse; 
-	text-align: right;
+
+.left {
+  float: left;
+  left: 3%;
 }
+
+#dialogHeader {
+  color: red;
+  font-family: Viner Hand ITC;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: right;
+}
+
 th {
-	padding: 10px; 
-	background-color: #0000ee; 
-	color: #fcfcfc;
-	font-size: 1.1em;
-  	border-left: 1px #fcfcfc solid;
+  padding: 10px;
+  background-color: #0000ee;
+  color: #fcfcfc;
+  font-size: 1.1em;
+  border-left: 1px #fcfcfc solid;
 }
-tr { 
-	border-bottom: 2px #00008b solid;
+
+tr {
+  border-bottom: 2px #00008b solid;
 }
-td { 
-	vertical-align: top; padding: 10px; 
+
+td {
+  vertical-align: top;
+  padding: 10px;
 }
-.medIcon
-{
+
+.medIcon {
   width: 75px;
   height: 75px;
 }
-.smallIcon
-{
+
+.smallIcon {
   width: 65px;
   height: 65px;
-  padding: 5px;
+  margin: 5px;
 }
-.unlockWidget
-{
+
+.unlockWidget {
   position: absolute;
   top: 250px;
   background: #B9B0FA;
@@ -86,69 +117,78 @@ td {
   border: 5px solid darkblue;
   border-radius: 10px;
 }
-footer{
-	position: fixed;
-	bottom:0;
-	width:100%;
-	height: 25px;
-	background: white;
-}
-#dialog-modal {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: #6cf;      
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 25px;
+  background: white;
 }
 
-#dialog-modal img { 
-	width: 100%;
-	padding-top: 5%; 
+#dialog-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #6cf;
+}
+
+#dialog-modal img {
+  width: 100%;
+  padding-top: 5%;
 }
 
 #SplashScreen {
-    padding-left: 100px;
-    padding-top: 10px;
+  padding-left: 100px;
+  padding-top: 10px;
 }
-.left {
-    float:left;
-    width: 100px;
-}
+
 button {
-	font: bold 10px Helvetica, Arial, sans-serif;
-	color: #444;
-	float: left;
-	font-size: 2.7vw;
-	line-height: 2px;
-	margin: 5px 35% 0px;
-	padding: 2% 0px;
-	width: 30%;
-	border-radius: 2px;
-	min-height: 30px;
-	cursor: pointer;
+  font: bold 10px Helvetica, Arial, sans-serif;
+  color: #444;
+  float: left;
+  font-size: 2.7vw;
+  line-height: 2px;
+  margin: 5px 35% 0px;
+  padding: 2% 0px;
+  width: 30%;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  min-height: 30px;
+  cursor: pointer;
 }
-button.redbtn {
-	border: 3px solid #D14836 !important; 
-	background: white;
+
+.redbtn {
+  border: 3px solid #D14836 !important;
+  background: white;
 }
-button.redbtn:hover {
-	background: beige;
+
+.redbtn:hover {
+  background: beige;
 }
-button.action:hover {
-	-moz-box-shadow: 0 1px 0px #DDD;
+
+.action:hover {
+  box-shadow: 0 1px 0px #DDD;
 }
-#credits h2, #credits p {  
-	margin: 0 35% 0px;    
-	width: 30%;  
-	color: #6cf;  
-	font-size: xx-large;
-	padding: 1.5% 0px;
-	text-align: center;
-	white-space: nowrap;
+
+#credits h2,
+#credits p {
+  margin: 0 35% 0px;
+  width: 30%;
+  font-size: xx-large;
+  padding: 1.5% 0px;
+  text-align: center;
+  white-space: nowrap;
 }
-#credits {
-	display:none;
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background-color: #fff;
+
+#credits, .LvlComplete {
+  display:none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index:100;
+}
+.LvlComplete {
+  background: #EF5350;
+  padding:15px;
 }
