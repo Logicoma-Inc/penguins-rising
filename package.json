@@ -1,5 +1,5 @@
 {
-  "name": "grunt-workspaces",
+  "name": "penguins-rising",
   "description": "Using Grunt and Chrome Workspaces for in-browser development.",
   "author": "Anthony Fassett",
   "homepage": "http://anthonyfassett.com",
@@ -14,8 +14,7 @@
     "grunt-contrib-imagemin": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-gh-pages": "^1.0.0",    
+    "grunt-contrib-watch": "^1.0.0",    
     "matchdep": "~1.0.0"
   },
   "license": "CC BY-NC 3.0"
