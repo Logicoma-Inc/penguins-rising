@@ -88,19 +88,21 @@ var game = {
       game.paused = true;
     }
   }
-
 };
-window.onblur = function(evt) {
-  Pause(true);
-}
-var Pause = function(flag) {
-  game.paused = (flag) ? flag : !game.paused;
-  if (game.paused) {
-    document.getElementsByClassName("pause")[0].style.display = "block";
-  } else {
-    document.getElementsByClassName("pause")[0].style.display = "none";
-  }
-}
+
+window.onblur = function (evt) {
+    Pause(true);
+};
+
+var Pause = function (flag) {
+    game.paused = (flag) ? flag : !game.paused;
+    if (game.paused) {
+        document.getElementsByClassName("pause")[0].style.display = "block";
+    } else {
+        document.getElementsByClassName("pause")[0].style.display = "none";
+    }
+};
+
 function NextLevel() {
   Pause(false);
   document.getElementsByClassName("LvlComplete")[0].style.display = "none";

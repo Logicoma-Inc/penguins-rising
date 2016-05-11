@@ -12,7 +12,7 @@
  * v0.9.1.20110703
 */
 
-/*jslint white: false, onevar: false, undef: true, nomen: false, eqeqeq: false, plusplus: false, bitwise: true, regexp: false, newcap: true, immed: true */
+/*jslint white: false, onevar: false, undef: true, nomen: false, eqeqeq: false, plusplus: false, bitwise: true, regexp: false, newcap: true, immed: true, plusplus: true */
 /*global window, document, navigator, setTimeout, setInterval, clearInterval, enableDebugMode, writeDebug, soundManager, FireworkParticle, attachEvent */
 
 var fc;
@@ -30,13 +30,13 @@ function Animator() {
   this.active = false;
   this.timer = null;
 
-  this.createTween = function(start,end,type) {
-    // return array of tween coordinate data (start->end)
-    type = type||'default';
-    var tween = [start];
-    var tmp = start;
-    var diff = end-start;
-    var x = self.tweens[type].length;
+    this.createTween = function (start, end, type) {
+        // return array of tween coordinate data (start->end)
+        type = type || 'default';
+        var tween = [start];
+        var tmp = start;
+        var diff = end - start;
+        var x = self.tweens[type].length;
     for (var i=0; i<x; i++) {
       tmp += diff*self.tweens[type][i]*0.01;
       tween[i] = {};
@@ -53,7 +53,7 @@ function Animator() {
     if (!fMethod) {
       writeDebug('animator.enqueue(): missing fMethod');
     }
-    if (typeof(self.queue.IDs[o.oID])=='undefined') {
+    if (typeof(self.queue.IDs[o.oID])==='undefined') {
       // writeDebug('animator.enqueue(): added '+o.oID);
       i = self.queue.length;
       self.queue.IDs[o.oID] = i;
@@ -160,13 +160,13 @@ function FireworksController() {
 
   this.isEmpty = function(o) {
     // needs further hacking
-    return (typeof(o)=='undefined'||(o===null&&o!==0)||(o===''&&o!==0)||o=='null');
+    return (typeof(o)==='undefined'||(o===null&&o!==0)||(o===''&&o!==0)||o==='null');
   };
 
   this.init = function() {
     self.oFW = document.getElementById('fw');
     self.oFP = document.getElementById('fp');
-    if (typeof(enableDebugMode)!='undefined' && (self.DEBUG||window.location.toString().toLowerCase().indexOf('debug')>=0)) {
+    if (typeof(enableDebugMode)!=='undefined' && (self.DEBUG||window.location.toString().toLowerCase().indexOf('debug')>=0)) {
       enableDebugMode();
     }
     self.getWindowCoords();
@@ -405,9 +405,9 @@ function FireworkParticle(oC,isRandom,type,baseX,baseY,obeyBoundaries) {
 
   this.nextState = function() {
     var vis = self.o.style.visibility;
-    if (self.state == 2 && vis != 'hidden') {
+    if (self.state === 2 && vis !== 'hidden') {
       self.o.style.visibility = 'hidden';
-    } else if (self.state != 2 && vis == 'hidden') {
+    } else if (self.state !== 2 && vis === 'hidden') {
       self.o.style.visibility = 'visible';
     }
     self.state = parseInt(Math.random()*3, 10);
@@ -596,18 +596,18 @@ soundManager.onready(function() {
 fc = new FireworksController();
 
 // create null objects if APIs not present
-if (typeof(writeDebug)=='undefined') {
+if (typeof(writeDebug)==='undefined') {
   window.writeDebug = function() {
     return false;
   };
 }
 
 function addEventHandler(o,evtName,evtHandler) {
-  return (typeof(attachEvent)=='undefined'?o.addEventListener(evtName,evtHandler,false):o.attachEvent('on'+evtName,evtHandler));
+  return (typeof(attachEvent)==='undefined'?o.addEventListener(evtName,evtHandler,false):o.attachEvent('on'+evtName,evtHandler));
 }
 
 function removeEventHandler(o,evtName,evtHandler) {
-  return (typeof(attachEvent)=='undefined'?o.removeEventListener(evtName,evtHandler,false):o.detachEvent('on'+evtName,evtHandler));
+  return (typeof(attachEvent)==='undefined'?o.removeEventListener(evtName,evtHandler,false):o.detachEvent('on'+evtName,evtHandler));
 }
 
 addEventHandler(window,'resize',fc.getWindowCoords);
