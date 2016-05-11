@@ -75,13 +75,7 @@ module.exports = function ( grunt ) {
 			options: {
 				 jshintrc: 'src/js/.jshintrc'
 			}
-		},
-		'gh-pages': {
-		    options: {
-		        base: 'src'		        
-		    },
-		    src: ['**']
-		}		
+		}
 	});
 
 	grunt.registerTask( 'default' , [

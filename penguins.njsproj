@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <SchemaVersion>2.0</SchemaVersion>
+        <ProjectGuid>{7ed38037-1014-41c1-a240-e2323dc7fff3}</ProjectGuid>
+        <ProjectHome />
+        <ProjectView>ShowAllFiles</ProjectView>
+        <StartupFile>Gruntfile.js</StartupFile>
+        <WorkingDirectory>.</WorkingDirectory>
+        <OutputPath>.</OutputPath>
+        <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+        <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+        <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+    <ItemGroup>
+        <Content Include="robots.txt" />
+        <Content Include="default_error.html" />
+        <Content Include="index.html" />
+        <Content Include="over_quota.html" />
+        <Content Include="favicon.ico" />
+        <Content Include="package.json" />
+        <Content Include="README.md" />
+        <Compile Include="Gruntfile.js" />
+        <Content Include="content\index.css" />
+        <Compile Include="js\game.min.js" />
+        <Content Include="src\index.html" />
+        <Content Include="src\seo-example.html" />
+        <Content Include="src\favicon.ico" />
+        <Content Include="static\HangoutApp.xml" />
+        <Content Include="content\img\10-10-2013 10-46-59 PM.png" />
+        <Content Include="content\img\boss1.png" />
+        <Content Include="content\img\brand.png" />
+        <Content Include="content\img\characters.png" />
+        <Content Include="content\img\crosshair.png" />
+        <Content Include="content\img\dead1.png" />
+        <Content Include="content\img\dead2.png" />
+        <Content Include="content\img\dead3.png" />
+        <Content Include="content\img\gplus.png" />
+        <Content Include="content\img\html5.png" />
+        <Content Include="content\img\leaderboard.png" />
+        <Content Include="content\img\New Doc-0.png" />
+        <Content Include="content\img\nuvormexplosions.png" />
+        <Content Include="content\img\question.png" />
+        <Content Include="content\img\splashscreen.png" />
+        <Content Include="content\img\borderline.jpg" />
+        <Content Include="content\img\images (4).jpg" />
+        <Content Include="content\img\images (5).jpg" />
+        <Content Include="content\img\images.jpg" />
+        <Content Include="content\img\landscape.jpg" />
+        <Content Include="content\img\landscapeside.jpg" />
+        <Content Include="content\img\MapleStory-BasilMarket-Screen-193363.jpg" />
+        <Content Include="content\img\marinethingua2.jpg" />
+        <Content Include="content\img\marinethingua3.jpg" />
+        <Content Include="content\img\marinethingua4.jpg" />
+        <Content Include="content\img\waterhole.jpg" />
+        <Content Include="content\img\loading.gif" />
+        <Content Include="src\chrome\penguin.png" />
+        <Content Include="src\chrome\manifest.json" />
+        <Compile Include="src\chrome\background.js" />
+        <Content Include="src\content\index.css" />
+        <Compile Include="src\js\achievements.js" />
+        <Compile Include="src\js\fireworks.js" />
+        <Compile Include="src\js\game.js" />
+        <Compile Include="src\js\leaderboard.js" />
+        <Compile Include="src\js\login.js" />
+        <Compile Include="src\js\startup.js" />
+        <Content Include="src\content\css\fireworks.css" />
+        <Content Include="src\content\css\style.css" />
+        <Content Include="src\content\img\brand.png" />
+        <Content Include="src\content\img\characters.png" />
+        <Content Include="src\content\img\crosshair.png" />
+        <Content Include="src\content\img\dead1.png" />
+        <Content Include="src\content\img\dead2.png" />
+        <Content Include="src\content\img\dead3.png" />
+        <Content Include="src\content\img\gplus.png" />
+        <Content Include="src\content\img\html5.png" />
+        <Content Include="src\content\img\leaderboard.png" />
+        <Content Include="src\content\img\question.png" />
+        <Content Include="src\content\img\splashscreen.png" />
+        <Content Include="src\content\img\borderline.jpg" />
+        <Content Include="src\content\img\landscape.jpg" />
+        <Content Include="src\content\img\landscapeside.jpg" />
+        <Content Include="src\content\img\waterhole.jpg" />
+        <Content Include="src\content\img\loading.gif" />
+        <Content Include="src\content\img\material-spinner2.gif" />
+        <Content Include="src\content\img\achievements\BloodAchievement.png" />
+        <Content Include="src\content\img\achievements\CircleTemplate.png" />
+        <Content Include="src\content\img\achievements\CowWeapon.png" />
+        <Content Include="src\content\img\achievements\fifthAchievement.png" />
+        <Content Include="src\content\img\achievements\firstAchievementversion2.png" />
+        <Content Include="src\content\img\achievements\fourthAchievement.png" />
+        <Content Include="src\content\img\achievements\Kickingitoldschool.png" />
+        <Content Include="src\content\img\achievements\outofbubblegumlvl2.png" />
+        <Content Include="src\content\img\achievements\pokemon___kanto_gym_badges_by_johnriddle20-d36s1hj.png" />
+        <Content Include="src\content\img\achievements\ReaperWeapon.png" />
+        <Content Include="src\content\img\achievements\SpecialStuff.png" />
+        <Content Include="src\content\img\achievements\supportfromtheheighierfoodchain.png" />
+        <Content Include="src\content\img\achievements\thirdAchievement.png" />
+        <Content Include="src\content\img\achievements\WeaponUpgrades.png" />
+        <Content Include="src\content\img\bosses\boss1.png" />
+        <Content Include="src\content\img\bosses\enemies_sheet.png" />
+        <Content Include="src\content\img\bosses\primerobot.jpg" />
+        <Content Include="src\content\img\bosses\primerollin.jpg" />
+        <Content Include="src\content\img\bosses\PrincessReturns.gif" />
+        <Content Include="src\content\img\featured\FeatureGraphic.png" />
+        <Content Include="src\content\img\featured\OrginalScreen.png" />
+        <Content Include="src\content\img\featured\Penguin128x128.png" />
+        <Content Include="src\content\img\featured\PenguinBrand16x16.png" />
+        <Content Include="src\content\img\featured\PenguinForGGS.png" />
+        <Content Include="src\content\img\featured\DisplayofOrginal.jpg" />
+        <Content Include="src\content\img\featured\DisplayofOrginal440x280.jpg" />
+        <Content Include="src\content\img\featured\Penguin.jpg" />
+        <Content Include="src\content\img\featured\PenguinForGPlus.jpg" />
+        <Content Include="src\content\img\penguins\13054.png" />
+        <Content Include="src\content\img\penguins\d2c71723efa4a7fc414689521298004c-d497zup.png" />
+        <Content Include="src\content\img\penguins\GunterAttempt1.png" />
+        <Content Include="src\content\img\penguins\NewConceptPenguins.png" />
+        <Content Include="src\content\img\penguins\Pixal_penguin.png" />
+        <Content Include="src\content\img\penguins\24861.jpg" />
+        <Content Include="src\content\img\penguins\250px-Pygoscelis_papua.jpg" />
+        <Content Include="src\content\img\penguins\DeadPenguin1.jpg" />
+        <Content Include="src\content\img\penguins\DeadPenguin2.jpg" />
+        <Content Include="src\content\img\penguins\DeadPenguin3.jpg" />
+        <Content Include="src\content\img\penguins\Evil_Penguin_by_bassqee.jpg" />
+        <Content Include="src\content\img\penguins\gunter_has_a_stank_booty__by_kakashilover10-d54bdlt.jpg" />
+        <Content Include="src\content\img\penguins\LeftWalkingPenguin.jpg" />
+        <Content Include="src\content\img\penguins\Ninja_Penguin___Juppo_by_ChibiXai.jpg" />
+        <Content Include="src\content\img\penguins\penguins.jpg" />
+        <Content Include="src\content\img\penguins\Scanned Document-3.jpg" />
+        <Content Include="src\content\img\penguins\southern-rockhopper.jpg" />
+        <Content Include="src\content\img\penguins\StandingPenguin.jpg" />
+        <Content Include="src\content\img\penguins\WalkingPenguin.jpg" />
+        <Content Include="src\content\img\penguins\Penguin_bw.GIF" />
+        <Content Include="src\content\img\penguins\tumblr_m5h6ofMYFo1ru642no1_400.gif" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="content" />
+        <Folder Include="content\audio" />
+        <Folder Include="content\audio\mp3" />
+        <Folder Include="content\audio\wav" />
+        <Folder Include="content\img" />
+        <Folder Include="js" />
+        <Folder Include="src" />
+        <Folder Include="src\chrome" />
+        <Folder Include="src\content" />
+        <Folder Include="src\content\audio" />
+        <Folder Include="src\content\audio\mp3" />
+        <Folder Include="src\content\audio\wav" />
+        <Folder Include="src\content\css" />
+        <Folder Include="src\content\img" />
+        <Folder Include="src\content\img\achievements" />
+        <Folder Include="src\content\img\bosses" />
+        <Folder Include="src\content\img\featured" />
+        <Folder Include="src\content\img\penguins" />
+        <Folder Include="src\js" />
+        <Folder Include="static" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+    <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+    <ProjectExtensions>
+        <VisualStudio>
+          <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+            <WebProjectProperties>
+              <UseIIS>False</UseIIS>
+              <AutoAssignPort>True</AutoAssignPort>
+              <DevelopmentServerPort>0</DevelopmentServerPort>
+              <DevelopmentServerVPath>/</DevelopmentServerVPath>
+              <IISUrl>http://localhost:48022/</IISUrl>
+              <NTLMAuthentication>False</NTLMAuthentication>
+              <UseCustomServer>True</UseCustomServer>
+              <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+              <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+            </WebProjectProperties>
+          </FlavorProperties>
+          <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+            <WebProjectProperties>
+              <StartPageUrl>
+              </StartPageUrl>
+              <StartAction>CurrentPage</StartAction>
+              <AspNetDebugging>True</AspNetDebugging>
+              <SilverlightDebugging>False</SilverlightDebugging>
+              <NativeDebugging>False</NativeDebugging>
+              <SQLDebugging>False</SQLDebugging>
+              <ExternalProgram>
+              </ExternalProgram>
+              <StartExternalURL>
+              </StartExternalURL>
+              <StartCmdLineArguments>
+              </StartCmdLineArguments>
+              <StartWorkingDirectory>
+              </StartWorkingDirectory>
+              <EnableENC>False</EnableENC>
+              <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+            </WebProjectProperties>
+          </FlavorProperties>
+        </VisualStudio>
+    </ProjectExtensions>
+</Project>
