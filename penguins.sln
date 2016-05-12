@@ -3,34 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "penguins", ".", "{FF10A377-67B6-4EC8-870D-4AD09141FB78}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_62968"
-		Debug.AspNetCompiler.PhysicalPath = "..\penguins\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62968\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_62968"
-		Release.AspNetCompiler.PhysicalPath = "..\penguins\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62968\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "62968"
-		SlnRelativePath = "..\penguins\"
-	EndProjectSection
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "penguins", "penguins.njsproj", "{7ED38037-1014-41C1-A240-E2323DC7FFF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF10A377-67B6-4EC8-870D-4AD09141FB78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF10A377-67B6-4EC8-870D-4AD09141FB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ED38037-1014-41C1-A240-E2323DC7FFF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ED38037-1014-41C1-A240-E2323DC7FFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ED38037-1014-41C1-A240-E2323DC7FFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ED38037-1014-41C1-A240-E2323DC7FFF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
