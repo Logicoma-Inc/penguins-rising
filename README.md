@@ -1,4 +1,4 @@
-[Penguins Rising](http://www.penguinsontherise.appspot.com/)
+[Penguins Rising](https://www.penguinsontherise.appspot.com/)
 ==============
 [![Build Status](https://travis-ci.org/fassetar/penguins-rising.svg?branch=master)](https://travis-ci.org/fassetar/penguins-rising)
 [![devDependency Status](https://david-dm.org/fassetar/penguins-rising/dev-status.svg)](https://david-dm.org/fassetar/penguins-rising#info=devDependencies)
@@ -6,7 +6,7 @@
 <br/>
 Originally inspired by Devroy Queen and Andrew Peek. Colleagues of mine who used an old version of [YOYO game's](http://www.yoyogames.com/studio) tool kit back in 2008. This is a port that expands far from the original material but uses their work as a base. It was first targeted towards browsers and used to experiement with hybrid web development.
 
-- [Website](http://www.penguinsontherise.appspot.com/)
+- [Website](https://www.penguinsontherise.appspot.com/)
 - Google hangout (multiplayer) possibly coming soon...
   - https://developers.google.com/+/hangouts/writing
 - [Facebook App](https://apps.facebook.com/penguinsrising/?fb_source=fbpage)
