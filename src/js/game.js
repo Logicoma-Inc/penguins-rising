@@ -46,7 +46,7 @@ var game = {
     game.loop();
     window.onblur = function(evt) {
       Pause(true);
-    };
+    }
     document.onkeypress = (function(evt) {
   evt = evt || window.event;
   var charCode = evt.keyCode || evt.which;
@@ -108,7 +108,7 @@ var Pause = function(flag) {
   } else {
     document.getElementsByClassName("pause")[0].style.display = "none";
   }
-};
+}
 
 function NextLevel() {
   Pause(false);

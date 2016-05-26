@@ -34,11 +34,11 @@ module.exports = function ( grunt ) {
 		htmlmin: {
 			dist: {
 				options: {
-					removeComments: true,
-					collapseWhitespace: true
+					removeComments: false,
+					collapseWhitespace: false
 				},
 				files: {
-					'index.html': 'index.html'
+					'index.html': 'src/index.html'
 				}
 			}
 		},
@@ -59,16 +59,13 @@ module.exports = function ( grunt ) {
 		},
 		copy: {
 			main: {
-				files: [{					
-					src: 'src/*.html',
-					dest: '../'
-				}, {
+				files: [{
 					expand: true,
 					cwd: 'src/content/audio/',
 					src: ['**/*'],
 					dest: 'content/audio/',
 					filter: 'isFile'
-				}
+				}				
 			]}
 		}, 
 		jshint: {
@@ -81,17 +78,17 @@ module.exports = function ( grunt ) {
 		},
         useref: {         
             html: 'index.html',
-            temp: '.'        
+            temp: 'src'        
         }
 	});
 
 	grunt.registerTask( 'default' , [
 		'cssmin',
-		'uglify',
-		'useref',
+		'uglify',		
 		'htmlmin',
 		'imagemin',
 		'jshint',
-		'copy'        
+		'copy',
+		'useref'
 	]);
 };
