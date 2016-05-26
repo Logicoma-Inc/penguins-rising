@@ -44,9 +44,9 @@ var game = {
           };
       })();
     game.loop();
-    window.onblur = function(evt) {
-      Pause(true);
-    }
+    window.onblur = function (evt) {
+        Pause(true);
+    };
     document.onkeypress = (function(evt) {
   evt = evt || window.event;
   var charCode = evt.keyCode || evt.which;
@@ -101,14 +101,14 @@ var game = {
   }
 
 };
-var Pause = function(flag) {
-  game.paused = (flag) ? flag : !game.paused;
-  if (game.paused) {
-    document.getElementsByClassName("pause")[0].style.display = "block";
-  } else {
-    document.getElementsByClassName("pause")[0].style.display = "none";
-  }
-}
+var Pause = function (flag) {
+    game.paused = (flag) ? flag : !game.paused;
+    if (game.paused) {
+        document.getElementsByClassName("pause")[0].style.display = "block";
+    } else {
+        document.getElementsByClassName("pause")[0].style.display = "none";
+    }
+};
 
 function NextLevel() {
   Pause(false);
