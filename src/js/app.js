@@ -57,8 +57,15 @@
     ga('send', 'pageview');
 	window.addEventListener('error', function (e) {
 		ga('send', 'event', 'Javascript Error', e.filename + ':  ' + e.lineno, e.message); 
-	});  
-	$(document).ajaxError(function (e, request, settings) {
-		ga('send', 'event', 'API Error', settings.url, e.result);                 
 	});
 })();
+// Check browser support
+// if (typeof(Storage) !== "undefined") {
+//     // Store
+//     var maple = "Eat ME!";
+//     localStorage.setItem("maple", maple);
+//     // Retrieve
+//     document.getElementById("result").innerHTML = localStorage.getItem("maple");
+// } else {
+//     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+// }

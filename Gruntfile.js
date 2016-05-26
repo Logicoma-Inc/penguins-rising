@@ -27,7 +27,7 @@ module.exports = function ( grunt ) {
 		cssmin: {
 		  target: {			
 			files: [{
-			  'content/index.css': ['src/content/*.css']
+			  'content/style.css': ['src/content/*.css']
 			 }]
 		  }
 		},
@@ -38,7 +38,7 @@ module.exports = function ( grunt ) {
 					collapseWhitespace: true
 				},
 				files: {
-					'index.html': 'src/index.html'
+					'index.html': 'index.html'
 				}
 			}
 		},
@@ -59,13 +59,16 @@ module.exports = function ( grunt ) {
 		},
 		copy: {
 			main: {
-				files: [{
+				files: [{					
+					src: 'src/*.html',
+					dest: '../'
+				}, {
 					expand: true,
 					cwd: 'src/content/audio/',
 					src: ['**/*'],
 					dest: 'content/audio/',
 					filter: 'isFile'
-				},
+				}
 			]}
 		}, 
 		jshint: {
@@ -75,16 +78,20 @@ module.exports = function ( grunt ) {
 			options: {
 				 jshintrc: 'src/js/.jshintrc'
 			}
-		}
+		},
+        useref: {         
+            html: 'index.html',
+            temp: '.'        
+        }
 	});
 
 	grunt.registerTask( 'default' , [
 		'cssmin',
 		'uglify',
+		'useref',
 		'htmlmin',
 		'imagemin',
 		'jshint',
-		'copy'
+		'copy'        
 	]);
-
 };
