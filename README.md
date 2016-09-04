@@ -16,6 +16,20 @@ Getting Started
 =============
 Install [Google App Engine](https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python) plus Python 2.7 which is what I used.
 
+
+Game Story
+=============
+A game where penguins have overtaken Antarctica and as a last stand a group of scientists have set up a post to fight off the fleet of penguins. This is a game based loosely on an older game create by a group of friends in high school.
+
+
+Research/Notes
+=============
+ - http://math.rice.edu/~pcmi/sphere/drg_txt.html
+ - https://www.youtube.com/watch?v=erEFRKnqitM&feature=player_embedded
+   - Good example of how to best practice input with canas refresh.
+ - https://www.youtube.com/watch?v=vR-obU0CKuo&feature=player_embedded
+
+
 License
 =============
 For more information about the license, <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>
