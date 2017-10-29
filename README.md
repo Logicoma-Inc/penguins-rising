@@ -6,8 +6,6 @@
 <br/>
 This is a port that expands far from the original material but uses their work as a base. It was first targeted towards browsers and used to experiement with hybrid web development.
 
-- Google hangout (multiplayer) possibly coming soon...
-  - https://developers.google.com/+/hangouts/writing
 - [Facebook App](https://apps.facebook.com/penguinsrising/?fb_source=fbpage)
 
 Getting Started
