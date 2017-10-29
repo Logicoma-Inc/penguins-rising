@@ -8,10 +8,6 @@ This is a port that expands far from the original material but uses their work a
 
 - [Facebook App](https://apps.facebook.com/penguinsrising/?fb_source=fbpage)
 
-Getting Started
-=============
-Install [Google App Engine](https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python) plus Python 2.7 which is what I used.
-
 Game Story
 =============
 A game where penguins have overtaken Antarctica and as a last stand a group of scientists have set up a post to fight off the fleet of penguins. This is a game based loosely on an older game create by a group of friends in high school.
