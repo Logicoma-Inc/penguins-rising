@@ -1,8 +1,8 @@
 {
   "name": "penguins-rising",
   "description": "Using Grunt and Chrome Workspaces for in-browser development.",
-  "author": "Anthony Fassett",
-  "homepage": "http://anthonyfassett.com",
+  "author": "fassetar",
+  "homepage": "http://games.logicoma.com",
   "private": true,
   "version": "2.0.0",
   "devDependencies": {
