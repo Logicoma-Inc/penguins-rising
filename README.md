@@ -5,8 +5,6 @@
 <br/>
 This is a port that expands far from the original material but uses their work as a base. It was first targeted towards browsers and used to experiement with hybrid web development.
 
-- [Facebook App](https://apps.facebook.com/penguinsrising/?fb_source=fbpage)
-
 Game Story
 =============
 A game where penguins have overtaken Antarctica and as a last stand a group of scientists have set up a post to fight off the fleet of penguins. This is a game based loosely on an older game create by a group of friends in high school.
